@@ -72,44 +72,69 @@
     }
   },
   "IndexPage": {
-    "intro": "Introducing Flux AI Image Generator",
-    "description": "Revolutionizing Next-Generation Advanced Text-to-Image open model, support flux.1 pro/dev and flux.1 schnell models.",
-    "title": "Flux AI Image Generator",
-    "subtitle": "Advanced Text-to-Image",
+    "intro": "Introducing HEIC to PDF Converter",
+    "description": "The fastest and most reliable way to convert HEIC images to PDF documents. Simple, secure, and efficient.",
+    "title": "HEIC to PDF Converter",
+    "subtitle": "Easy Image Conversion",
+    "upload": {
+      "title": "Start Converting",
+      "subtitle": "Upload your HEIC files and we'll quickly convert them to PDF format",
+      "features": {
+        "fast": "Fast HEIC to PDF conversion",
+        "batch": "Batch processing support", 
+        "quality": "Maintain original quality",
+        "secure": "Safe and reliable"
+      },
+      "steps": {
+        "title": "Complete conversion in 3 simple steps",
+        "step1": {
+          "title": "Select Files",
+          "description": "Drag and drop or click to upload your HEIC image files"
+        },
+        "step2": {
+          "title": "Auto Convert", 
+          "description": "Our servers will automatically process your files"
+        },
+        "step3": {
+          "title": "Download Results",
+          "description": "Download your PDF files immediately after conversion"
+        }
+      }
+    },
     "examples": {
       "label": "Example",
-      "title": "Flux AI Image Examples",
-      "subtitle": "Generate images from text prompts."
+      "title": "HEIC to PDF Conversion Examples",
+      "subtitle": "Convert your HEIC images to PDF documents in seconds."
     },
     "features": {
       "title": "Features",
-      "description": "Flux AI Image Generator is a powerful tool that allows you to generate images from text prompts. It uses advanced AI models to create stunning images that are perfect for any project.",
+      "description": "Our HEIC to PDF converter is a powerful tool that allows you to easily convert Apple's HEIC image format to universally compatible PDF documents. Perfect for sharing, printing, and archiving your photos.",
       "action": {
-        "visit": "Generate"
+        "visit": "Convert Now"
       },
       "item1": {
-        "title": "FLUX.1 [pro]",
-        "description": "The best of FLUX.1, offering state-of-the-art performance image generation with top of the line prompt following, visual quality, image detail and output diversity."
+        "title": "Batch Conversion",
+        "description": "Convert multiple HEIC images to a single PDF document or individual PDFs in one go. Save time with our efficient batch processing capabilities."
       },
       "item2": {
-        "title": "FLUX.1 [dev]",
-        "description": "Directly distilled from FLUX.1 [pro], FLUX.1 [dev] obtains similar quality and prompt adherence capabilities, while being more efficient than a standard model of the same size. "
+        "title": "High Quality Preservation",
+        "description": "Our converter maintains the original quality of your HEIC images when converting to PDF, ensuring your photos look just as good as the originals."
       },
       "item3": {
-        "title": "FLUX.1 [schnell]",
-        "description": "The fastest image generation model tailored for local development and personal use"
+        "title": "Cloud Storage Integration",
+        "description": "Easily import HEIC images from your cloud storage services like iCloud, Google Drive, or Dropbox, and save the converted PDFs back to your preferred location."
       },
       "item4": {
-        "title": "Lightning-Fast",
-        "description": "Flux AI generates high-quality images in seconds, significantly faster than Stable Diffusion 3 and Midjourney. With its lightning-fast image generation capabilities, Flux AI ensures quick and efficient results, saving you valuable time and resources."
+        "title": "Lightning-Fast Conversion",
+        "description": "Our optimized conversion engine processes your HEIC images in seconds, significantly faster than other converters. With its lightning-fast conversion capabilities, our tool ensures quick and efficient results, saving you valuable time."
       },
       "item5": {
-        "title": "Customizable",
-        "description": "The advanced Flux.1 model produces more detailed and coherent images than competitors. With its customizable features and user-friendly interface, Flux AI Image Generator is the ultimate tool for generating stunning images from text prompts. Whether you're a beginner or a professional, Flux AI has got you covered. Experience the power of AI and revolutionize your image generation process today!"
+        "title": "Cross-Platform Compatibility",
+        "description": "Works seamlessly across all devices and operating systems. Whether you're using Windows, macOS, iOS, or Android, our HEIC to PDF converter ensures your images are accessible everywhere."
       },
       "item6": {
         "title": "User-Friendly Interface",
-        "description": "Easier to use than ComfyUI, perfect for beginners and pros alike. Flux AI Image Generator is the ultimate tool for generating stunning images from text prompts. With its user-friendly interface and powerful AI models, Flux AI makes it easy for both beginners and professionals to create amazing visuals."
+        "description": "Simple and intuitive design makes converting HEIC to PDF effortless. Just upload your images, click convert, and download your PDF. No technical knowledge required - perfect for everyone from beginners to professionals."
       }
     },
     "powered": {
@@ -121,19 +146,181 @@
       }
     },
     "schnell": {
-      "title": "Flux.1 [Schnell]",
-      "description": "Flux.1 [schnell] is a refined version of the base model, operating up to 10 times faster than the original. Licensed under Apache 2.0, it's optimized for speed and efficiency, catering to users who demand rapid image generation without compromising on quality. This model is ideal for local development and personal use, striking the perfect balance between performance and accessibility. We offer users 5 free opportunities each month to experience the lightning-fast image generation of the Flux.1 [schnell] model, allowing you to witness its incredible speed firsthand.",
+      "title": "HEIC to PDF Premium",
+      "description": "Our premium converter offers additional features including batch processing, watermark-free output, and priority support. The premium version operates up to 10 times faster than the standard version, optimized for speed and efficiency, catering to users who need to convert large volumes of images quickly. This version is ideal for professionals and business users, striking the perfect balance between performance and accessibility. We offer users 5 free opportunities each month to experience the lightning-fast conversion of the premium version, allowing you to witness its incredible speed firsthand.",
       "action": "Try Now"
     },
     "action": {
-      "pricing": "Buy Credits",
+      "pricing": "View Plans",
       "login": "Login",
       "dashboard": "Dashboard",
-      "generate": "Generate",
+      "generate": "Convert Now",
       "github": {
         "sm": "Star on",
         "normal": "Github"
       }
+    },
+    "upload": {
+      "title": "Upload Your HEIC Images",
+      "subtitle": "Drag and drop your HEIC files or click to browse",
+      "features": {
+        "fast": "Lightning Fast",
+        "batch": "Batch Processing",
+        "quality": "High Quality",
+        "secure": "100% Secure"
+      },
+      "steps": {
+        "title": "How It Works",
+        "step1": {
+          "title": "Upload HEIC Files",
+          "description": "Select or drag your HEIC images from your device"
+        },
+        "step2": {
+          "title": "Convert to PDF",
+          "description": "Our system processes your images instantly"
+        },
+        "step3": {
+          "title": "Download PDF",
+          "description": "Get your converted PDF files ready to use"
+        }
+      },
+      "legal": "By continuing, you agree to our <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>.",
+      "privacy_commitment": "We are committed to protecting your privacy. Uploaded files will be automatically deleted after conversion.",
+      "uploader": {
+        "drag_active": "Drop files to start conversion",
+        "drag_inactive": "Drag and drop or click to upload HEIC files",
+        "supported_formats": "Supports .heic, .heif formats, max file size {maxSize}",
+        "max_files": "Up to {maxFiles} files can be uploaded",
+        "select_files": "Select Files",
+        "error_format": "Please upload only HEIC format files",
+        "error_max_files": "Maximum {maxFiles} files can be uploaded",
+        "selected_files": "Selected files ({count})"
+      }
+    },
+    "whatIs": {
+      "title": "What is HEIC to PDF?",
+      "subtitle": "Understanding HEIC format and why you need to convert to PDF",
+      "description": "HEIC (High Efficiency Image Container) is Apple's default image format with high compression ratio and excellent quality. However, due to compatibility issues, many devices and software cannot directly open HEIC files.",
+      "benefits": {
+        "title": "Benefits of Converting to PDF",
+        "item1": {
+          "title": "Universal Compatibility",
+          "description": "PDF format displays perfectly on all devices and platforms"
+        },
+        "item2": {
+          "title": "Easy Sharing",
+          "description": "PDF files can be easily shared via email, cloud storage, etc."
+        },
+        "item3": {
+          "title": "Quality Preservation",
+          "description": "Maintains original image quality during conversion"
+        },
+        "item4": {
+          "title": "Document Integration",
+          "description": "Multiple images can be merged into a single PDF document"
+        }
+      }
+    },
+    "howTo": {
+      "title": "How to Use",
+      "subtitle": "Complete HEIC to PDF conversion in 3 simple steps",
+      "steps": {
+        "step1": {
+          "title": "Upload Files",
+          "description": "Select your HEIC image files, drag & drop supported",
+          "detail": "Support single or batch upload, max file size 10MB"
+        },
+        "step2": {
+          "title": "Auto Convert", 
+          "description": "Our servers automatically process your files",
+          "detail": "Using efficient algorithms, average conversion time under 30 seconds"
+        },
+        "step3": {
+          "title": "Download Results",
+          "description": "Instantly download your converted PDF files",
+          "detail": "Secure download links valid for 3 hours"
+        }
+      }
+    },
+    "why": {
+      "title": "Why Choose Us?",
+      "subtitle": "Professional, secure, and efficient HEIC to PDF service",
+      "features": {
+        "security": {
+          "title": "Privacy Security",
+          "description": "All files encrypted during transmission, automatically deleted after conversion",
+          "icon": "shield"
+        },
+        "speed": {
+          "title": "Lightning Fast",
+          "description": "Latest technology, average conversion time only 30 seconds",
+          "icon": "zap"
+        },
+        "quality": {
+          "title": "Quality Preservation",
+          "description": "Advanced algorithms ensure converted PDFs maintain original image quality",
+          "icon": "star"
+        },
+        "batch": {
+          "title": "Batch Processing",
+          "description": "Support simultaneous conversion of multiple files for efficiency",
+          "icon": "layers"
+        },
+        "free": {
+          "title": "Free to Use",
+          "description": "Daily free conversion quota, no registration required",
+          "icon": "gift"
+        },
+        "support": {
+          "title": "24/7 Support",
+          "description": "Round-the-clock technical support to solve your problems",
+          "icon": "headphones"
+        }
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Common questions about HEIC to PDF conversion",
+      "pricing": {
+        "description": "Need more conversions or larger file support?",
+        "action": "View Pricing Plans"
+      },
+      "items": {
+        "q1": {
+          "question": "What is HEIC format?",
+          "answer": "HEIC (High Efficiency Image Container) is Apple's default image format since iOS 11. It saves about 50% storage space compared to JPEG while maintaining the same image quality."
+        },
+        "q2": {
+          "question": "Why do I need to convert HEIC to PDF?",
+          "answer": "While HEIC format works great on Apple devices, it has poor compatibility on other platforms (like Windows, Android). Converting to PDF ensures files can be viewed and shared on any device."
+        },
+        "q3": {
+          "question": "Will conversion affect image quality?",
+          "answer": "We use advanced conversion algorithms to maintain original image quality to the maximum extent. The converted PDF quality is virtually identical to the original HEIC file."
+        },
+        "q4": {
+          "question": "Are there file size limitations?",
+          "answer": "Free users can process files up to 10MB each, with batch upload supporting up to 5 files. For larger files or more quantity, you can upgrade to a paid plan."
+        },
+        "q5": {
+          "question": "Are my files secure?",
+          "answer": "Yes, we take user privacy very seriously. All files are transmitted via SSL encryption and automatically deleted within 3 hours after conversion. We don't save or share any of your files."
+        },
+        "q6": {
+          "question": "How long does conversion take?",
+          "answer": "Typically, the conversion process completes within 30 seconds. Actual time depends on file size and current server load. Batch conversions may take longer."
+        },
+        "pricing": {
+          "question": "How can I get more conversions or larger file support?",
+          "answer": "If you need more conversion quota, larger file support, or watermark-free output, please check our",
+          "link": "pricing plans"
+        }
+      }
+    },
+    "getStarted": {
+      "title": "Ready to Convert Your HEIC Files?",
+      "subtitle": "The simplest way to turn your HEIC images into universally compatible PDF documents.",
+      "action": "Start Converting Now"
     }
   },
   "PricingPage": {
@@ -152,30 +339,30 @@
     "faq": {
       "label": "FAQ",
       "title": "Frequently asked questions",
-      "subtitle": "Explore our comprehensive FAQ to find quick answers to common inquiries. If you need further assistance, don't hesitate to contact us for personalized help.",
+      "subtitle": "Explore our comprehensive FAQ to find quick answers about HEIC to PDF conversion. If you need further assistance, don't hesitate to contact us for personalized help.",
       "item1": {
-        "question": "How does Flux AI compare to Stable Diffusion 3?",
-        "answer": "Flux AI offers faster generation times, higher image quality, and a more user-friendly interface compared to Stable Diffusion 3. The Flux.1 model incorporates the latest advancements in AI research."
+        "question": "What is HEIC format and why convert to PDF?",
+        "answer": "HEIC (High Efficiency Image Container) is Apple's modern image format that saves storage space. Converting to PDF makes your images universally accessible across all devices and platforms, perfect for sharing, printing, and archiving."
       },
       "item2": {
-        "question": "Is Flux AI available on GitHub or Hugging Face?",
-        "answer": "Yes, Flux AI is open-source and available on both GitHub and Hugging Face."
+        "question": "Can I convert multiple HEIC files at once?",
+        "answer": "Yes! Our batch conversion feature allows you to upload and convert multiple HEIC images simultaneously. You can create either a single PDF with all images or individual PDFs for each image."
       },
       "item3": {
-        "question": "What makes Flux AI different from other AI image generators?",
-        "answer": "Flux AI combines speed, quality, and ease of use. It's faster than Midjourney, more user-friendly than ComfyUI, and produces higher quality images than many competitors."
+        "question": "Will the image quality be preserved during conversion?",
+        "answer": "Absolutely! Our advanced conversion engine maintains the original quality of your HEIC images. The converted PDFs will look identical to your original photos with no quality loss."
       },
       "item4": {
-        "question": "How to use Flux AI?",
-        "answer": "To use Flux AI, simply visit fluxaipro.art, enter your prompt, and witness the creation of breathtaking visuals in a matter of seconds."
+        "question": "How do I convert HEIC to PDF?",
+        "answer": "Simply upload your HEIC files using our drag-and-drop interface, choose your conversion settings (single PDF or multiple PDFs), click convert, and download your files. No software installation required!"
       },
       "item5": {
-        "question": "What pricing plans does Flux AI offer?",
-        "answer": "We use points to use our services, and you can click on the price card to buy points (only one payment is required)."
+        "question": "Is there a file size limit for HEIC conversion?",
+        "answer": "Our free plan supports files up to 10MB each with up to 5 conversions per day. Premium plans offer larger file sizes and unlimited conversions for professional users."
       },
       "item6": {
-        "question": "How can I get support for Online?",
-        "answer": "You can reach out to us at support@fluxaipro.art."
+        "question": "Is my data secure during the conversion process?",
+        "answer": "Yes, we take privacy seriously. All uploaded files are processed securely and automatically deleted from our servers after 24 hours. We never store or share your personal images."
       }
     },
     "tip": {
@@ -184,23 +371,7 @@
       "contact": "contact us"
     }
   },
-  "ExplorePage": {
-    "layout": {
-      "title": "Explore Flux AI Image Generator",
-      "description": "Discover the latest features and updates of Flux AI Image Generator. ",
-      "keywords": "flux AI, AI flux, flux artificial intelligence, AI technology, machine learning flux, flux AI tools, AI applications, artificial intelligence solutions, flux data analysis, AI innovation, predictive analytics flux, flux machine learning, AI development, next-gen AI"
-    },
-    "title": "Explore Flux AI Image Generator",
-    "description": "Discover the latest features and updates of Flux AI Image Generator. ",
-    "flux": {
-      "model": "Model",
-      "lora": "Style",
-      "prompt": "Prompt",
-      "executePrompt": "Magic Prompt",
-      "resolution": "Resolution",
-      "createdAt": "Date created"
-    }
-  },
+
   "Playground": {
     "layout": {
       "title": "Free Flux.1 {model} Image Generator: Create Stunning Images in Seconds",
@@ -219,31 +390,31 @@
     },
     "schnell_faq": {
       "label": "FAQ",
-      "title": "Frequently asked questions",
-      "subtitle": "Explore our comprehensive FAQ to find quick answers to common inquiries. If you need further assistance, don't hesitate to contact us for personalized help.",
+      "title": "Frequently Asked Questions",
+      "subtitle": "Explore our comprehensive FAQ to find quick answers about HEIC to PDF conversion. If you need further assistance, don't hesitate to contact us for personalized help.",
       "item1": {
-        "question": "What is Flux.1 Schnell?",
-        "answer": "Flux.1 Schnell is the fastest image generation model tailored for local development and personal use."
+        "question": "What is the HEIC format?",
+        "answer": "HEIC (High Efficiency Image Container) is Apple's default image format introduced after iOS 11. It offers better compression and quality than JPEG, but has less universal compatibility than PDF."
       },
       "item2": {
-        "question": "How important is the initial input when generating images in Flux.1 Schnell?",
-        "answer": "The initial input used in Flux.1 Schnell is incredibly important for image quality. Providing high-quality and detailed inputs can lead to more realistic and detailed outputs. Ensure that the concepts and elements proposed are well-defined for the best results."
+        "question": "Why convert HEIC to PDF?",
+        "answer": "Converting HEIC to PDF ensures your images can be viewed on any device or platform, making them easier to share, print, and archive. PDF is a universal format supported by virtually all devices and applications."
       },
       "item3": {
-        "question": "How can I improve the quality of images generated by Flux.1 Schnell?",
-        "answer": "To enhance image quality, provide clear and detailed prompts, experiment with different artistic styles, and consider using the pro variant for more complex tasks."
+        "question": "What additional features does the Premium version offer?",
+        "answer": "Our Premium version offers batch processing, watermark-free output, higher resolution, priority support, and faster conversion speeds. It's particularly suited for professionals and businesses that need to process large volumes of images."
       },
       "item4": {
-        "question": "Are there online communities or forums that provide tips for improving Flux.1 Schnell image quality?",
-        "answer": "Yes, can be used on the official website at https://fluxaipro.art/flux-schnell. Users only need to input their prompts on the website and generate images, which can help you improve the quality of your generated images."
+        "question": "How can I get the best conversion quality?",
+        "answer": "For best conversion quality, ensure you upload original HEIC files rather than compressed versions, select appropriate conversion settings, and consider using our Premium version for higher quality output."
       },
       "item5": {
-        "question": "How can I use Flux.1 Schnell and are there any free options?",
-        "answer": "Flux.1 Schnell can be used on the official website at https://fluxaipro.art/flux-schnell. Each user gets 5 free uses of the Flux.1 Schnell model per calendar month, which resets at the beginning of each month. To use it, simply input your prompt on the website and generate images. This process can help you improve the quality of your generated images over time."
+        "question": "What are the limitations of the free version?",
+        "answer": "The free version limits you to 5 conversions per day, with a maximum file size of 10MB each, and includes watermarks on the output PDFs. Your free usage count resets at the beginning of each month, allowing you to continue using our basic service."
       },
       "item6": {
-        "question": "How can I get support for Online?",
-        "answer": "You can reach out to us at support@fluxaipro.art."
+        "question": "How can I get online support?",
+        "answer": "You can reach out to our support team at support@heictopdf.com. We offer 24/7 support, with Premium users enjoying priority response service."
       }
     },
     "title": "Flux AI Image Generator",
@@ -367,9 +538,9 @@
     }
   },
   "LocaleLayout": {
-    "title": "Flux AI Image Generator Online - Flux AI",
-    "description": "Transform your visuals with Flux.1 AI's advanced tools: Flux Schnell for swift creations, Flux Dev for detailed customization, and Flux Pro for unmatched professional quality.",
-    "keywords": "flux AI, AI flux, flux artificial intelligence, AI technology, machine learning flux, flux AI tools, AI applications, artificial intelligence solutions, flux data analysis, AI innovation, predictive analytics flux, flux machine learning, AI development, next-gen AI"
+    "title": "HEIC to PDF Converter Online - Free Fast Conversion",
+    "description": "Professional HEIC to PDF online conversion tool: batch conversion, high-quality preservation, cloud storage integration. Convert Apple HEIC format to universal PDF documents, simple, fast and secure.",
+    "keywords": "HEIC to PDF, HEIC converter, image conversion, Apple photo converter, PDF conversion tool, online converter, batch conversion, image format conversion, free conversion tool"
   },
   "LocaleSwitcher": {
     "label": "Change language",
@@ -380,18 +551,17 @@
   },
   "AppNavigation": {
     "Index": "Home",
-    "Generate": "Generate",
-    "History": "History",
-    "GiftCode": "Gift Code",
-    "ChargeOrder": "Charge Order"
+    "Generate": "HEIC to PDF",
+    "History": "Conversion History",
+    "GiftCode": "Redeem Code",
+    "ChargeOrder": "Order History"
   },
   "Navigation": {
     "pricing": "Pricing",
-    "schnell": "Flux Schnell",
-    "explore": "Explore",
-    "title": "Flux AI Image Generator",
+    "convert": "Start Converting",
+
+    "title": "HEIC to PDF Converter",
     "blog": "Blog",
-    "prompt": "Flux AI Prompt Generator",
     "dashboard": "Dashboard",
     "tooltip": {
       "login": "Login"
@@ -403,7 +573,7 @@
   },
   "PageLayout": {
     "footer": {
-      "title": "Flux AI Image Generator",
+      "title": "HEIC to PDF Converter",
       "term": "Terms",
       "privacy": "Privacy",
       "contact": "Contact"

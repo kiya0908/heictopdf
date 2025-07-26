@@ -13,7 +13,7 @@ export async function getChargeProduct(locale?: string) {
       locale,
     },
     orderBy: {
-      credit: "asc",
+      amount: "asc",
     },
   });
 

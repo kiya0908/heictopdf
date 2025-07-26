@@ -28,14 +28,13 @@ import { DownloadAction } from "./download-action";
 import LoadMoreLoading from "./loading";
 
 const useQueryMineFluxMutation = (config?: {
-  explore?: boolean;
   onSuccess: (result: any) => void;
 }) => {
   const { getToken } = useAuth();
 
   return useMutation({
     mutationFn: async (values: any) => {
-      const path = config?.explore ? "/api/explore" : "/api/mine-flux";
+      const path = "/api/mine-flux";
       const res = await fetch(`${path}?${qs.stringify(values)}`, {
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
@@ -59,7 +58,7 @@ const breakpointColumnsObj = {
   640: 1,
 };
 
-export default function History({ locale, explore }: { locale: string, explore?: boolean }) {
+export default function History({ locale }: { locale: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [init, setInit] = useState(false);
   const t = useTranslations("History");
@@ -71,7 +70,6 @@ export default function History({ locale, explore }: { locale: string, explore?:
   const [hasMore, setHasMore] = useState(true);
   const [dataSource, setDataSource] = useState<FluxSelectDto[]>([]);
   const useQueryMineFlux = useQueryMineFluxMutation({
-    explore,
     onSuccess(result) {
       const { page, pageSize, total, data } = result.data ?? {};
       setDataSource(page === 1 ? data : [...dataSource, ...data]);
@@ -104,12 +102,7 @@ export default function History({ locale, explore }: { locale: string, explore?:
   const debounceLoadMore = debounce(loadMore, 500);
 
   return (
-    <Container className={
-      cn({
-        "h-[calc(100vh_-_76px)]": !explore,
-        "min-h-screen": explore,
-      })
-    }>
+    <Container className="h-[calc(100vh_-_76px)]">
       <div
         className="no-scrollbar h-full overflow-y-auto overflow-x-hidden"
         id={id}
@@ -181,42 +174,36 @@ export default function History({ locale, explore }: { locale: string, explore?:
                       </svg>
                     </span>
                   </Link>
-                  {
-                    !explore && (
-                      <>
-                        <div className="text-content-light inline-block px-4 py-2 text-sm">
-                          <p className="line-clamp-4 italic md:line-clamp-6 lg:line-clamp-[8]">
-                            {item.inputPrompt}
-                          </p>
-                        </div>
-                        <div className="flex flex-row flex-wrap space-x-1 px-2">
-                          {ModelName[item.model] && (
-                            <div className="bg-surface-alpha-strong text-content-base inline-flex items-center rounded-md border border-transparent px-1.5 py-0.5 font-mono text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                              {ModelName[item.model]}
-                            </div>
-                          )}
-                          {item.loraName && LoraConfig[item.loraName]?.styleName && (
-                            <div className="bg-surface-alpha-strong text-content-base inline-flex items-center rounded-md border border-transparent px-1.5 py-0.5 font-mono text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                              {LoraConfig[item.loraName]?.styleName}
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex flex-row justify-between space-x-2 p-4 pt-0">
-                          <button
-                            className="focus-ring text-content-strong border-stroke-strong hover:border-stroke-stronger data-[state=open]:bg-surface-alpha-light inline-flex h-8 items-center justify-center whitespace-nowrap rounded-lg border bg-transparent px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
-                            onClick={() => copyPrompt(item.inputPrompt!)}
-                          >
-                            <Copy className="icon-xs me-1" />
-                            {t("action.copy")}
-                          </button>
-                          <DownloadAction
-                            disabled={item.taskStatus === FluxTaskStatus.Processing}
-                            id={item.id}
-                          />
-                        </div>
-                      </>
-                    )
-                  }
+                  <div className="text-content-light inline-block px-4 py-2 text-sm">
+                    <p className="line-clamp-4 italic md:line-clamp-6 lg:line-clamp-[8]">
+                      {item.inputPrompt}
+                    </p>
+                  </div>
+                  <div className="flex flex-row flex-wrap space-x-1 px-2">
+                    {ModelName[item.model] && (
+                      <div className="bg-surface-alpha-strong text-content-base inline-flex items-center rounded-md border border-transparent px-1.5 py-0.5 font-mono text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                        {ModelName[item.model]}
+                      </div>
+                    )}
+                    {item.loraName && LoraConfig[item.loraName]?.styleName && (
+                      <div className="bg-surface-alpha-strong text-content-base inline-flex items-center rounded-md border border-transparent px-1.5 py-0.5 font-mono text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                        {LoraConfig[item.loraName]?.styleName}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-row justify-between space-x-2 p-4 pt-0">
+                    <button
+                      className="focus-ring text-content-strong border-stroke-strong hover:border-stroke-stronger data-[state=open]:bg-surface-alpha-light inline-flex h-8 items-center justify-center whitespace-nowrap rounded-lg border bg-transparent px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
+                      onClick={() => copyPrompt(item.inputPrompt!)}
+                    >
+                      <Copy className="icon-xs me-1" />
+                      {t("action.copy")}
+                    </button>
+                    <DownloadAction
+                      disabled={item.taskStatus === FluxTaskStatus.Processing}
+                      id={item.id}
+                    />
+                  </div>
                 </div>
               ))}
             </Masonry>

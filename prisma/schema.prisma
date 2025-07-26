@@ -12,7 +12,6 @@ model ChargeOrder {
   userId    String    @map(name: "user_id") @db.VarChar(200)
   userInfo  Json?     @map(name: "user_info") @db.Json
   amount    Int
-  credit    Int
   phase     String    @db.VarChar
   channel   String    @db.VarChar
   currency  String    @db.VarChar
@@ -24,173 +23,19 @@ model ChargeOrder {
   @@map(name: "charge_order")
 }
 
-model ClaimedActivityOrder {
-  id            Int      @id @default(autoincrement())
-  chargeOrderId Int      @map(name: "charge_order_id")
-  userId        String   @map(name: "user_id") @db.VarChar(200)
-  credit        Int
-  createdAt     DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt     DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-  activityCode  String   @map(name: "activity_code") @db.VarChar(200)
-  transactionId Int?     @map(name: "transaction_id")
-
-  @@map(name: "claimed_activity_order")
-}
-
 model ChargeProduct {
-  id             Int      @id @default(autoincrement())
-  amount         Int
-  originalAmount Int      @map(name: "original_amount")
-  credit         Int
-  currency       String   @db.VarChar
-  locale         String   @db.VarChar
-  title          String   @db.VarChar
-  tag            Json?    @db.Json
-  message        String?
-  state          String   @db.VarChar
-  createdAt      DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt      DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-
-  @@map(name: "charge_product")
-}
-
-model FluxData {
-  id               Int      @id @default(autoincrement())
-  userId           String   @map(name: "user_id") @db.VarChar
-  replicateId      String   @map(name: "replicate_id") @db.VarChar
-  inputPrompt      String?  @map(name: "input_prompt")
-  executePrompt    String?  @map(name: "execute_prompt")
-  steps            Int?
-  guidance         Int?
-  interval         Int?
-  inputImageUrl    String?  @map(name: "input_image_url") @db.VarChar
-  imageUrl         String?  @map(name: "image_url") @db.VarChar
-  model            String   @db.VarChar(255)
-  executeStartTime BigInt?  @map(name: "execute_start_time")
-  executeEndTime   BigInt?  @map(name: "execute_end_time")
-  locale           String?  @db.VarChar(64)
-  aspectRatio      String   @map("aspect_ratio") @db.VarChar
-  safetyTolerance  Int?     @map("safety_tolerance")
-  seed             Int?
-  taskStatus       String   @map(name: "task_status") @db.VarChar
-  isPrivate        Boolean? @default(false) @map(name: "is_private")
-  downloadNum      Int      @default(0) @map(name: "download_num")
-  viewsNum         Int      @default(0) @map(name: "views_num")
-  createdAt        DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt        DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-  errorMsg         String?  @map(name: "error_msg")
-  loraUrl          String?  @map("lora_url") @db.VarChar(255)
-  loraName         String?  @map("lora_name") @db.VarChar(255)
-  loraScale        Float?   @map("lora_scale") @db.DoublePrecision
-
-  @@map(name: "flux_data")
-}
-
-model FluxDownloads {
-  id        Int      @id @default(autoincrement())
-  fluxId    Int      @map(name: "flux_id")
-  userId    String   @map(name: "user_id") @db.VarChar(200)
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-
-  @@map(name: "flux_downloads")
-}
-
-model FluxViews {
-  id        Int      @id @default(autoincrement())
-  fluxId    Int      @map(name: "flux_id")
-  userId    String   @map(name: "user_id") @db.VarChar(200)
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-
-  @@map(name: "flux_views")
-}
-
-model GiftCode {
-  id            Int       @id @default(autoincrement())
-  code          String    @db.VarChar(256)
-  creditAmount  Int       @map(name: "credit_amount")
-  used          Boolean?  @default(false)
-  usedBy        String?   @map(name: "used_by") @db.VarChar(200)
-  usedAt        DateTime? @map(name: "used_at") @db.Timestamp(6)
-  transactionId Int?      @map(name: "transaction_id")
-  createdAt     DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  expiredAt     DateTime? @map(name: "expired_at") @db.Timestamp(6)
-
-  @@map(name: "gift_code")
-}
-
-model media {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar
-  key       String   @db.VarChar
-  url       String   @db.VarChar
-  color     String?  @db.VarChar
-  blurhash  String?  @db.VarChar
-  fileSize  Int      @map(name: "file_size")
-  fileType  String   @map(name: "file_type") @db.VarChar
-  md5       String   @db.VarChar
-  ext       Json?    @db.Json
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-}
-
-model newsletters {
-  id        Int       @id @default(autoincrement())
-  subject   String?   @db.VarChar(200)
-  body      String?
-  locale    String?   @db.VarChar(10)
-  sentAt    DateTime? @map(name: "sent_at") @db.Timestamp(6)
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-}
-
-model subscribers {
-  id             Int       @id @default(autoincrement())
-  email          String?   @db.VarChar(120)
-  token          String?   @db.VarChar(50)
-  locale         String?   @db.VarChar(10)
-  subscribedAt   DateTime? @map(name: "subscribed_at") @db.Timestamp(6)
-  unsubscribedAt DateTime? @map(name: "unsubscribed_at") @db.Timestamp(6)
-
-  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-}
-
-model UserBilling {
-  id          Int      @id @default(autoincrement())
-  userId      String   @map(name: "user_id") @db.VarChar(200)
-  state       String   @db.VarChar
+  id          Int       @id @default(autoincrement())
   amount      Int
-  type        String   @db.VarChar
-  fluxId      Int?     @map(name: "flux_id")
-  description String?  @db.VarChar
-  createdAt   DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt   DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  name        String    @db.VarChar
+  description String?   @db.VarChar
+  locale      String?   @db.VarChar
+  currency    String    @db.VarChar
+  features    Json?     @db.Json
+  createdAt   DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
+  updatedAt   DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
-  @@map(name: "user_billing")
-}
-
-model UserCredit {
-  id        Int      @id @default(autoincrement())
-  userId    String   @map(name: "user_id") @db.VarChar(200)
-  credit    Int
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-
-  @@map(name: "user_credit")
-}
-
-model UserCreditTransaction {
-  id        Int      @id @default(autoincrement())
-  userId    String   @map(name: "user_id") @db.VarChar(200)
-  credit    Int
-  balance   Int
-  billingId Int?     @map(name: "billing_id")
-  type      String   @db.VarChar
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
-
-  @@map(name: "user_credit_transaction")
+  @@unique([name, locale])
+  @@map(name: "charge_product")
 }
 
 model UserPaymentInfo {
@@ -205,4 +50,33 @@ model UserPaymentInfo {
   updatedAt              DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
   @@map(name: "user_payment_info")
+}
+
+model UserConversionUsage {
+  id                   Int       @id @default(autoincrement())
+  userId               String    @map(name: "user_id") @db.VarChar(200)
+  dailyConversionCount Int       @default(0) @map(name: "daily_conversion_count")
+  lastConversionDate   DateTime? @map(name: "last_conversion_date") @db.Date
+  createdAt            DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
+  updatedAt            DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+
+  @@unique([userId])
+  @@map(name: "user_conversion_usage")
+}
+
+model ConversionHistory {
+  id               Int       @id @default(autoincrement())
+  userId           String    @map(name: "user_id") @db.VarChar(200)
+  originalFileName String    @map(name: "original_file_name") @db.VarChar(255)
+  originalFileSize Int       @map(name: "original_file_size")
+  convertedFileName String?  @map(name: "converted_file_name") @db.VarChar(255)
+  downloadUrl      String?   @map(name: "download_url") @db.Text
+  urlExpiresAt     DateTime? @map(name: "url_expires_at") @db.Timestamp(6)
+  conversionCost   Float?    @map(name: "conversion_cost")
+  status           String    @map(name: "status") @db.VarChar(50) // 'pending', 'completed', 'failed'
+  errorMessage     String?   @map(name: "error_message") @db.Text
+  createdAt        DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
+  updatedAt        DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+
+  @@map(name: "conversion_history")
 }

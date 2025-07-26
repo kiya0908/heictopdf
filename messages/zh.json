@@ -72,10 +72,35 @@
     }
   },
   "IndexPage": {
-    "intro": "介绍 Flux AI 图像生成器",
-    "description": "革新下一代高级文本到图像的开放模型，支持 flux.1 pro/dev和 flux.1 schnell模型。",
-    "title": "Flux AI 图像生成器",
-    "subtitle": "高级文本图像生成",
+    "intro": "介绍 HEIC 转 PDF 转换器",
+    "description": "将 HEIC 图像转换为 PDF 文档的最快、最可靠的方式。简单、安全、高效。",
+    "title": "HEIC 转 PDF 转换器",
+    "subtitle": "轻松图像转换",
+    "upload": {
+      "title": "开始转换",
+      "subtitle": "上传您的HEIC文件，我们将快速为您转换为PDF格式",
+      "features": {
+        "fast": "快速转换HEIC到PDF",
+        "batch": "支持批量处理",
+        "quality": "保持原图质量",
+        "secure": "安全可靠"
+      },
+      "steps": {
+        "title": "简单三步完成转换",
+        "step1": {
+          "title": "选择文件",
+          "description": "拖拽或点击上传您的HEIC图片文件"
+        },
+        "step2": {
+          "title": "自动转换",
+          "description": "我们的服务器会自动处理您的文件"
+        },
+        "step3": {
+          "title": "下载结果",
+          "description": "转换完成后立即下载PDF文件"
+        }
+      }
+    },
     "powered": {
       "title": "技术支持"
     },
@@ -86,54 +111,216 @@
     },
     "examples": {
       "label": "示例",
-      "title": "Flux AI 生成示例 - 高级文本图像转换",
-      "subtitle": "浏览 Flux AI 生成示例，从文本提示生成图像。体验下一代高级文本到图像的开放模型。"
+      "title": "HEIC 转 PDF 转换示例",
+      "subtitle": "几秒钟内将您的 HEIC 图像转换为 PDF 文档。"
     },
     "features": {
       "title": "产品特点",
       "action": {
-        "visit": "去生成"
+        "visit": "立即转换"
       },
-      "description": "Flux AI 图像生成器是一个强大的工具，可以根据文本提示生成图像。它使用先进的 AI 模型创建出色的图像，非常适合任何项目。",
+      "description": "我们的 HEIC 转 PDF 转换器是一个强大的工具，可以轻松将苹果的 HEIC 图像格式转换为通用兼容的 PDF 文档。完美适用于分享、打印和归档您的照片。",
       "item1": {
-        "title": "FLUX.1 [pro]",
-        "description": "FLUX.1 的最佳版本，提供先进的性能图像生成，具有一流的提示跟随、视觉质量、图像细节和输出多样性。"
+        "title": "批量转换",
+        "description": "一次性将多个 HEIC 图像转换为单个 PDF 文档或多个独立的 PDF。通过我们高效的批处理功能节省时间。"
       },
       "item2": {
-        "title": "FLUX.1 [dev]",
-        "description": "FLUX.1 [dev] 具有类似的质量和提示遵循能力，同时比相同大小的标准模型更高效。"
+        "title": "高质量保留",
+        "description": "我们的转换器在将 HEIC 图像转换为 PDF 时保持原始质量，确保您的照片看起来与原始照片一样好。"
       },
       "item3": {
-        "title": "FLUX.1 [schnell]",
-        "description": "专为本地开发和个人使用而量身定制的最快图像生成模型，价格成本更低，高效，文本提示生成图像"
+        "title": "云存储集成",
+        "description": "轻松从 iCloud、Google Drive 或 Dropbox 等云存储服务导入 HEIC 图像，并将转换后的 PDF 保存到您喜欢的位置。"
       },
       "item4": {
-        "title": "极速生成",
-        "description": "Flux AI 在几秒钟内生成高质量图像，比 Stable Diffusion 3 和 Midjourney 快得多。凭借其极速生成能力，Flux AI 确保快速高效生成，为您节省宝贵的时间资源。"
+        "title": "极速转换",
+        "description": "我们优化的转换引擎可在几秒钟内处理您的 HEIC 图像，比其他转换器快得多。凭借其极速转换能力，我们的工具确保快速高效的结果，为您节省宝贵的时间。"
       },
       "item5": {
-        "title": "可定制化",
-        "description": "先进的 Flux.1 模型比竞争对手生成更详细、更连贯的图像。凭借其可定制化的功能和用户友好的界面，Flux AI 图像生成器是从文本提示生成惊人图像的终极工具。"
+        "title": "跨平台兼容",
+        "description": "在所有设备和操作系统上无缝运行。无论您使用的是 Windows、macOS、iOS 还是 Android，我们的 HEIC 转 PDF 转换器确保您的图像在任何地方都可访问。"
       },
       "item6": {
-        "title": "易于使用",
-        "description": "比 ComfyUI 更易于使用，适合初学者和专业人士。Flux AI 图像生成器是从文本提示生成惊人图像的终极工具。Flux AI 让初学者和专业人士轻松创建出色视觉效果。"
+        "title": "用户友好界面",
+        "description": "简单直观的设计使 HEIC 转 PDF 变得轻松。只需上传您的图像，点击转换，然后下载您的 PDF。无需技术知识 - 适合从初学者到专业人士的所有人。"
       }
     },
     "schnell": {
-      "title": "Flux.1 [Schnell]",
-      "description": "Flux.1 [schnell] 是基础模型的精炼版本，运行速度比原版快10倍。它采用 Apache 2.0 许可，针对速度和效率进行了优化，满足那些需要快速生成图像而不影响质量的用户。这个模型非常适合本地开发和个人使用，在性能和可访问性之间达到了完美平衡。我们每月为用户提供5次免费机会，体验 Flux.1 [schnell] 模型的闪电般快速图像生成，让您亲身感受其令人难以置信的速度。",
+      "title": "HEIC 转 PDF 高级版",
+      "description": "我们的高级版转换器提供更多功能，包括批量处理、无水印输出和优先支持。高级版速度比标准版快10倍，针对速度和效率进行了优化，满足那些需要快速转换大量图像的用户。这个版本非常适合专业人士和企业用户，在性能和可访问性之间达到了完美平衡。我们每月为用户提供5次免费机会，体验高级版的闪电般快速转换，让您亲身感受其令人难以置信的速度。",
       "action": "立即尝试"
     },
     "action": {
-      "pricing": "购买积分",
+      "pricing": "查看套餐",
       "login": "登录",
-      "dashboard": "去使用",
-      "generate": "去使用",
+      "dashboard": "控制台",
+      "generate": "立即转换",
       "github": {
         "sm": "在 Github 上加星",
         "normal": "Github"
       }
+    },
+    "upload": {
+      "title": "上传您的 HEIC 图像",
+      "subtitle": "拖放您的 HEIC 文件或点击浏览",
+      "features": {
+        "fast": "极速转换",
+        "batch": "批量处理",
+        "quality": "高质量",
+        "secure": "100% 安全"
+      },
+      "steps": {
+        "title": "工作原理",
+        "step1": {
+          "title": "上传 HEIC 文件",
+          "description": "从您的设备选择或拖拽 HEIC 图像"
+        },
+        "step2": {
+          "title": "转换为 PDF",
+          "description": "我们的系统会立即处理您的图像"
+        },
+        "step3": {
+          "title": "下载 PDF",
+          "description": "获取转换后的 PDF 文件，即可使用"
+        }
+      },
+      "legal": "继续操作即表示您同意我们的<terms>服务条款</terms>和<privacy>隐私政策</privacy>。",
+      "privacy_commitment": "我们承诺保护您的隐私，上传的文件将在转换完成后自动删除。",
+      "uploader": {
+        "drag_active": "放下文件开始转换",
+        "drag_inactive": "拖拽或点击上传 HEIC 文件",
+        "supported_formats": "支持 .heic, .heif 格式，单个文件最大 {maxSize}",
+        "max_files": "最多可上传 {maxFiles} 个文件",
+        "select_files": "选择文件",
+        "error_format": "请只上传 HEIC 格式的文件",
+        "error_max_files": "最多只能上传 {maxFiles} 个文件",
+        "selected_files": "已选择的文件 ({count})"
+      }
+    },
+    "whatIs": {
+      "title": "什么是 HEIC 转 PDF？",
+      "subtitle": "了解 HEIC 格式以及为什么需要转换为 PDF",
+      "description": "HEIC (High Efficiency Image Container) 是苹果设备默认的图片格式，具有高压缩率和优质画质。但由于兼容性问题，很多设备和软件无法直接打开 HEIC 文件。",
+      "benefits": {
+        "title": "转换为 PDF 的优势",
+        "item1": {
+          "title": "通用兼容性",
+          "description": "PDF 格式在所有设备和平台上都能完美显示"
+        },
+        "item2": {
+          "title": "易于分享",
+          "description": "PDF 文件可以轻松通过邮件、云存储等方式分享"
+        },
+        "item3": {
+          "title": "保持质量",
+          "description": "转换过程中保持原始图片的高质量"
+        },
+        "item4": {
+          "title": "文档整合",
+          "description": "多个图片可以合并成一个 PDF 文档"
+        }
+      }
+    },
+    "howTo": {
+      "title": "如何使用",
+      "subtitle": "简单三步完成 HEIC 到 PDF 转换",
+      "steps": {
+        "step1": {
+          "title": "上传文件",
+          "description": "选择您的 HEIC 图片文件，支持拖拽上传",
+          "detail": "支持单个或批量上传，最大文件大小 10MB"
+        },
+        "step2": {
+          "title": "自动转换",
+          "description": "我们的服务器自动处理您的文件",
+          "detail": "使用高效算法，平均转换时间少于 30 秒"
+        },
+        "step3": {
+          "title": "下载结果",
+          "description": "立即下载转换完成的 PDF 文件",
+          "detail": "提供 3 小时有效的安全下载链接"
+        }
+      }
+    },
+    "why": {
+      "title": "为什么选择我们？",
+      "subtitle": "专业、安全、高效的 HEIC 转 PDF 服务",
+      "features": {
+        "security": {
+          "title": "隐私安全",
+          "description": "所有文件自动加密传输，转换完成后立即删除",
+          "icon": "shield"
+        },
+        "speed": {
+          "title": "极速转换",
+          "description": "采用最新技术，平均转换时间仅需 30 秒",
+          "icon": "zap"
+        },
+        "quality": {
+          "title": "保持质量",
+          "description": "先进算法确保转换后 PDF 保持原始图片质量",
+          "icon": "star"
+        },
+        "batch": {
+          "title": "批量处理",
+          "description": "支持同时转换多个文件，提高工作效率",
+          "icon": "layers"
+        },
+        "free": {
+          "title": "免费使用",
+          "description": "每日免费转换次数，无需注册即可使用",
+          "icon": "gift"
+        },
+        "support": {
+          "title": "全天候支持",
+          "description": "24/7 技术支持，随时解决您的问题",
+          "icon": "headphones"
+        }
+      }
+    },
+    "faq": {
+      "title": "常见问题",
+      "subtitle": "关于 HEIC 转 PDF 的常见疑问解答",
+      "pricing": {
+        "description": "需要更多转换次数或更大文件支持？",
+        "action": "查看定价方案"
+      },
+      "items": {
+        "q1": {
+          "question": "什么是 HEIC 格式？",
+          "answer": "HEIC (High Efficiency Image Container) 是苹果从 iOS 11 开始采用的默认图片格式。它比 JPEG 格式节省约 50% 的存储空间，同时保持相同的图片质量。"
+        },
+        "q2": {
+          "question": "为什么需要将 HEIC 转换为 PDF？",
+          "answer": "虽然 HEIC 格式在苹果设备上效果很好，但在其他平台（如 Windows、Android）上兼容性较差。转换为 PDF 可以确保文件在任何设备上都能正常查看和分享。"
+        },
+        "q3": {
+          "question": "转换过程会影响图片质量吗？",
+          "answer": "我们使用先进的转换算法，确保在转换过程中最大程度保持原始图片的质量。转换后的 PDF 文件质量与原始 HEIC 文件几乎无差异。"
+        },
+        "q4": {
+          "question": "文件大小有限制吗？",
+          "answer": "免费用户单个文件最大支持 10MB，批量上传最多支持 5 个文件。如需处理更大的文件或更多数量，可以升级到付费计划。"
+        },
+        "q5": {
+          "question": "我的文件安全吗？",
+          "answer": "是的，我们非常重视用户隐私。所有文件都通过 SSL 加密传输，转换完成后会在 3 小时内自动删除。我们不会保存或分享您的任何文件。"
+        },
+        "q6": {
+          "question": "转换需要多长时间？",
+          "answer": "通常情况下，转换过程在 30 秒内完成。具体时间取决于文件大小和当前服务器负载。批量转换可能需要更长时间。"
+        },
+        "pricing": {
+          "question": "如何获得更多转换次数或更大文件支持？",
+          "answer": "如果您需要更多转换次数、更大文件支持或无水印输出，请查看我们的",
+          "link": "定价方案"
+        }
+      }
+    },
+    "getStarted": {
+      "title": "准备好转换您的HEIC文件了吗？",
+      "subtitle": "将您的HEIC图片转换为通用PDF文档的最简单方法。",
+      "action": "立即开始转换"
     }
   },
   "PricingPage": {
@@ -152,30 +339,30 @@
     "faq": {
       "label": "常见问题",
       "title": "常见问题解答",
-      "subtitle": "浏览我们全面的常见问题解答，快速找到常见疑问的答案。如果您需要进一步帮助，请随时联系我们获取个性化支持。",
+      "subtitle": "浏览我们关于 HEIC 转 PDF 转换的全面常见问题解答，快速找到常见疑问的答案。如果您需要进一步帮助，请随时联系我们获取个性化支持。",
       "item1": {
-        "question": "Flux AI 与 Stable Diffusion 3 相比有什么不同？",
-        "answer": "与 Stable Diffusion 3 相比，Flux AI 提供更快的生成时间、更高的图像质量和更用户友好的界面。Flux.1 模型融合了最新的人工智能研究成果。"
+        "question": "什么是 HEIC 格式，为什么要转换为 PDF？",
+        "answer": "HEIC（高效图像容器）是苹果的现代图像格式，可节省存储空间。转换为 PDF 使您的图像在所有设备和平台上都能通用访问，非常适合分享、打印和归档。"
       },
       "item2": {
-        "question": "Flux AI 是否在 GitHub 或 Hugging Face 上可用？",
-        "answer": "是的，Flux AI 是开源的，可在 GitHub 和 Hugging Face 上使用。"
+        "question": "我可以一次转换多个 HEIC 文件吗？",
+        "answer": "可以！我们的批量转换功能允许您同时上传和转换多个 HEIC 图像。您可以创建包含所有图像的单个 PDF，或为每个图像创建单独的 PDF。"
       },
       "item3": {
-        "question": "Flux AI 与其他人工智能图像生成器有何不同？",
-        "answer": "Flux AI 结合了速度、质量和易用性。它比 Midjourney 更快，比 ComfyUI 更易于使用，并且比许多竞争对手生成更高质量的图像。"
+        "question": "转换过程中图像质量会保持吗？",
+        "answer": "当然！我们的高级转换引擎在将 HEIC 图像转换为 PDF 时保持原始质量。转换后的 PDF 看起来与您的原始照片完全相同，没有质量损失。"
       },
       "item4": {
-        "question": "如何使用 Flux AI？",
-        "answer": "要使用 Flux AI，只需访问 fluxaipro.art，输入您的提示，然后在几秒钟内见证令人惊叹的视觉效果的创作过程。"
+        "question": "如何将 HEIC 转换为 PDF？",
+        "answer": "只需使用我们的拖放界面上传您的 HEIC 文件，选择转换设置（单个 PDF 或多个 PDF），点击转换，然后下载您的文件。无需安装软件！"
       },
       "item5": {
-        "question": "Flux AI 提供哪些定价计划？",
-        "answer": "我们使用积分来使用我们的服务，您可以点击价格卡购买积分（只需一次付款）。"
+        "question": "HEIC 转换有文件大小限制吗？",
+        "answer": "我们的免费计划支持每个文件最大 10MB，每天最多 5 次转换。高级计划为专业用户提供更大的文件大小和无限转换。"
       },
       "item6": {
-        "question": "如何获取在线支持？",
-        "answer": "您可以通过发送电子邮件至 support@fluxaipro.art 联系我们的支持团队。"
+        "question": "转换过程中我的数据安全吗？",
+        "answer": "是的，我们非常重视隐私。所有上传的文件都经过安全处理，并在 24 小时后自动从我们的服务器中删除。我们绝不存储或分享您的个人图像。"
       }
     },
     "tip": {
@@ -184,23 +371,7 @@
       "contact": "联系我们"
     }
   },
-  "ExplorePage": {
-    "layout": {
-      "title": "探索Flux AI图像生成器",
-      "description": "探索Flux AI图像生成器的最新功能和更新。 ",
-      "keywords": "flux AI, AI flux, flux人工智能, AI技术, flux机器学习, flux AI工具, AI应用, 人工智能解决方案, flux数据分析, AI创新, flux预测分析, flux机器学习, AI开发, 下一代AI"
-    },
-    "title": "探索Flux AI图像生成器",
-    "description": "探索Flux AI图像生成器的最新功能和更新。 ",
-    "flux": {
-      "model": "模型",
-      "lora": "风格",
-      "prompt": "提示",
-      "executePrompt": "魔法提示",
-      "resolution": "分辨率",
-      "createdAt": "创建日期"
-    }
-  },
+
   "Playground": {
     "layout": {
       "title": "免费 Flux.1 {model} 图像生成器：几秒钟内创造令人惊叹的图像",
@@ -220,30 +391,30 @@
     "schnell_faq": {
       "label": "常见问题",
       "title": "常见问题解答",
-      "subtitle": "浏览我们全面的常见问题解答，快速找到常见疑问的答案。如果您需要进一步帮助，请随时联系我们获得个性化支持。",
+      "subtitle": "浏览我们全面的常见问题解答，快速找到关于 HEIC 转 PDF 的常见疑问答案。如果您需要进一步帮助，请随时联系我们获得个性化支持。",
       "item1": {
-        "question": "什么是 Flux.1 Schnell？",
-        "answer": "Flux.1 Schnell 是专为本地开发和个人使用而设计的最快速图像生成模型。"
+        "question": "什么是 HEIC 格式？",
+        "answer": "HEIC（高效图像容器）是苹果在 iOS 11 之后引入的默认图像格式。它比 JPEG 提供更好的压缩率和图像质量，但兼容性不如 PDF 广泛。"
       },
       "item2": {
-        "question": "在 Flux.1 Schnell 生成图像时，初始输入有多重要？",
-        "answer": "Flux.1 Schnell 中使用的初始输入对图像质量极为重要。提供高质量和详细的输入可以产生更逼真和细致的输出。为获得最佳结果，请确保提出的概念和元素都有明确定义。"
+        "question": "为什么需要将 HEIC 转换为 PDF？",
+        "answer": "将 HEIC 转换为 PDF 可以确保您的图像在任何设备或平台上都能被查看，并且更容易分享、打印和归档。PDF 是一种通用格式，几乎所有设备和应用程序都支持。"
       },
       "item3": {
-        "question": "如何提高 Flux.1 Schnell 生成的图像质量？",
-        "answer": "要提高图像质量，请提供清晰详细的提示，尝试不同的艺术风格，并考虑使用专业版来处理更复杂的任务。"
+        "question": "高级版有哪些额外功能？",
+        "answer": "我们的高级版提供批量处理、无水印输出、更高分辨率、优先支持以及更快的转换速度。它特别适合需要处理大量图像的专业用户和企业。"
       },
       "item4": {
-        "question": "是否有提供改善 Flux.1 Schnell 图像质量技巧的在线社区或论坛？",
-        "answer": "是的，您可以在官方网站 https://fluxaipro.art/flux-schnell 上使用。用户只需在网站上输入提示并生成图像，这可以帮助您提高生成图像的质量。"
+        "question": "如何获得最佳转换质量？",
+        "answer": "为获得最佳转换质量，请确保上传原始 HEIC 文件而不是压缩版本，选择适当的转换设置，并考虑使用我们的高级版以获得更高质量的输出。"
       },
       "item5": {
-        "question": "如何使用 Flux.1 Schnell，有免费选项吗？",
-        "answer": "Flux.1 Schnell 可在官方网站 https://fluxaipro.art/flux-schnell 上使用。每位用户每月可免费使用 Flux.1 Schnell 模型 5 次，每月初重置。使用时，只需在网站上输入您的提示并生成图像。这个过程可以帮助改善生成图像的质量。"
+        "question": "免费版有什么限制？",
+        "answer": "免费版每天限制 5 次转换，每个文件最大 10MB，并且输出的 PDF 会包含水印。每个月初，免费使用次数会重置，让您可以继续使用我们的基本服务。"
       },
       "item6": {
         "question": "如何获得在线支持？",
-        "answer": "您可以通过 support@fluxaipro.art 联系我们。"
+        "answer": "您可以通过 support@heictopdf.com 联系我们的支持团队。我们提供 24/7 全天候支持，高级用户可享受优先响应服务。"
       }
     },
     "title": "Flux AI 图像生成器",
@@ -368,25 +539,24 @@
     }
   },
   "LocaleLayout": {
-    "title": "Flux AI 在线图像生成器 - Flux AI",
-    "description": "利用 Flux.1 AI 的高级工具提升您的视觉内容：Flux Schnell 快速创作，Flux Dev 精细定制，以及 Flux Pro 无与伦比的专业品质。",
-    "keywords": "Flux AI, AI Flux, Flux 人工智能, AI 技术, 机器学习 Flux, Flux AI 工具, AI 应用, 人工智能解决方案, Flux 数据分析, AI 创新, 预测分析 Flux, Flux 机器学习, AI 开发, 下一代 AI"
+    "title": "HEIC 转 PDF 在线转换器 - 免费快速转换",
+    "description": "专业的 HEIC 转 PDF 在线转换工具：批量转换、高质量保留、云存储集成。支持苹果 HEIC 格式转换为通用 PDF 文档，简单快速安全。",
+    "keywords": "HEIC 转 PDF, HEIC to PDF, 图像转换, 苹果图片转换, HEIC 转换器, PDF 转换工具, 在线转换, 批量转换, 图片格式转换, 免费转换工具"
   },
   "LocaleSwitcher": {
     "label": "更改语言",
     "locale": "{locale, select, zh {🇨🇳 简体中文} tw {🇭🇰 繁體中文} en {🇺🇸 English} fr {🇫🇷 Français} ja {🇯🇵 日本語} ko {🇰🇷 한국어} es {🇪🇸 Español} de {🇩🇪 Deutsch} pt {🇧🇷 Português} ar {🇦🇪 العربية} other {未知}}"
   },
   "Manifest": {
-    "name": "Flux AI 图像生成器"
+    "name": "HEIC 转 PDF 转换器"
   },
   "Navigation": {
     "pricing": "定价",
-    "schnell": "Flux Schnell",
-    "explore": "发现",
-    "title": "Flux AI 图像生成器",
-    "prompt": "Flux AI 提示词生成器",
+    "convert": "开始转换",
+
+    "title": "HEIC 转 PDF 转换器",
     "blog": "博客",
-    "dashboard": "去使用",
+    "dashboard": "控制台",
     "tooltip": {
       "login": "登录"
     }
@@ -397,14 +567,14 @@
   },
   "AppNavigation": {
     "Index": "首页",
-    "Generate": "AI 生图",
-    "History": "历史记录",
-    "GiftCode": "兑换",
-    "ChargeOrder": "充值订单"
+    "Generate": "HEIC转PDF",
+    "History": "转换记录",
+    "GiftCode": "兑换码",
+    "ChargeOrder": "订单记录"
   },
   "PageLayout": {
     "footer": {
-      "title": "Flux AI Image Generator",
+      "title": "HEIC 转 PDF 转换器",
       "term": "使用条款",
       "privacy": "隐私政策",
       "contact": "联系我们"

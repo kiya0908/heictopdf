@@ -37,7 +37,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           {t("footer.privacy")}
         </Link>
         <Link
-          href="mailto:support@fluxaipro.art"
+          href="mailto:support@heictopdf.com"
           className="underline-offset-4 hover:underline"
           prefetch={false}
           title={t("footer.contact")}
@@ -49,57 +49,23 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-between gap-4 text-sm md:flex-row">
         <div className="flex items-center gap-2">
           <Icons.logo className="h-6 w-6" />
-          <span className="font-medium">Fluxaipro.Art Inc.</span>
+          <span className="font-medium">HEIC to PDF Converter</span>
         </div>
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link
-            href="https://tap4.ai/"
-            title="Tap4 AI Tools Directory"
+            href="https://github.com"
+            title="GitHub"
             className="underline-offset-4 hover:underline"
             prefetch={false}
             target="_blank"
           >
-            Tap4 AI
-          </Link>
-          <Link
-            href="https://aiwith.me/"
-            title="Discover thousands of AI tools"
-            className="underline-offset-4 hover:underline"
-            prefetch={false}
-            target="_blank"
-          >
-            AIWITH.ME
-          </Link>
-          <Link
-            href="https://woy.ai/"
-            className="underline-offset-4 hover:underline"
-            title="Woy AI Tools Directory"
-            prefetch={false}
-            target="_blank"
-          >
-            Woy AI
-          </Link>
-          <Link
-            href="https://aipure.ai/"
-            prefetch={false}
-            target="_blank"
-            className="underline-offset-4 hover:underline"
-          >
-            AIPURE AI
-          </Link>
-          <Link
-            href="https://www.toolify.ai/"
-            prefetch={false}
-            target="_blank"
-            className="underline-offset-4 hover:underline"
-          >
-            Toolify AI
+            GitHub
           </Link>
         </div>
       </div>
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-center gap-4 text-sm md:flex-row">
         <p className="text-muted-foreground">
-          &copy; 2024 fluxaipro.Art. All rights reserved.
+          &copy; 2025 HEIC to PDF Converter. All rights reserved.
         </p>
       </div>
     </footer>
