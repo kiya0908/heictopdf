@@ -104,13 +104,13 @@ export const Post = defineDocumentType(() => ({
     authors: {
       type: "list",
       of: { type: "string" },
-      required: true,
+      required: false,
     },
     categories: {
       type: "list",
       of: {
         type: "enum",
-        options: ["news", "education"],
+        options: ["news", "education", "tutorial", "guide"],
         default: "news",
       },
       required: true,

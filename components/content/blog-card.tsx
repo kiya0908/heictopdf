@@ -61,11 +61,13 @@ export function BlogCard({
           )}
         </div>
         <div className="mt-4 flex items-center space-x-3">
-          <div className="flex items-center -space-x-2">
-            {data.authors.map((author) => (
-              <Author username={author} key={data._id + author} imageOnly />
-            ))}
-          </div>
+          {data.authors && data.authors.length > 0 && (
+            <div className="flex items-center -space-x-2">
+              {data.authors.map((author) => (
+                <Author username={author} key={data._id + author} imageOnly />
+              ))}
+            </div>
+          )}
 
           {data.date && (
             <p className="text-sm text-muted-foreground">

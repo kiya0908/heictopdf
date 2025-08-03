@@ -1,6 +1,6 @@
 export const BLOG_CATEGORIES: {
   title: string;
-  slug: "news" | "education";
+  slug: "news" | "education" | "tutorial" | "guide";
   description: string;
 }[] = [
   {
@@ -12,6 +12,16 @@ export const BLOG_CATEGORIES: {
     title: "Education",
     slug: "education",
     description: "Educational content about SaaS management.",
+  },
+  {
+    title: "Tutorial",
+    slug: "tutorial",
+    description: "Step-by-step tutorials and how-to guides.",
+  },
+  {
+    title: "Guide",
+    slug: "guide",
+    description: "Comprehensive guides and best practices.",
   },
 ];
 

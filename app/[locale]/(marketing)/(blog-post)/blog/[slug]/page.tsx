@@ -55,9 +55,15 @@ export async function generateMetadata({
 }
 
 export default async function PostPage({ params }: PageProps) {
-  const post = allPosts.find(
+  // First try to find the post with locale prefix
+  let post = allPosts.find(
     (post) => post.slugAsParams === `${params.locale}/${params.slug}`,
   );
+
+  // If not found, try to find by just the slug (fallback)
+  if (!post) {
+    post = allPosts.find((post) => post.slugAsParams === params.slug);
+  }
 
   if (!post) {
     notFound();
@@ -122,7 +128,7 @@ export default async function PostPage({ params }: PageProps) {
             {post.description}
           </p>
           <div className="flex flex-nowrap items-center space-x-5 pt-1 md:space-x-8">
-            {post.authors.map((author) => (
+            {post.authors?.map((author) => (
               <Author username={author} key={post._id + author} />
             ))}
           </div>

@@ -28,6 +28,11 @@ const nextConfig = {
         hostname: "img.douni.one",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+      },
     ],
   },
 
