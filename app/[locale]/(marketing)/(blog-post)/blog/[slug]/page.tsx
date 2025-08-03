@@ -14,12 +14,10 @@ import Author from "@/components/content/author";
 import BlurImage from "@/components/shared/blur-image";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { DashboardTableOfContents } from "@/components/shared/toc";
-import { buttonVariants } from "@/components/ui/button";
-import { BLOG_CATEGORIES } from "@/config/blog";
+// BLOG_CATEGORIES import removed - no longer using categories
 import { Link } from "@/lib/navigation";
 import { getTableOfContents } from "@/lib/toc";
 import {
-  cn,
   constructMetadata,
   formatDate,
   getBlurDataURL,
@@ -69,9 +67,7 @@ export default async function PostPage({ params }: PageProps) {
     notFound();
   }
 
-  const category = BLOG_CATEGORIES.find(
-    (category) => category.slug === post.categories[0],
-  )!;
+  // Category functionality removed - no longer needed
 
   const relatedArticles =
     (post.related &&
@@ -102,18 +98,6 @@ export default async function PostPage({ params }: PageProps) {
       <MaxWidthWrapper className="pt-6 md:pt-10">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-4">
-            <Link
-              href={`/blog/category/${category.slug}`}
-              className={cn(
-                buttonVariants({
-                  variant: "outline",
-                  size: "sm",
-                }),
-                "h-8 rounded-lg",
-              )}
-            >
-              {category.title}
-            </Link>
             <time
               dateTime={post.date}
               className="text-sm font-medium text-muted-foreground"
