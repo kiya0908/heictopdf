@@ -2,10 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 
-// ⚠️ 请将你的PayPal Sandbox信息填入下面：
+// ⚠️ 请设置环境变量或在.env文件中配置：
 const PAYPAL_CONFIG = {
-  CLIENT_ID: 'AYz83hXBtsEG9H_ogxHCj5vQZhHlJOjlKXBTcZBvoP46w3sGC0NCSBr37qQ2HJApozgwf8-OaDHmhPLL',           // 👈 请替换
-  CLIENT_SECRET: 'EGaetE2yzbkT-Ha42izWVHZuNN3dwLjwjV_HfnvBcIhnK_CgTfgwDVKFKgZJKNNCMPUp_aLMEO41GwKC',   // 👈 请替换
+  CLIENT_ID: process.env.PAYPAL_CLIENT_ID || 'your_paypal_client_id_here',
+  CLIENT_SECRET: process.env.PAYPAL_CLIENT_SECRET || 'your_paypal_client_secret_here',
   ENVIRONMENT: 'sandbox',
   API_BASE: 'https://api-m.sandbox.paypal.com'
 };
