@@ -3,17 +3,14 @@ import { NextResponse, type NextRequest } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { z } from "zod";
 
-import { model } from "@/config/constants";
-import { FluxHashids } from "@/db/dto/flux.dto";
 import { prisma } from "@/db/prisma";
-import { FluxTaskStatus } from "@/db/type";
 import { getErrorMessage } from "@/lib/handle-error";
 
 const searchParamsSchema = z.object({
   page: z.coerce.number().default(1),
   pageSize: z.coerce.number().default(10),
   sort: z.string().optional(),
-  model: z.enum([model.dev, model.pro, model.schnell]).optional(),
+  status: z.enum(["pending", "completed", "failed"]).optional(),
 });
 
 export async function GET(req: NextRequest) {
@@ -30,26 +27,23 @@ export async function GET(req: NextRequest) {
     const values = searchParamsSchema.parse(
       Object.fromEntries(url.searchParams),
     );
-    const { page, pageSize, model } = values;
+    const { page, pageSize, status } = values;
     const offset = (page - 1) * pageSize;
     const whereConditions: any = {
       userId,
-      taskStatus: {
-        in: [FluxTaskStatus.Succeeded, FluxTaskStatus.Processing],
-      },
     };
-    if (model) {
-      whereConditions.model = model;
+    if (status) {
+      whereConditions.status = status;
     }
 
-    const [fluxData, total] = await Promise.all([
-      prisma.fluxData.findMany({
+    const [conversionData, total] = await Promise.all([
+      prisma.conversionHistory.findMany({
         where: whereConditions,
         take: pageSize,
         skip: offset,
         orderBy: { createdAt: "desc" },
       }),
-      prisma.fluxData.count({ where: whereConditions }),
+      prisma.conversionHistory.count({ where: whereConditions }),
     ]);
 
     return NextResponse.json({
@@ -57,22 +51,25 @@ export async function GET(req: NextRequest) {
         total,
         page,
         pageSize,
-        data: fluxData.map(
-          ({ id, executeEndTime, executeStartTime, loraUrl, ...rest }) => ({
-            ...rest,
-            executeTime:
-              executeEndTime && executeStartTime
-                ? Number(`${executeEndTime - executeStartTime}`)
-                : 0,
-            id: FluxHashids.encode(id),
-          }),
-        ),
+        data: conversionData.map((item) => ({
+          id: item.id.toString(),
+          originalFileName: item.originalFileName,
+          originalFileSize: item.originalFileSize,
+          convertedFileName: item.convertedFileName,
+          downloadUrl: item.downloadUrl,
+          urlExpiresAt: item.urlExpiresAt,
+          conversionCost: item.conversionCost,
+          status: item.status,
+          errorMessage: item.errorMessage,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt,
+        })),
       },
     });
   } catch (error) {
     return NextResponse.json(
       { error: getErrorMessage(error) },
-      { status: 400 },
+      { status: 500 },
     );
   }
 }

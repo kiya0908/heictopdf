@@ -7,7 +7,7 @@ export const env = createEnv({
     // See https://next-auth.js.org/deployment.
     DATABASE_URL: z.string().min(1),
     //RESEND_API_KEY: z.string().min(1),
-    //HASHID_SALT: z.string().min(1),
+    HASHID_SALT: z.string().min(1),
     //VERCEL_ENV: z
     //.enum(["development", "preview", "production"])
     //.default("development"),
@@ -59,7 +59,7 @@ export const env = createEnv({
   },
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
-    //HASHID_SALT: process.env.HASHID_SALT,
+    HASHID_SALT: process.env.HASHID_SALT,
     //LOG_SNAG_TOKEN: process.env.LOG_SNAG_TOKEN,
     //RESEND_API_KEY: process.env.RESEND_API_KEY,
     //VERCEL_ENV: process.env.VERCEL_ENV,

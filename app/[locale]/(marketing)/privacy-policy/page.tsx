@@ -12,35 +12,28 @@ export default function IndexPage({ params: { locale } }: Props) {
     <article className="container max-w-6xl py-6 lg:py-12">
       <div className="space-y-4">
         <h1 className="inline-block font-heading text-3xl lg:text-4xl">
-          Privacy
+          Privacy Policy
         </h1>
         <p className="text-base text-muted-foreground">
-          Please read our privacy policy.
+          Learn how we protect your privacy when using our HEIC to PDF conversion service.
         </p>
       </div>
       <hr className="my-4" />
       <div className="mdx">
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Last updated: Jane 18, 2024
+          Last updated: July 29, 2025
         </p>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
           This Privacy Policy describes Our policies and procedures on the
-          collection, use and disclosure of Your information when You use the
-          Service and tells You about Your privacy rights and how the law
-          protects You.
+          collection, use and disclosure of Your information when You use our
+          HEIC to PDF conversion service and tells You about Your privacy rights 
+          and how the law protects You.
         </p>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          We use Your Personal data to provide and improve the Service. By using
-          the Service, You agree to the collection and use of information in
-          accordance with this Privacy Policy. This Privacy Policy has been
-          created with the help of the{" "}
-          <a
-            className="font-medium underline underline-offset-4"
-            href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/"
-          >
-            Free Privacy Policy Generator
-          </a>
-          .
+          We use Your Personal data to provide and improve our HEIC to PDF conversion 
+          Service. By using the Service, You agree to the collection and use of 
+          information in accordance with this Privacy Policy. We are committed to 
+          protecting your privacy and ensuring the security of your uploaded files.
         </p>
         <h2
           className="mt-10 scroll-m-20 border-b pb-1 text-2xl font-semibold tracking-tight first:mt-0"
@@ -109,7 +102,7 @@ export default function IndexPage({ params: { locale } }: Props) {
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
               <strong>Company</strong> (referred to as either "the Company",
-              "We", "Us" or "Our" in this Agreement) refers to FluxAIProTeam.
+              "We", "Us" or "Our" in this Agreement) refers to HEIC to PDF Converter.
             </p>
           </li>
           <li className="mt-2">
@@ -139,7 +132,7 @@ export default function IndexPage({ params: { locale } }: Props) {
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
-              <strong>Service</strong> refers to the Website.
+              <strong>Service</strong> refers to the HEIC to PDF conversion service provided through the Website.
             </p>
           </li>
           <li className="mt-2">
@@ -162,13 +155,7 @@ export default function IndexPage({ params: { locale } }: Props) {
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
-              <strong>Website</strong> refers to FluxAIProTeam, accessible from{" "}
-              <a
-                className="font-medium underline underline-offset-4"
-                href="https://fluxaipro.art"
-              >
-                https://fluxaipro.art
-              </a>
+              <strong>Website</strong> refers to HEIC to PDF Converter, accessible from our domain.
             </p>
           </li>
           <li className="mt-2">
@@ -232,6 +219,41 @@ export default function IndexPage({ params: { locale } }: Props) {
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">Usage Data</p>
+          </li>
+          <li className="mt-2">
+            <p className="leading-7 [&:not(:first-child)]:mt-6">
+              <strong>Uploaded Files:</strong> HEIC image files that you upload for conversion to PDF format
+            </p>
+          </li>
+        </ul>
+        <h4
+          className="mt-8 scroll-m-20 text-lg font-semibold tracking-tight"
+          id="file-processing-data"
+        >
+          <a
+            className="subheading-anchor font-medium underline underline-offset-4"
+            aria-label="Link to section"
+            href="#file-processing-data"
+          >
+            <span className="icon icon-link" />
+          </a>
+          File Processing Data
+        </h4>
+        <p className="leading-7 [&:not(:first-child)]:mt-6">
+          When you use our HEIC to PDF conversion service, we temporarily process your uploaded HEIC files to convert them to PDF format. Here's what you need to know about your file data:
+        </p>
+        <ul className="my-6 ml-6 list-disc">
+          <li className="mt-2">
+            <strong>Temporary Storage:</strong> Your uploaded HEIC files are temporarily stored on our secure servers only for the duration of the conversion process.
+          </li>
+          <li className="mt-2">
+            <strong>Automatic Deletion:</strong> All uploaded files and converted PDF files are automatically deleted from our servers within 24 hours of processing.
+          </li>
+          <li className="mt-2">
+            <strong>No File Content Analysis:</strong> We do not analyze, view, or retain the content of your uploaded images beyond what is necessary for the conversion process.
+          </li>
+          <li className="mt-2">
+            <strong>Secure Processing:</strong> All file processing occurs on encrypted servers with industry-standard security measures.
           </li>
         </ul>
         <h4
@@ -404,8 +426,15 @@ export default function IndexPage({ params: { locale } }: Props) {
         <ul className="my-6 ml-6 list-disc">
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
-              <strong>To provide and maintain our Service</strong>, including to
-              monitor the usage of our Service.
+              <strong>To provide and maintain our HEIC to PDF conversion Service</strong>, 
+              including processing your uploaded files and delivering converted PDF files.
+            </p>
+          </li>
+          <li className="mt-2">
+            <p className="leading-7 [&:not(:first-child)]:mt-6">
+              <strong>To process file conversions:</strong> We use your uploaded HEIC files 
+              solely for the purpose of converting them to PDF format and providing you 
+              with the converted files.
             </p>
           </li>
           <li className="mt-2">
@@ -803,9 +832,9 @@ export default function IndexPage({ params: { locale } }: Props) {
             By email:{" "}
             <a
               className="font-medium underline underline-offset-4"
-              href="mailto:support@fluxaipro.art"
+              href="mailto:support@heictopdf.com"
             >
-              support@fluxaipro.art
+              support@heictopdf.com
             </a>
           </li>
         </ul>

@@ -115,34 +115,34 @@
       "subtitle": "几秒钟内将您的 HEIC 图像转换为 PDF 文档。"
     },
     "features": {
-      "title": "产品特点",
+      "title": "高级 HEIC 转 PDF 功能",
+      "description": "我们的专业 HEIC 转 PDF 转换器提供行业领先的功能，实现无缝的 HEIC 转 PDF 转换。将苹果的 HEIC 格式转换为通用可访问的 PDF 文档，采用我们全面的 HEIC 转 PDF 解决方案，完美适用于专业文档管理和共享工作流程。",
       "action": {
-        "visit": "立即转换"
+        "visit": "开始 HEIC 转 PDF 转换"
       },
-      "description": "我们的 HEIC 转 PDF 转换器是一个强大的工具，可以轻松将苹果的 HEIC 图像格式转换为通用兼容的 PDF 文档。完美适用于分享、打印和归档您的照片。",
       "item1": {
-        "title": "批量转换",
-        "description": "一次性将多个 HEIC 图像转换为单个 PDF 文档或多个独立的 PDF。通过我们高效的批处理功能节省时间。"
+        "title": "智能批量 HEIC 转 PDF 处理",
+        "description": "使用我们先进的批量 HEIC 转 PDF 引擎同时转换多个 HEIC 文件为 PDF。创建单独的 PDF 或将多个 HEIC 图像合并为统一的 PDF 文档，实现简化的文件组织。"
       },
       "item2": {
-        "title": "高质量保留",
-        "description": "我们的转换器在将 HEIC 图像转换为 PDF 时保持原始质量，确保您的照片看起来与原始照片一样好。"
+        "title": "优质 HEIC 转 PDF 质量保持",
+        "description": "我们复杂的 HEIC 转 PDF 算法在转换过程中保持原始图像保真度。每次 HEIC 转 PDF 转换都保持色彩准确性、分辨率和元数据，实现专业级输出。"
       },
       "item3": {
-        "title": "云存储集成",
-        "description": "轻松从 iCloud、Google Drive 或 Dropbox 等云存储服务导入 HEIC 图像，并将转换后的 PDF 保存到您喜欢的位置。"
+        "title": "无缝 HEIC 转 PDF 云集成",
+        "description": "直接从云存储平台导入 HEIC 文件，并将转换后的 PDF 文档保存回您首选的位置。我们的 HEIC 转 PDF 服务集成 iCloud、Google Drive 和 Dropbox，提升工作流程效率。"
       },
       "item4": {
-        "title": "极速转换",
-        "description": "我们优化的转换引擎可在几秒钟内处理您的 HEIC 图像，比其他转换器快得多。凭借其极速转换能力，我们的工具确保快速高效的结果，为您节省宝贵的时间。"
+        "title": "超快速 HEIC 转 PDF 引擎",
+        "description": "使用我们优化的处理技术体验闪电般的 HEIC 转 PDF 转换速度。我们增强的 HEIC 转 PDF 算法在几秒内交付转换文件，超越标准转换工具，实现最大生产力。"
       },
       "item5": {
-        "title": "跨平台兼容",
-        "description": "在所有设备和操作系统上无缝运行。无论您使用的是 Windows、macOS、iOS 还是 Android，我们的 HEIC 转 PDF 转换器确保您的图像在任何地方都可访问。"
+        "title": "通用 HEIC 转 PDF 兼容性",
+        "description": "在所有平台和设备上访问我们的 HEIC 转 PDF 转换器。无论使用 Windows、macOS、iOS 还是 Android，我们跨平台的 HEIC 转 PDF 解决方案确保一致的性能和可访问性。"
       },
       "item6": {
-        "title": "用户友好界面",
-        "description": "简单直观的设计使 HEIC 转 PDF 变得轻松。只需上传您的图像，点击转换，然后下载您的 PDF。无需技术知识 - 适合从初学者到专业人士的所有人。"
+        "title": "直观的 HEIC 转 PDF 界面",
+        "description": "轻松导航我们简化的 HEIC 转 PDF 转换流程。上传 HEIC 文件、启动转换、下载 PDF 结果，使用我们为所有技术背景用户设计的用户友好 HEIC 转 PDF 平台。"
       }
     },
     "schnell": {
@@ -199,81 +199,81 @@
     },
     "whatIs": {
       "title": "什么是 HEIC 转 PDF？",
-      "subtitle": "了解 HEIC 格式以及为什么需要转换为 PDF",
-      "description": "HEIC (High Efficiency Image Container) 是苹果设备默认的图片格式，具有高压缩率和优质画质。但由于兼容性问题，很多设备和软件无法直接打开 HEIC 文件。",
+      "subtitle": "专业的 HEIC 转 PDF 转换服务，实现无缝文件转换",
+      "description": "HEIC 转 PDF 转换将苹果的高效图像容器格式转换为通用可访问的 PDF 文档。我们的 HEIC 转 PDF 转换器通过将 HEIC 文件转换为 PDF 格式来解决兼容性问题，确保您的图像可以在任何设备或平台上查看，无需专门软件。",
       "benefits": {
-        "title": "转换为 PDF 的优势",
+        "title": "为什么选择 HEIC 转 PDF 转换？",
         "item1": {
-          "title": "通用兼容性",
-          "description": "PDF 格式在所有设备和平台上都能完美显示"
+          "title": "通用 PDF 兼容性",
+          "description": "HEIC 转 PDF 转换确保您的文件在所有设备、浏览器和操作系统上无缝打开"
         },
         "item2": {
-          "title": "易于分享",
-          "description": "PDF 文件可以轻松通过邮件、云存储等方式分享"
+          "title": "轻松的 HEIC 转 PDF 分享",
+          "description": "将 HEIC 转换为 PDF 格式，便于通过电子邮件、消息应用和云存储平台轻松分享"
         },
         "item3": {
-          "title": "保持质量",
-          "description": "转换过程中保持原始图片的高质量"
+          "title": "高质量 HEIC 转 PDF 输出",
+          "description": "我们的 HEIC 转 PDF 转换器在创建紧凑、专业的 PDF 文档的同时保持原始图像质量"
         },
         "item4": {
-          "title": "文档整合",
-          "description": "多个图片可以合并成一个 PDF 文档"
+          "title": "批量 HEIC 转 PDF 处理",
+          "description": "同时转换多个 HEIC 文件为 PDF，将它们合并为有序的 PDF 文档，改善工作流程"
         }
       }
     },
     "howTo": {
       "title": "如何使用",
-      "subtitle": "简单三步完成 HEIC 到 PDF 转换",
+      "subtitle": "使用我们专业的 HEIC 转 PDF 转换服务，通过三个简单步骤将您的 HEIC 文件转换为 PDF 格式",
       "steps": {
         "step1": {
-          "title": "上传文件",
-          "description": "选择您的 HEIC 图片文件，支持拖拽上传",
-          "detail": "支持单个或批量上传，最大文件大小 10MB"
+          "title": "上传您的 HEIC 文件",
+          "description": "选择并上传您的 HEIC 图片进行 PDF 转换。我们的 HEIC 转 PDF 工具支持便捷的拖拽功能",
+          "detail": "支持批量 HEIC 转 PDF 转换，每个文件最大 10MB"
         },
         "step2": {
-          "title": "自动转换",
-          "description": "我们的服务器自动处理您的文件",
-          "detail": "使用高效算法，平均转换时间少于 30 秒"
+          "title": "自动 HEIC 转 PDF 处理",
+          "description": "我们的先进服务器使用优化的 HEIC 转 PDF 算法，立即开始将您的 HEIC 文件转换为 PDF 格式",
+          "detail": "行业领先的 HEIC 转 PDF 转换技术在 30 秒内完成处理"
         },
         "step3": {
-          "title": "下载结果",
-          "description": "立即下载转换完成的 PDF 文件",
-          "detail": "提供 3 小时有效的安全下载链接"
+          "title": "下载您的 PDF 文件",
+          "description": "立即下载转换完成的 PDF 文件。每次 HEIC 转 PDF 转换都保持原始图像质量和格式",
+          "detail": "您的 HEIC 转 PDF 转换结果的安全下载链接保持 3 小时有效"
         }
       }
     },
     "why": {
-      "title": "为什么选择我们？",
-      "subtitle": "专业、安全、高效的 HEIC 转 PDF 服务",
+      "title": "为什么选择我们的 HEIC 转 PDF 转换器？",
+      "subtitle": "最值得信赖的 HEIC 转 PDF 转换平台，具备先进功能",
       "features": {
         "security": {
-          "title": "隐私安全",
-          "description": "所有文件自动加密传输，转换完成后立即删除",
+          "title": "安全的 HEIC 转 PDF 处理",
+          "description": "我们的 HEIC 转 PDF 转换器在传输过程中加密所有文件，并在处理后自动删除转换文件",
           "icon": "shield"
         },
         "speed": {
-          "title": "极速转换",
-          "description": "采用最新技术，平均转换时间仅需 30 秒",
+          "title": "快速 HEIC 转 PDF 转换",
+          "description": "行业领先的 HEIC 转 PDF 技术通过优化处理在 30 秒内交付转换文件",
           "icon": "zap"
         },
         "quality": {
-          "title": "保持质量",
-          "description": "先进算法确保转换后 PDF 保持原始图片质量",
+          "title": "优质 HEIC 转 PDF 质量",
+          "description": "我们先进的 HEIC 转 PDF 算法在创建专业 PDF 文档的同时保持原始图像质量",
           "icon": "star"
         },
         "batch": {
-          "title": "批量处理",
-          "description": "支持同时转换多个文件，提高工作效率",
+          "title": "批量 HEIC 转 PDF 处理",
+          "description": "同时转换多个 HEIC 文件为 PDF，简化您的 HEIC 转 PDF 工作流程以实现最大效率",
           "icon": "layers"
         },
         "free": {
-          "title": "免费使用",
-          "description": "每日免费转换次数，无需注册即可使用",
+          "title": "免费 HEIC 转 PDF 服务",
+          "description": "享受每日免费 HEIC 转 PDF 转换配额，无需注册，让我们的转换器对每个人都可访问",
           "icon": "gift"
         },
         "support": {
-          "title": "全天候支持",
-          "description": "24/7 技术支持，随时解决您的问题",
+          "title": "专业 HEIC 转 PDF 支持",
+          "description": "为您所有的 HEIC 转 PDF 转换需求和故障排除需求提供 24/7 技术援助",
           "icon": "headphones"
         }
       }
@@ -324,13 +324,74 @@
     }
   },
   "PricingPage": {
-    "title": "选择套餐购买积分",
-    "description": "无重复收费",
-    "worth": "积分",
+    "title": "选择您的套餐",
+    "description": "简单透明的定价，适合每个人",
+    "worth": "次转换",
     "label": "定价",
+    "billing": {
+      "monthly": "月度订阅",
+      "yearly": "年度订阅",
+      "save": "节省25%",
+      "freeMonths": "免费用两个月"
+    },
+    "plans": {
+      "free": {
+        "title": "免费版",
+        "price": "¥0",
+        "period": "/月",
+        "description": "满足您日常所有的基本转换需求，完全免费。",
+        "valueProposition": "满足您日常所有的基本转换需求，完全免费。",
+        "features": [
+          "每次转换5个文件",
+          "每天10次转换",
+          "基础转换速度",
+          "标准质量输出",
+          "邮件支持"
+        ],
+        "limitations": [
+          "含广告",
+          "不支持批量处理",
+          "无优先支持"
+        ],
+        "cta": "免费开始"
+      },
+      "pro": {
+        "title": "专业版",
+        "badge": "最受欢迎",
+        "monthly": {
+          "price": "¥49",
+          "period": "/月",
+          "originalPrice": null
+        },
+        "yearly": {
+          "price": "¥490",
+          "period": "/年",
+          "originalPrice": "¥588",
+          "savings": "节省25%",
+          "monthlyEquivalent": "约¥40.8/月"
+        },
+        "description": "解放您的生产力。无限转换，速度更快，体验更纯净。",
+        "valueProposition": "解放您的生产力。无限转换，速度更快，体验更纯净。",
+        "features": [
+          "每次转换无限文件",
+          "无限每日转换次数",
+          "优先处理速度",
+          "高质量输出",
+          "无广告体验",
+          "批量处理最多50个文件",
+          "优先邮件支持",
+          "所有未来高级功能"
+        ],
+        "popular": true,
+        "cta": "升级到专业版"
+      }
+    },
     "action": {
       "signin": "登录",
-      "buy": "一次性付款"
+      "buy": "开始使用",
+      "current": "当前套餐",
+      "upgrade": "立即升级",
+      "contact": "联系销售"
     },
     "contact": {
       "title": "联系我们",
@@ -339,30 +400,30 @@
     "faq": {
       "label": "常见问题",
       "title": "常见问题解答",
-      "subtitle": "浏览我们关于 HEIC 转 PDF 转换的全面常见问题解答，快速找到常见疑问的答案。如果您需要进一步帮助，请随时联系我们获取个性化支持。",
+      "subtitle": "获取关于我们定价和服务的最常见问题的答案。",
       "item1": {
-        "question": "什么是 HEIC 格式，为什么要转换为 PDF？",
-        "answer": "HEIC（高效图像容器）是苹果的现代图像格式，可节省存储空间。转换为 PDF 使您的图像在所有设备和平台上都能通用访问，非常适合分享、打印和归档。"
+        "question": "我可以随时取消订阅吗？",
+        "answer": "当然可以！您可以随时在账户设置中取消订阅。没有取消费用，您将继续享有专业版权限直到当前计费周期结束。"
       },
       "item2": {
-        "question": "我可以一次转换多个 HEIC 文件吗？",
-        "answer": "可以！我们的批量转换功能允许您同时上传和转换多个 HEIC 图像。您可以创建包含所有图像的单个 PDF，或为每个图像创建单独的 PDF。"
+        "question": "你们接受哪些支付方式？",
+        "answer": "我们接受所有主要信用卡（Visa、MasterCard、American Express）和PayPal账户支付。所有支付都通过PayPal安全处理，确保您的支付信息始终受到保护。"
       },
       "item3": {
-        "question": "转换过程中图像质量会保持吗？",
-        "answer": "当然！我们的高级转换引擎在将 HEIC 图像转换为 PDF 时保持原始质量。转换后的 PDF 看起来与您的原始照片完全相同，没有质量损失。"
+        "question": "我的支付信息安全吗？",
+        "answer": "绝对安全。我们使用PayPal，这是全球数百万企业信赖的领先支付处理商。我们从不在服务器上存储您的支付信息 - 所有交易都由PayPal通过银行级加密安全处理。"
       },
       "item4": {
-        "question": "如何将 HEIC 转换为 PDF？",
-        "answer": "只需使用我们的拖放界面上传您的 HEIC 文件，选择转换设置（单个 PDF 或多个 PDF），点击转换，然后下载您的文件。无需安装软件！"
+        "question": "如果我不满意，可以退款吗？",
+        "answer": "是的，我们提供7天退款保证。如果您在订阅专业版服务的前7天内不满意，请联系我们获得全额退款，无需任何理由。"
       },
       "item5": {
-        "question": "HEIC 转换有文件大小限制吗？",
-        "answer": "我们的免费计划支持每个文件最大 10MB，每天最多 5 次转换。高级计划为专业用户提供更大的文件大小和无限转换。"
+        "question": "如果我超过了免费计划的限制会怎样？",
+        "answer": "如果您达到了免费计划的每日转换限制，您需要等到第二天才能转换更多文件，或者升级到专业版以获得无限转换。我们会在您接近限制时始终通知您。"
       },
       "item6": {
-        "question": "转换过程中我的数据安全吗？",
-        "answer": "是的，我们非常重视隐私。所有上传的文件都经过安全处理，并在 24 小时后自动从我们的服务器中删除。我们绝不存储或分享您的个人图像。"
+        "question": "我可以随时升级或降级我的计划吗？",
+        "answer": "可以！您可以随时升级到专业版以立即获得无限转换。如果您想降级，可以取消订阅，您将继续享有专业版权限直到当前计费周期结束。"
       }
     },
     "tip": {
@@ -467,20 +528,20 @@
     }
   },
   "History": {
-    "title": "生成记录",
-    "description": "查看您最近的图像生成记录。",
+    "title": "转换记录",
+    "description": "查看您最近的HEIC转PDF转换记录。",
     "empty": {
-      "title": "还没有历史记录",
-      "description": "当前空空如也，快去生成吧～"
+      "title": "还没有转换记录",
+      "description": "当前空空如也，快去转换文件吧～"
     },
     "action": {
-      "generate": "去生成",
-      "copy": "复制 Prompt",
-      "copySuccess": "Prompt 已复制到剪贴板。",
-      "download": "下载图像",
-      "downloadSuccess": "图像已下载。",
+      "generate": "去转换",
+      "copy": "复制文件名",
+      "copySuccess": "文件名已复制到剪贴板。",
+      "download": "下载PDF",
+      "downloadSuccess": "PDF已下载。",
       "downloadLoading": "正在下载...",
-      "upgrade": "通过 Schnell 的每月限量免费试用提升您的艺术创作。点击此处体验无水印的高级模型。"
+      "upgrade": "升级到Pro版本享受更大文件转换和无限制使用。"
     }
   },
   "Billings": {
@@ -550,6 +611,12 @@
   "Manifest": {
     "name": "HEIC 转 PDF 转换器"
   },
+  "Dashboard": {
+    "page": {
+      "title": "仪表盘",
+      "description": "管理您的HEIC转PDF转换和订阅"
+    }
+  },
   "Navigation": {
     "pricing": "定价",
     "convert": "开始转换",
@@ -595,5 +662,36 @@
   "BlogPage": {
     "title": "博客",
     "description": "我们的最新新闻和更新"
+  },
+  "HeicConverter": {
+    "title": "HEIC 转 PDF 在线转换器",
+    "subtitle": "将您的 HEIC 图片快速转换为 PDF 文档，简单安全高效",
+    "upload": {
+      "dragActive": "拖放文件开始转换",
+      "dragInactive": "拖拽或点击上传 HEIC 文件",
+      "clickToSelect": "支持批量上传，一次最多5个文件",
+      "supportedFormats": "支持 .heic, .heif 格式，单个文件最大 10MB"
+    },
+    "usage": {
+      "dailyUsage": "今日已使用：{current}/{total} 次转换",
+      "upgradeButton": "升级到专业版"
+    },
+    "queue": {
+      "title": "转换队列"
+    },
+    "status": {
+      "pending": "等待中",
+      "converting": "转换中",
+      "completed": "已完成",
+      "failed": "转换失败",
+      "conversionComplete": "转换完成！",
+      "conversionFailed": "转换失败，请重试",
+      "networkError": "网络错误，请检查网络连接"
+    },
+    "actions": {
+      "download": "下载 PDF",
+      "retry": "重试转换",
+      "remove": "移除"
+    }
   }
 }

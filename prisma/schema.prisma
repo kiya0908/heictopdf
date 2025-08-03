@@ -8,75 +8,80 @@ datasource db {
 }
 
 model ChargeOrder {
-  id        Int       @id @default(autoincrement())
-  userId    String    @map(name: "user_id") @db.VarChar(200)
-  userInfo  Json?     @map(name: "user_info") @db.Json
-  amount    Int
-  phase     String    @db.VarChar
-  channel   String    @db.VarChar
-  currency  String    @db.VarChar
-  paymentAt DateTime? @map(name: "payment_at") @db.Timestamp(6)
-  result    Json?     @db.Json
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  id              Int       @id @default(autoincrement())
+  userId          String    @map("user_id") @db.VarChar(200)
+  userInfo        Json?     @map("user_info") @db.Json
+  amount          Int
+  phase           String    @db.VarChar
+  channel         String    @db.VarChar
+  currency        String    @db.VarChar
+  paymentAt       DateTime? @map("payment_at") @db.Timestamp(6)
+  result          Json?     @db.Json
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt       DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
+  providerOrderId String?   @map("provider_order_id") @db.VarChar
 
-  @@map(name: "charge_order")
+  @@map("charge_order")
 }
 
 model ChargeProduct {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   amount      Int
-  name        String    @db.VarChar
-  description String?   @db.VarChar
-  locale      String?   @db.VarChar
-  currency    String    @db.VarChar
-  features    Json?     @db.Json
-  createdAt   DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt   DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  currency    String   @db.VarChar
+  locale      String?  @db.VarChar
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamp(6)
+  description String?  @db.VarChar
+  features    Json?    @db.Json
+  name        String   @db.VarChar
 
   @@unique([name, locale])
-  @@map(name: "charge_product")
+  @@map("charge_product")
 }
 
 model UserPaymentInfo {
   id                     Int       @id @default(autoincrement())
-  userId                 String    @map(name: "user_id") @db.VarChar(200)
-  userInfo               Json?     @map(name: "user_info") @db.Json
-  stripeCustomerId       String?   @map(name: "stripe_customer_id") @db.VarChar
-  stripeSubscriptionId   String?   @map(name: "stripe_subscription_id") @db.VarChar
-  stripePriceId          String?   @map(name: "stripe_price_id") @db.VarChar
-  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end") @db.Timestamp(6)
-  createdAt              DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt              DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  userId                 String    @unique @map("user_id") @db.VarChar(200)
+  userInfo               Json?     @map("user_info") @db.Json
+  stripeCustomerId       String?   @map("stripe_customer_id") @db.VarChar
+  stripeSubscriptionId   String?   @map("stripe_subscription_id") @db.VarChar
+  stripePriceId          String?   @map("stripe_price_id") @db.VarChar
+  stripeCurrentPeriodEnd DateTime? @map("stripe_current_period_end") @db.Timestamp(6)
+  createdAt              DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt              DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
+  paypalSubscriptionId   String?   @map("paypal_subscription_id") @db.VarChar
+  subscriptionExpiresAt  DateTime? @map("subscription_expires_at") @db.Timestamp(6)
+  subscriptionPlanId     String?   @map("subscription_plan_id") @db.VarChar
+  subscriptionProvider   String?   @default("paypal") @map("subscription_provider") @db.VarChar
+  subscriptionStatus     String?   @map("subscription_status") @db.VarChar
 
-  @@map(name: "user_payment_info")
+  @@map("user_payment_info")
 }
 
 model UserConversionUsage {
   id                   Int       @id @default(autoincrement())
-  userId               String    @map(name: "user_id") @db.VarChar(200)
-  dailyConversionCount Int       @default(0) @map(name: "daily_conversion_count")
-  lastConversionDate   DateTime? @map(name: "last_conversion_date") @db.Date
-  createdAt            DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt            DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  userId               String    @unique @map("user_id") @db.VarChar(200)
+  dailyConversionCount Int       @default(0) @map("daily_conversion_count")
+  lastConversionDate   DateTime? @map("last_conversion_date") @db.Date
+  createdAt            DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt            DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
 
-  @@unique([userId])
-  @@map(name: "user_conversion_usage")
+  @@map("user_conversion_usage")
 }
 
 model ConversionHistory {
-  id               Int       @id @default(autoincrement())
-  userId           String    @map(name: "user_id") @db.VarChar(200)
-  originalFileName String    @map(name: "original_file_name") @db.VarChar(255)
-  originalFileSize Int       @map(name: "original_file_size")
-  convertedFileName String?  @map(name: "converted_file_name") @db.VarChar(255)
-  downloadUrl      String?   @map(name: "download_url") @db.Text
-  urlExpiresAt     DateTime? @map(name: "url_expires_at") @db.Timestamp(6)
-  conversionCost   Float?    @map(name: "conversion_cost")
-  status           String    @map(name: "status") @db.VarChar(50) // 'pending', 'completed', 'failed'
-  errorMessage     String?   @map(name: "error_message") @db.Text
-  createdAt        DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt        DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  id                Int       @id @default(autoincrement())
+  userId            String    @map("user_id") @db.VarChar(200)
+  originalFileName  String    @map("original_file_name") @db.VarChar(255)
+  originalFileSize  Int       @map("original_file_size")
+  convertedFileName String?   @map("converted_file_name") @db.VarChar(255)
+  downloadUrl       String?   @map("download_url")
+  urlExpiresAt      DateTime? @map("url_expires_at") @db.Timestamp(6)
+  conversionCost    Float?    @map("conversion_cost")
+  status            String    @map("status") @db.VarChar(50)
+  errorMessage      String?   @map("error_message")
+  createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt         DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
 
-  @@map(name: "conversion_history")
+  @@map("conversion_history")
 }

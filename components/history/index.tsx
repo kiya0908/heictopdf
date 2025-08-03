@@ -10,37 +10,45 @@ import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import qs from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Masonry from "react-masonry-css";
 import { toast } from "sonner";
-import Link from "next/link";
 import Loading from "@/components/loading";
 import BlurFade from "@/components/magicui/blur-fade";
-import PlaygroundLoading from "@/components/playground/loading";
 import { EmptyPlaceholder } from "@/components/shared/empty-placeholder";
-import { LoraConfig, ModelName, Ratio } from "@/config/constants";
-import { FluxSelectDto } from "@/db/type";
-import { cn, createRatio } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
-import { FluxTaskStatus } from "../playground";
 import { Button } from "../ui/button";
 import Container from "./container";
-import { DownloadAction } from "./download-action";
 import LoadMoreLoading from "./loading";
 
-const useQueryMineFluxMutation = (config?: {
+interface ConversionHistoryItem {
+  id: string;
+  originalFileName: string;
+  originalFileSize: number;
+  convertedFileName?: string;
+  downloadUrl?: string;
+  urlExpiresAt?: Date;
+  conversionCost?: number;
+  status: "pending" | "completed" | "failed";
+  errorMessage?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const useQueryConversionHistoryMutation = (config?: {
   onSuccess: (result: any) => void;
+  onError?: (error: any) => void;
 }) => {
   const { getToken } = useAuth();
 
   return useMutation({
     mutationFn: async (values: any) => {
-      const path = "/api/mine-flux";
+      const path = "/api/convert";
       const res = await fetch(`${path}?${qs.stringify(values)}`, {
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
 
-      if (!res.ok && res.status >= 500) {
-        throw new Error("Network response error");
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
 
       return res.json();
@@ -48,15 +56,14 @@ const useQueryMineFluxMutation = (config?: {
     onSuccess: async (result) => {
       config?.onSuccess(result);
     },
+    onError: (error) => {
+      console.error("Conversion history query error:", error);
+      config?.onError?.(error);
+    },
   });
 };
 
-const breakpointColumnsObj = {
-  default: 4,
-  1024: 3,
-  768: 2,
-  640: 1,
-};
+
 
 export default function History({ locale }: { locale: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -68,35 +75,63 @@ export default function History({ locale }: { locale: string }) {
     pageSize: 12,
   });
   const [hasMore, setHasMore] = useState(true);
-  const [dataSource, setDataSource] = useState<FluxSelectDto[]>([]);
-  const useQueryMineFlux = useQueryMineFluxMutation({
+  const [dataSource, setDataSource] = useState<ConversionHistoryItem[]>([]);
+  const useQueryConversionHistory = useQueryConversionHistoryMutation({
     onSuccess(result) {
-      const { page, pageSize, total, data } = result.data ?? {};
-      setDataSource(page === 1 ? data : [...dataSource, ...data]);
-      setPageParams({ page, pageSize });
-      setHasMore(page * pageSize < total);
+      const { conversions = [], pagination } = result;
+      // 确保 conversions 是数组，如果不是则使用空数组
+      const safeData = Array.isArray(conversions) ? conversions : [];
+      setDataSource(pagination.page === 1 ? safeData : [...dataSource, ...safeData]);
+      setPageParams({ page: pagination.page || 1, pageSize: pagination.limit || 12 });
+      setHasMore(pagination.page * pagination.limit < pagination.total);
       setInit(true);
+    },
+    onError(error) {
+      console.error("Failed to load conversion history:", error);
+      toast.error("Failed to load conversion history");
+      setInit(true); // 即使出错也要设置 init 为 true，避免无限加载
     },
   });
 
   useEffect(() => {
-    useQueryMineFlux.mutateAsync({
+    useQueryConversionHistory.mutateAsync({
       page: pageParams.page,
-      pageSize: pageParams.pageSize,
+      limit: pageParams.pageSize,
     });
   }, []);
 
   const loadMore = () => {
     console.log("load more");
-    useQueryMineFlux.mutateAsync({
+    useQueryConversionHistory.mutateAsync({
       page: pageParams.page + 1,
-      pageSize: pageParams.pageSize,
+      limit: pageParams.pageSize,
     });
   };
 
-  const copyPrompt = (prompt: string) => {
-    copy(prompt);
+  const copyFileName = (fileName: string) => {
+    copy(fileName);
     toast.success(t("action.copySuccess"));
+  };
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'text-green-600 bg-green-100';
+      case 'pending':
+        return 'text-yellow-600 bg-yellow-100';
+      case 'failed':
+        return 'text-red-600 bg-red-100';
+      default:
+        return 'text-gray-600 bg-gray-100';
+    }
   };
 
   const debounceLoadMore = debounce(loadMore, 500);
@@ -133,80 +168,77 @@ export default function History({ locale }: { locale: string }) {
           scrollableTarget={id}
         >
           {dataSource.length > 0 ? (
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className="flex w-auto"
-              columnClassName="bg-clip-padding pl-4 first:pl-0"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {dataSource.map((item, idx) => (
-                <div
+                <BlurFade
                   key={item.id}
-                  className="border-stroke-light bg-surface-300 hover:border-stroke-strong mb-4 flex break-inside-avoid flex-col space-y-4 overflow-hidden rounded-xl border relative"
+                  delay={0.25 + (idx % pageParams.pageSize) * 0.05}
+                  inView
                 >
-                  {item.taskStatus === FluxTaskStatus.Processing ? (
-                    <div
-                      className={`bg-pattern flx w-full items-center justify-center rounded-xl ${createRatio(item.aspectRatio as Ratio)} pointer-events-none`}
-                    >
-                      <PlaygroundLoading />
+                  <div className="border-stroke-light bg-surface-300 hover:border-stroke-strong flex flex-col space-y-4 overflow-hidden rounded-xl border p-4">
+                    {/* 文件图标和状态 */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="font-medium text-sm truncate max-w-[150px]" title={item.originalFileName}>
+                            {item.originalFileName}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {formatFileSize(item.originalFileSize)}
+                          </p>
+                        </div>
+                      </div>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
+                        {item.status}
+                      </span>
                     </div>
-                  ) : (
-                    <BlurFade
-                      key={item?.imageUrl!}
-                      delay={0.25 + (idx % pageParams.pageSize) * 0.05}
-                      inView
-                    >
-                      <img
-                        src={item.imageUrl!}
-                        alt={item.inputPrompt!}
-                        title={item.inputPrompt!}
-                        className={`w-full rounded-xl object-cover ${createRatio(item.aspectRatio as Ratio)} pointer-events-none`}
-                      />
-                    </BlurFade>
-                  )}
-                  <Link
-                    className="absolute right-1 top-1 !m-0"
-                    target="_blank"
-                    href={`https://pinterest.com/pin/create/button/?url=https://pinterest.com/pin/create/button/?description=${encodeURIComponent(item.inputPrompt!)}&url=${encodeURIComponent(item.imageUrl!)}`}
-                  >
-                    <span className="[&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-[#e60023]">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-                        <path d="M496 256c0 137-111 248-248 248-25.6 0-50.2-3.9-73.4-11.1 10.1-16.5 25.2-43.5 30.8-65 3-11.6 15.4-59 15.4-59 8.1 15.4 31.7 28.5 56.8 28.5 74.8 0 128.7-68.8 128.7-154.3 0-81.9-66.9-143.2-152.9-143.2-107 0-163.9 71.8-163.9 150.1 0 36.4 19.4 81.7 50.3 96.1 4.7 2.2 7.2 1.2 8.3-3.3 .8-3.4 5-20.3 6.9-28.1 .6-2.5 .3-4.7-1.7-7.1-10.1-12.5-18.3-35.3-18.3-56.6 0-54.7 41.4-107.6 112-107.6 60.9 0 103.6 41.5 103.6 100.9 0 67.1-33.9 113.6-78 113.6-24.3 0-42.6-20.1-36.7-44.8 7-29.5 20.5-61.3 20.5-82.6 0-19-10.2-34.9-31.4-34.9-24.9 0-44.9 25.7-44.9 60.2 0 22 7.4 36.8 7.4 36.8s-24.5 103.8-29 123.2c-5 21.4-3 51.6-.9 71.2C65.4 450.9 0 361.1 0 256 0 119 111 8 248 8s248 111 248 248z"></path>
-                      </svg>
-                    </span>
-                  </Link>
-                  <div className="text-content-light inline-block px-4 py-2 text-sm">
-                    <p className="line-clamp-4 italic md:line-clamp-6 lg:line-clamp-[8]">
-                      {item.inputPrompt}
-                    </p>
-                  </div>
-                  <div className="flex flex-row flex-wrap space-x-1 px-2">
-                    {ModelName[item.model] && (
-                      <div className="bg-surface-alpha-strong text-content-base inline-flex items-center rounded-md border border-transparent px-1.5 py-0.5 font-mono text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                        {ModelName[item.model]}
+
+                    {/* 转换信息 */}
+                    {item.convertedFileName && (
+                      <div className="text-sm text-gray-600">
+                        <p className="font-medium">Converted to:</p>
+                        <p className="truncate" title={item.convertedFileName}>
+                          {item.convertedFileName}
+                        </p>
                       </div>
                     )}
-                    {item.loraName && LoraConfig[item.loraName]?.styleName && (
-                      <div className="bg-surface-alpha-strong text-content-base inline-flex items-center rounded-md border border-transparent px-1.5 py-0.5 font-mono text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                        {LoraConfig[item.loraName]?.styleName}
-                      </div>
-                    )}
+
+                    {/* 时间信息 */}
+                    <div className="text-xs text-gray-500">
+                      <p>Created: {new Date(item.createdAt).toLocaleString()}</p>
+                      {item.urlExpiresAt && (
+                        <p>Expires: {new Date(item.urlExpiresAt).toLocaleString()}</p>
+                      )}
+                    </div>
+
+                    {/* 操作按钮 */}
+                    <div className="flex flex-row justify-between space-x-2 pt-2">
+                      <button
+                        className="focus-ring text-content-strong border-stroke-strong hover:border-stroke-stronger inline-flex h-8 items-center justify-center whitespace-nowrap rounded-lg border bg-transparent px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
+                        onClick={() => copyFileName(item.originalFileName)}
+                      >
+                        <Copy className="w-3 h-3 me-1" />
+                        {t("action.copy")}
+                      </button>
+                      {item.downloadUrl && item.status === 'completed' && (
+                        <a
+                          href={item.downloadUrl}
+                          download={item.convertedFileName}
+                          className="focus-ring text-white bg-blue-600 hover:bg-blue-700 inline-flex h-8 items-center justify-center whitespace-nowrap rounded-lg px-2.5 text-sm font-medium transition-colors"
+                        >
+                          Download
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex flex-row justify-between space-x-2 p-4 pt-0">
-                    <button
-                      className="focus-ring text-content-strong border-stroke-strong hover:border-stroke-stronger data-[state=open]:bg-surface-alpha-light inline-flex h-8 items-center justify-center whitespace-nowrap rounded-lg border bg-transparent px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
-                      onClick={() => copyPrompt(item.inputPrompt!)}
-                    >
-                      <Copy className="icon-xs me-1" />
-                      {t("action.copy")}
-                    </button>
-                    <DownloadAction
-                      disabled={item.taskStatus === FluxTaskStatus.Processing}
-                      id={item.id}
-                    />
-                  </div>
-                </div>
+                </BlurFade>
               ))}
-            </Masonry>
+            </div>
           ) : init ? (
             <div className="flex min-h-96 items-center justify-center">
               <EmptyPlaceholder>

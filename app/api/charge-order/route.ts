@@ -10,14 +10,14 @@ import { prisma } from "@/db/prisma";
 import { OrderPhase } from "@/db/type";
 import { getErrorMessage } from "@/lib/handle-error";
 import { redis } from "@/lib/redis";
-import { stripe } from "@/lib/stripe";
+// import { stripe } from "@/lib/stripe"; // Removed for PayPal migration
 import { absoluteUrl } from "@/lib/utils";
 
 const CreateChargeOrderSchema = z.object({
   currency: z.enum(["CNY", "USD"]).default("USD"),
   productId: z.string(),
-  amount: z.number().min(100).max(1000000000),
-  channel: z.enum(["GiftCode", "Stripe"]).default("Stripe"),
+  amount: z.number().min(0).max(1000000000), // Allow 0 for free tier
+  channel: z.enum(["GiftCode", "PayPal"]).default("PayPal"), // Changed from Stripe to PayPal
   url: z.string().optional(),
 });
 
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     const { currency, amount, channel, productId, url } =
       CreateChargeOrderSchema.parse(data);
-    if (channel !== "Stripe") {
+    if (channel !== "PayPal" && channel !== "GiftCode") {
       return NextResponse.json(
         { error: "Not Support Channel" },
         { status: 400 },
@@ -75,7 +75,6 @@ export async function POST(req: NextRequest) {
           username: user.username,
         },
         currency,
-        credit: product.credit,
         amount,
         channel,
         phase: OrderPhase.Pending,
@@ -87,43 +86,13 @@ export async function POST(req: NextRequest) {
     const nextUrl = url?.includes("?")
       ? `${url}&orderId=${orderId}`
       : `${url}?orderId=${orderId}`;
-    if (channel === "Stripe") {
-      const stripeSession = await stripe.checkout.sessions.create({
-        success_url: `${nextUrl ?? billingUrl}&success=true`,
-        cancel_url: `${nextUrl ?? billingUrl}&success=false`,
-        payment_method_types: ["card"],
-        mode: "payment",
-        billing_address_collection: "auto",
-        customer_email: user.primaryEmailAddress.emailAddress,
-        line_items: [
-          {
-            price_data: {
-              currency: "usd",
-              product_data: {
-                name: "Charge Order",
-              },
-              unit_amount: amount,
-            },
-            quantity: 1,
-          },
-        ],
-        payment_intent_data: {
-          metadata: {
-            orderId,
-            userId: user.id,
-            chargeProductId: productId,
-          },
-        },
-        metadata: {
-          orderId,
-          userId: user.id,
-          chargeProductId: productId,
-        },
-      });
-      return NextResponse.json({
-        orderId,
-        url: stripeSession.url as string,
-      });
+    // TODO: Implement PayPal payment logic
+    if (channel === "PayPal") {
+      // PayPal integration will be implemented in T-10
+      return NextResponse.json(
+        { error: "PayPal integration pending" },
+        { status: 501 },
+      );
     }
     return NextResponse.json({
       orderId,

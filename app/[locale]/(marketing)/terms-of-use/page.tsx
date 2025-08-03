@@ -14,20 +14,20 @@ export default function IndexPage({ params: { locale } }: Props) {
     <article className="container max-w-6xl py-6 lg:py-12">
       <div className="space-y-4">
         <h1 className="inline-block font-heading text-3xl lg:text-4xl">
-          Terms &amp; Conditions
+          Terms of Service
         </h1>
         <p className="text-base text-muted-foreground">
-          Please read our terms and conditions.
+          Please read these terms and conditions for using our HEIC to PDF conversion service.
         </p>
       </div>
       <hr className="my-4" />
       <div className="mdx">
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Last updated: May 29, 2024
+          Last updated: July 29, 2025
         </p>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Please read these terms and conditions carefully before using Our
-          Service.
+          Please read these terms and conditions carefully before using our
+          HEIC to PDF conversion service.
         </p>
         <h2
           className="mt-10 scroll-m-20 border-b pb-1 text-2xl font-semibold tracking-tight first:mt-0"
@@ -89,13 +89,13 @@ export default function IndexPage({ params: { locale } }: Props) {
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
-              <strong>Country</strong> refers to: Singapore
+              <strong>Country</strong> refers to: United States
             </p>
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
               <strong>Company</strong> (referred to as either "the Company",
-              "We", "Us" or "Our" in this Agreement) refers to FluxAIProTeam.
+              "We", "Us" or "Our" in this Agreement) refers to HEIC to PDF Converter.
             </p>
           </li>
           <li className="mt-2">
@@ -106,23 +106,15 @@ export default function IndexPage({ params: { locale } }: Props) {
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
-              <strong>Service</strong> refers to the Website.
+              <strong>Service</strong> refers to the HEIC to PDF conversion service provided through the Website.
             </p>
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
               <strong>Terms and Conditions</strong> (also referred as "Terms")
               mean these Terms and Conditions that form the entire agreement
-              between You and the Company regarding the use of the Service. This
-              Terms and Conditions agreement has been created with the help of
-              the{" "}
-              <a
-                className="font-medium underline underline-offset-4"
-                href="https://www.freeprivacypolicy.com/free-terms-and-conditions-generator/"
-              >
-                Free Terms and Conditions Generator
-              </a>
-              .
+              between You and the Company regarding the use of the HEIC to PDF
+              conversion Service.
             </p>
           </li>
           <li className="mt-2">
@@ -135,13 +127,7 @@ export default function IndexPage({ params: { locale } }: Props) {
           </li>
           <li className="mt-2">
             <p className="leading-7 [&:not(:first-child)]:mt-6">
-              <strong>Website</strong> refers to FluxAIProTeam, accessible from{" "}
-              <a
-                className="font-medium underline underline-offset-4"
-                href="https://fluxaipro.art"
-              >
-                https://fluxaipro.art
-              </a>
+              <strong>Website</strong> refers to HEIC to PDF Converter, our web-based conversion service.
             </p>
           </li>
           <li className="mt-2">
@@ -187,7 +173,7 @@ export default function IndexPage({ params: { locale } }: Props) {
           permit those under 18 to use the Service.
         </p>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Your access to and use of the Service is also conditioned on Your
+          Your access to and use of the HEIC to PDF conversion Service is also conditioned on Your
           acceptance of and compliance with the Privacy Policy of the Company.
           Our Privacy Policy describes Our policies and procedures on the
           collection, use and disclosure of Your personal information when You
@@ -195,6 +181,88 @@ export default function IndexPage({ params: { locale } }: Props) {
           rights and how the law protects You. Please read Our Privacy Policy
           carefully before using Our Service.
         </p>
+        <h2
+          className="mt-10 scroll-m-20 border-b pb-1 text-2xl font-semibold tracking-tight first:mt-0"
+          id="file-conversion-service"
+        >
+          <a
+            className="subheading-anchor font-medium underline underline-offset-4"
+            aria-label="Link to section"
+            href="#file-conversion-service"
+          >
+            <span className="icon icon-link" />
+          </a>
+          File Conversion Service
+        </h2>
+        <h3
+          className="mt-8 scroll-m-20 text-xl font-semibold tracking-tight"
+          id="acceptable-use"
+        >
+          <a
+            className="subheading-anchor font-medium underline underline-offset-4"
+            aria-label="Link to section"
+            href="#acceptable-use"
+          >
+            <span className="icon icon-link" />
+          </a>
+          Acceptable Use
+        </h3>
+        <p className="leading-7 [&:not(:first-child)]:mt-6">
+          Our Service is designed to convert HEIC (High Efficiency Image Container) files to PDF format. You agree to use this Service only for lawful purposes and in accordance with these Terms.
+        </p>
+        <p className="leading-7 [&:not(:first-child)]:mt-6">
+          You agree not to upload:
+        </p>
+        <ul className="my-6 ml-6 list-disc">
+          <li className="mt-2">Files containing illegal, harmful, or copyrighted content that you do not own or have permission to use</li>
+          <li className="mt-2">Files containing malware, viruses, or other malicious code</li>
+          <li className="mt-2">Files that violate any applicable laws or regulations</li>
+          <li className="mt-2">Inappropriate, offensive, or explicit content</li>
+        </ul>
+        <h3
+          className="mt-8 scroll-m-20 text-xl font-semibold tracking-tight"
+          id="file-processing"
+        >
+          <a
+            className="subheading-anchor font-medium underline underline-offset-4"
+            aria-label="Link to section"
+            href="#file-processing"
+          >
+            <span className="icon icon-link" />
+          </a>
+          File Processing and Storage
+        </h3>
+        <p className="leading-7 [&:not(:first-child)]:mt-6">
+          When you upload HEIC files to our Service:
+        </p>
+        <ul className="my-6 ml-6 list-disc">
+          <li className="mt-2">Files are processed temporarily on our secure servers solely for conversion purposes</li>
+          <li className="mt-2">All uploaded and converted files are automatically deleted within 24 hours</li>
+          <li className="mt-2">We do not access, view, or retain the content of your files beyond what is necessary for conversion</li>
+          <li className="mt-2">You retain all rights to your original files and converted outputs</li>
+        </ul>
+        <h3
+          className="mt-8 scroll-m-20 text-xl font-semibold tracking-tight"
+          id="service-limitations"
+        >
+          <a
+            className="subheading-anchor font-medium underline underline-offset-4"
+            aria-label="Link to section"
+            href="#service-limitations"
+          >
+            <span className="icon icon-link" />
+          </a>
+          Service Limitations
+        </h3>
+        <p className="leading-7 [&:not(:first-child)]:mt-6">
+          Our Service has the following limitations:
+        </p>
+        <ul className="my-6 ml-6 list-disc">
+          <li className="mt-2">Maximum file size limits may apply</li>
+          <li className="mt-2">Daily conversion limits may be enforced to ensure fair usage</li>
+          <li className="mt-2">Service availability may be interrupted for maintenance or technical issues</li>
+          <li className="mt-2">We do not guarantee the quality or accuracy of converted files</li>
+        </ul>
         <h2
           className="mt-10 scroll-m-20 border-b pb-1 text-2xl font-semibold tracking-tight first:mt-0"
           id="links-to-other-websites"
@@ -531,9 +599,9 @@ export default function IndexPage({ params: { locale } }: Props) {
             By email:{" "}
             <a
               className="font-medium underline underline-offset-4"
-              href="mailto:support@fluxaipro.art"
+              href="mailto:support@heictopdf.com"
             >
-              support@fluxaipro.art
+              support@heictopdf.com
             </a>
           </li>
         </ul>

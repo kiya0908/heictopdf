@@ -1,6 +1,8 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
-import BillingsInfo from "@/components/billing-info";
+import SubscriptionInfo from "@/components/dashboard/subscription-info";
+import { DashboardHeader } from "@/components/dashboard/header";
+import { DashboardShell } from "@/components/dashboard/shell";
 
 interface PageProps {
   params: { locale: string };
@@ -9,15 +11,24 @@ interface PageProps {
 export async function generateMetadata({
   params: { locale },
 }: PageProps) {
-  const t = await getTranslations({ locale, namespace: "Billings" });
+  const t = await getTranslations({ locale, namespace: "Dashboard" });
 
   return {
-    title: t("page.title"),
-    description: t("page.description"),
+    title: t("page.title") || "Dashboard",
+    description: t("page.description") || "Manage your HEIC to PDF conversions and subscription",
   };
 }
+
 export default async function DashboardPage({ params: { locale } }: PageProps) {
   unstable_setRequestLocale(locale);
 
-  return <BillingsInfo />;
+  return (
+    <DashboardShell>
+      <DashboardHeader 
+        heading="Dashboard" 
+        text="Manage your conversions and subscription"
+      />
+      <SubscriptionInfo />
+    </DashboardShell>
+  );
 }

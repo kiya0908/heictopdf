@@ -25,22 +25,25 @@ export function BillingFormButton({
   const { getToken } = useAuth();
   const pathname = usePathname();
 
+  // TODO: Replace with PayPal payment logic
   const stripeSessionAction = () =>
     startTransition(async () => {
-      const data = await fetch(`/api/charge-order`, {
-        method: "POST",
-        body: JSON.stringify({
-          amount: offer.amount,
-          chanel: "Stripe",
-          productId: offer.id,
-          url: url(pathname).href,
-          currency: offer.currency?.toUpperCase(),
-        }),
-        headers: { Authorization: `Bearer ${await getToken()}` },
-      }).then((res) => res.json());
-      window.location.href = data.url;
+      // Stripe payment logic temporarily disabled
+      console.log("Payment button clicked - PayPal integration pending");
+      // const data = await fetch(`/api/charge-order`, {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     amount: offer.amount,
+      //     chanel: "Stripe",
+      //     productId: offer.id,
+      //     url: url(pathname).href,
+      //     currency: offer.currency?.toUpperCase(),
+      //   }),
+      //   headers: { Authorization: `Bearer ${await getToken()}` },
+      // }).then((res) => res.json());
+      // window.location.href = data.url;
     });
-  const userOffer = offer.amount === 1990;
+  const userOffer = offer.amount > 0; // Pro tier has amount > 0
   return (
     <Button
       variant={userOffer ? "default" : "outline"}

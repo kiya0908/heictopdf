@@ -4,61 +4,78 @@ const prisma = new PrismaClient();
 
 async function main() {
   try {
-    // Create some sample charge products
+    // Create HEIC to PDF conversion pricing tiers
     const products = [
+      // Free tier - English
       {
-        amount: 999,
-        name: 'Basic Plan',
-        description: 'Perfect for individuals',
+        amount: 0,
+        name: 'Free',
+        description: 'Perfect for daily basic conversion needs, completely free.',
         locale: 'en',
         currency: 'USD',
-        features: JSON.stringify(['10 conversions/day', 'Standard quality', 'Email support'])
+        features: JSON.stringify([
+          '5 files per conversion',
+          '10 conversions per day',
+          'Basic conversion speed',
+          'Standard quality output',
+          'Email support'
+        ])
       },
+      // Pro tier Monthly - English
       {
-        amount: 1999,
-        name: 'Pro Plan',
-        description: 'Ideal for professionals',
+        amount: 700, // $7.00
+        name: 'Pro',
+        description: 'Unleash your productivity. Unlimited conversions, faster speed, cleaner experience.',
         locale: 'en',
         currency: 'USD',
-        features: JSON.stringify(['50 conversions/day', 'High quality', 'Priority support'])
+        features: JSON.stringify([
+          'Unlimited files per conversion',
+          'Unlimited daily conversions',
+          'Priority processing speed',
+          'High quality output',
+          'No ads',
+          'Batch processing up to 50 files',
+          'Priority email support',
+          'All future premium features'
+        ])
       },
+      // Free tier - Chinese
       {
-        amount: 4999,
-        name: 'Business Plan',
-        description: 'For teams and businesses',
-        locale: 'en',
-        currency: 'USD',
-        features: JSON.stringify(['Unlimited conversions', 'Premium quality', '24/7 support', 'API access'])
-      },
-      // Chinese versions
-      {
-        amount: 999,
-        name: '基础套餐',
-        description: '适合个人用户',
+        amount: 0,
+        name: '免费版',
+        description: '满足您日常所有的基本转换需求，完全免费。',
         locale: 'zh',
         currency: 'CNY',
-        features: JSON.stringify(['每天10次转换', '标准质量', '电子邮件支持'])
+        features: JSON.stringify([
+          '每次转换5个文件',
+          '每天10次转换',
+          '基础转换速度',
+          '标准质量输出',
+          '邮件支持'
+        ])
       },
+      // Pro tier Monthly - Chinese
       {
-        amount: 1999,
-        name: '专业套餐',
-        description: '适合专业人士',
+        amount: 4900, // ¥49.00
+        name: '专业版',
+        description: '解放您的生产力。无限转换，速度更快，体验更纯净。',
         locale: 'zh',
         currency: 'CNY',
-        features: JSON.stringify(['每天50次转换', '高质量', '优先支持'])
-      },
-      {
-        amount: 4999,
-        name: '企业套餐',
-        description: '适合团队和企业',
-        locale: 'zh',
-        currency: 'CNY',
-        features: JSON.stringify(['无限转换', '优质质量', '24/7支持', 'API访问'])
+        features: JSON.stringify([
+          '每次转换无限文件',
+          '无限每日转换次数',
+          '优先处理速度',
+          '高质量输出',
+          '无广告体验',
+          '批量处理最多50个文件',
+          '优先邮件支持',
+          '所有未来高级功能'
+        ])
       }
     ];
 
-    console.log('Seeding ChargeProduct data...');
-    
+    console.log('Seeding HEIC to PDF ChargeProduct data...');
+
     for (const product of products) {
       await prisma.chargeProduct.upsert({
         where: {
@@ -71,7 +88,7 @@ async function main() {
         create: product
       });
     }
-    
+
     console.log('Seed completed successfully!');
   } catch (error) {
     console.error('Seeding failed:', error);

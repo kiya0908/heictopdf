@@ -1,13 +1,14 @@
 "use client";
 
-import { cloneElement, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useSearchParams } from "next/navigation";
 
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, useUser } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
 
-import { BillingFormButton } from "@/components/forms/billing-form-button";
+import PayPalButton from "@/components/features/paypal/PayPalButton";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
@@ -16,11 +17,8 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import type { ChargeProductSelectDto } from "@/db/type";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -37,86 +35,150 @@ interface PricingCardsProps {
 const PricingCard = ({
   userId,
   offer,
+  isYearly = false,
 }: {
   userId?: string;
   offer: ChargeProductSelectDto;
+  isYearly?: boolean;
 }) => {
   const pathname = usePathname();
   const t = useTranslations("PricingPage");
+
+  // Parse features from JSON string
+  const features = offer.features ? JSON.parse(offer.features as string) : [];
+  const isProTier = offer.amount > 0;
+  const isFree = offer.amount === 0;
+
+  // Calculate pricing based on billing period with localized display
+  const getPrice = () => {
+    if (isFree) return formatPrice(0, offer.currency === 'CNY' ? '¥' : '$');
+    
+    if (isYearly) {
+      // Display localized prices but payment will be in USD
+      const yearlyPrice = offer.currency === 'CNY' ? 4900 * 10 : 6900; // ¥490 or $69 yearly
+      return formatPrice(yearlyPrice, offer.currency === 'CNY' ? '¥' : '$');
+    }
+    
+    // Display localized prices: ¥49 for CN, $7 for others
+    const monthlyPrice = offer.currency === 'CNY' ? 4900 : 700; // ¥49 or $7 monthly
+    return formatPrice(monthlyPrice, offer.currency === 'CNY' ? '¥' : '$');
+  };
+
+  const getPeriod = () => {
+    if (isFree) return t("plans.free.period");
+    return isYearly ? "/year" : "/month";
+  };
+
+  const getOriginalPrice = () => {
+    if (!isYearly || isFree) return null;
+    // Show original price for yearly discount calculation
+    const originalPrice = offer.currency === 'CNY' ? 4900 * 12 : 700 * 12; // ¥588 or $84
+    return formatPrice(originalPrice, offer.currency === 'CNY' ? '¥' : '$');
+  };
+
+  const getCTA = () => {
+    if (isFree) return t("plans.free.cta");
+    return t("plans.pro.cta");
+  };
 
   return (
     <div
       className={cn(
         "relative flex flex-col overflow-hidden rounded-3xl border shadow-sm",
-        offer.amount === 1990 ? "-m-0.5 border-2 border-purple-400" : "",
+        isProTier ? "-m-0.5 border-2 border-purple-400" : "",
       )}
-      key={offer.title}
+      key={offer.name}
     >
+      {/* Popular Badge */}
+      {isProTier && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-1 text-xs font-semibold text-white">
+            {t("plans.pro.badge")}
+          </span>
+        </div>
+      )}
+
       <div className="min-h-[150px] items-start space-y-4 bg-muted/50 p-6">
         <p className="flex font-urban text-sm font-bold uppercase tracking-wider text-muted-foreground">
-          {offer.title}
+          {offer.name}
         </p>
 
         <div className="flex flex-row">
           <div className="flex items-end">
             <div className="flex text-left text-3xl font-semibold leading-6">
-              {offer.originalAmount && offer.originalAmount > 0 ? (
-                <>
-                  <span className="mr-2 text-base text-muted-foreground/80 line-through">
-                    {formatPrice(offer.originalAmount, "$")}
-                  </span>
-                  <span>{formatPrice(offer.amount, "$")}</span>
-                </>
-              ) : (
-                `${formatPrice(offer.amount, "$")}`
+              {getOriginalPrice() && (
+                <span className="mr-2 text-base text-muted-foreground/80 line-through">
+                  {getOriginalPrice()}
+                </span>
               )}
+              <span>{getPrice()}</span>
             </div>
             <div className="-mb-1 ml-2 text-left text-sm font-medium text-muted-foreground">
-              <div>
-                {offer.credit} {t("worth")}
-              </div>
+              <div>{getPeriod()}</div>
+              {isYearly && isProTier && (
+                <div className="text-xs text-green-600">
+                  {offer.currency === 'CNY' ? '约¥40.8/月' : '~$5.75/month'}
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className="text-left text-sm text-muted-foreground">
-          <div>{t("description")}</div>
+          <div>{offer.description}</div>
         </div>
       </div>
 
       <div className="flex h-full flex-col justify-between gap-16 p-6">
         <ul className="space-y-2 text-left text-sm font-medium leading-normal">
-          {offer.message &&
-            offer.message.split(",")?.map((feature) => (
-              <li className="flex items-start gap-x-3" key={feature}>
-                <Icons.check className="size-5 shrink-0 text-purple-500" />
-                <p>{feature}</p>
-              </li>
-            ))}
-
-          {/* {offer.limitations.length > 0 &&
-            offer.limitations.map((feature) => (
-              <li
-                className="flex items-start text-muted-foreground"
-                key={feature}
-              >
-                <Icons.close className="mr-3 size-5 shrink-0" />
-                <p>{feature}</p>
-              </li>
-            ))} */}
+          {features.map((feature: string) => (
+            <li className="flex items-start gap-x-3" key={feature}>
+              <Icons.check className="size-5 shrink-0 text-purple-500" />
+              <p>{feature}</p>
+            </li>
+          ))}
+          
+          {/* Show limitations for free tier */}
+          {isFree && (
+            <>
+              {Array.isArray(t("plans.free.limitations")) && (t("plans.free.limitations") as string[]).map((limitation: string) => (
+                <li
+                  className="flex items-start text-muted-foreground"
+                  key={limitation}
+                >
+                  <Icons.close className="mr-3 size-5 shrink-0" />
+                  <p>{limitation}</p>
+                </li>
+              ))}
+            </>
+          )}
         </ul>
+        
         <SignedIn>
-          <BillingFormButton offer={offer} btnText={t("action.buy")} />
+          {isProTier && (
+            <PayPalButton 
+              planId={isYearly ? 
+                process.env.NEXT_PUBLIC_PAYPAL_PRO_YEARLY_USD_PLAN_ID || "" : 
+                process.env.NEXT_PUBLIC_PAYPAL_PRO_MONTHLY_USD_PLAN_ID || ""
+              }
+              customId={userId || ""}
+              btnText={getCTA()}
+            />
+          )}
+          {isFree && (
+            <Button variant="outline" className="w-full">
+              {getCTA()}
+            </Button>
+          )}
         </SignedIn>
 
         <SignedOut>
           <div className="flex justify-center">
             <SignInButton mode="modal" forceRedirectUrl={url(pathname).href}>
               <Button
-                variant={offer.amount === 1990 ? "default" : "outline"}
+                variant={isProTier ? "default" : "outline"}
                 className="w-full"
-                // onClick={() => setShowSignInModal(true)}
               >
-                {t("action.signin")}
+                {getCTA()}
               </Button>
             </SignInButton>
           </div>
@@ -137,7 +199,7 @@ export function FreeCard() {
     >
       <div className="min-h-[150px] items-start space-y-4 bg-muted/50 p-6">
         <p className="flex font-urban text-sm font-bold uppercase tracking-wider text-muted-foreground">
-          Free
+          {t("plans.free.title")}
         </p>
 
         <div className="flex flex-row">
@@ -146,53 +208,48 @@ export function FreeCard() {
               {`${formatPrice(0, "$")}`}
             </div>
             <div className="-mb-1 ml-2 text-left text-sm font-medium text-muted-foreground">
-              <div>5 {t("worth")}</div>
+              <div>10 {t("worth")}</div>
             </div>
           </div>
+        </div>
+        <div className="text-left text-sm text-muted-foreground">
+          <div>{t("plans.free.valueProposition")}</div>
         </div>
       </div>
 
       <div className="flex h-full flex-col justify-between gap-16 p-6">
         <ul className="space-y-2 text-left text-sm font-medium leading-normal">
-          {["Limited models", "Max 5/month Flux.1 Schnell Images"]?.map(
-            (feature) => (
-              <li className="flex items-start gap-x-3" key={feature}>
-                <Icons.check className="size-5 shrink-0 text-purple-500" />
-                <p>{feature}</p>
-              </li>
-            ),
-          )}
+          {Array.isArray(t("plans.free.features")) && (t("plans.free.features") as string[]).map((feature: string) => (
+            <li className="flex items-start gap-x-3" key={feature}>
+              <Icons.check className="size-5 shrink-0 text-purple-500" />
+              <p>{feature}</p>
+            </li>
+          ))}
 
-          {["Private Generations", "Commercial License"].map((feature) => (
+          {Array.isArray(t("plans.free.limitations")) && (t("plans.free.limitations") as string[]).map((limitation: string) => (
             <li
               className="flex items-start text-muted-foreground"
-              key={feature}
+              key={limitation}
             >
               <Icons.close className="mr-3 size-5 shrink-0" />
-              <p>{feature}</p>
+              <p>{limitation}</p>
             </li>
           ))}
         </ul>
         <SignBox>
-          <Button>Try Out</Button>
+          <Button>{t("plans.free.cta")}</Button>
         </SignBox>
       </div>
     </div>
   );
 }
 export function PricingCards({
-  userId,
   chargeProduct,
-  locale,
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
-  const isYearlyDefault = false;
-  const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
+  const [isYearly, setIsYearly] = useState(false);
   const searchParams = useSearchParams();
-
-  const toggleBilling = () => {
-    setIsYearly(!isYearly);
-  };
+  const { user } = useUser();
 
   const { reward } = useReward("order-success", "confetti", {
     position: "fixed",
@@ -219,20 +276,30 @@ export function PricingCards({
     <MaxWidthWrapper>
       <section className="flex flex-col items-center text-center">
         <HeaderSection label={t("label")} title={t("title")} />
-        <div className="mt-4">
-          <p className="mb-7 inline-flex items-center justify-between rounded-xl bg-blue-100 px-2 py-2 pe-4 text-sm text-blue-700 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800 md:rounded-full md:px-1 md:py-1">
-            <span className="text-sm font-medium">
-              {t("tip.title")}&nbsp;(
-              {t("tip.subtitle")}&nbsp;
-              <a
-                href="mailto:support@fluxaipro.art"
-                className="font-semibold text-blue-700 underline decoration-blue-500 dark:text-white dark:decoration-white"
-              >
-                {t("tip.contact")}
-              </a>
-              &nbsp;)
-            </span>
-          </p>
+        <div className="mb-4 mt-10 flex items-center gap-5">
+          <ToggleGroup
+            type="single"
+            size="sm"
+            defaultValue={isYearly ? "yearly" : "monthly"}
+            onValueChange={(value) => setIsYearly(value === "yearly")}
+            aria-label="toggle-billing"
+            className="h-9 overflow-hidden rounded-full border bg-background p-1 *:h-7 *:text-muted-foreground"
+          >
+            <ToggleGroupItem
+              value="monthly"
+              className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+              aria-label="Toggle monthly billing"
+            >
+              {t("billing.monthly")}
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="yearly"
+              className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+              aria-label="Toggle yearly billing"
+            >
+              {t("billing.yearly")} ({t("billing.save")})
+            </ToggleGroupItem>
+          </ToggleGroup>
         </div>
         {/* <div className="mb-4 mt-10 flex items-center gap-5">
           <ToggleGroup
@@ -260,9 +327,14 @@ export function PricingCards({
           </ToggleGroup>
         </div> */}
 
-        <div className="grid gap-5 bg-inherit py-5 md:grid-cols-3">
+        <div className="grid gap-5 bg-inherit py-5 md:grid-cols-2">
           {chargeProduct?.map((offer) => (
-            <PricingCard offer={offer} key={offer.id} />
+            <PricingCard 
+              offer={offer} 
+              key={offer.id} 
+              isYearly={isYearly}
+              userId={user?.id}
+            />
           ))}
         </div>
 
@@ -271,15 +343,12 @@ export function PricingCards({
           <br />
           <a
             className="font-medium text-primary hover:underline"
-            href="mailto:support@fluxaipro.art"
+            href="mailto:support@heictopdf.com"
           >
-            support@fluxaipro.art
+            support@heictopdf.com
           </a>{" "}
           {t("contact.description")}
           <br />
-          {/* <strong>
-            You can test the subscriptions and won&apos;t be charged.
-          </strong> */}
         </p>
       </section>
       <div
@@ -301,6 +370,9 @@ export function PricingCardDialog({
 }) {
   const t = useTranslations("PricingPage");
   const { isSm, isMobile } = useMediaQuery();
+  const [isYearly, setIsYearly] = useState(false);
+  const { user } = useUser();
+  
   const product = useMemo(() => {
     if (isSm || isMobile) {
       return ([chargeProduct?.[1]] ?? []) as ChargeProductSelectDto[];
@@ -318,9 +390,37 @@ export function PricingCardDialog({
       <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px]">
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
-          <div className="grid grid-cols-1 gap-5 bg-inherit py-5 lg:grid-cols-3">
+          <div className="mb-4 flex justify-center">
+            <ToggleGroup
+              type="single"
+              size="sm"
+              defaultValue={isYearly ? "yearly" : "monthly"}
+              onValueChange={(value) => setIsYearly(value === "yearly")}
+              aria-label="toggle-billing"
+              className="h-9 overflow-hidden rounded-full border bg-background p-1 *:h-7 *:text-muted-foreground"
+            >
+              <ToggleGroupItem
+                value="monthly"
+                className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+              >
+                {t("billing.monthly")}
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="yearly"
+                className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+              >
+                {t("billing.yearly")} ({t("billing.save")})
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+          <div className="grid grid-cols-1 gap-5 bg-inherit py-5 lg:grid-cols-2">
             {product?.map((offer) => (
-              <PricingCard offer={offer} key={offer.id} />
+              <PricingCard 
+                offer={offer} 
+                key={offer.id} 
+                isYearly={isYearly}
+                userId={user?.id}
+              />
             ))}
           </div>
         </DialogHeader>

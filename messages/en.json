@@ -81,7 +81,7 @@
       "subtitle": "Upload your HEIC files and we'll quickly convert them to PDF format",
       "features": {
         "fast": "Fast HEIC to PDF conversion",
-        "batch": "Batch processing support", 
+        "batch": "Batch processing support",
         "quality": "Maintain original quality",
         "secure": "Safe and reliable"
       },
@@ -92,7 +92,7 @@
           "description": "Drag and drop or click to upload your HEIC image files"
         },
         "step2": {
-          "title": "Auto Convert", 
+          "title": "Auto Convert",
           "description": "Our servers will automatically process your files"
         },
         "step3": {
@@ -108,33 +108,33 @@
     },
     "features": {
       "title": "Features",
-      "description": "Our HEIC to PDF converter is a powerful tool that allows you to easily convert Apple's HEIC image format to universally compatible PDF documents. Perfect for sharing, printing, and archiving your photos.",
+      "description": "Our professional HEIC to PDF converter delivers industry-leading functionality for seamless conversion. Transform Apple's HEIC format into universally accessible PDF documents with our comprehensive HEIC to PDF solution, perfect for professional document management and sharing workflows.",
       "action": {
-        "visit": "Convert Now"
+        "visit": "Start HEIC to PDF Conversion"
       },
       "item1": {
-        "title": "Batch Conversion",
-        "description": "Convert multiple HEIC images to a single PDF document or individual PDFs in one go. Save time with our efficient batch processing capabilities."
+        "title": "Intelligent Batch HEIC to PDF Processing",
+        "description": "Convert multiple HEIC files to PDF simultaneously with our advanced batch HEIC to PDF engine. Create individual PDFs or merge multiple HEIC images into consolidated PDF documents for streamlined file organization."
       },
       "item2": {
-        "title": "High Quality Preservation",
-        "description": "Our converter maintains the original quality of your HEIC images when converting to PDF, ensuring your photos look just as good as the originals."
+        "title": "Premium HEIC to PDF Quality Retention",
+        "description": "Our sophisticated algorithms preserve original image fidelity during conversion. Every HEIC to PDF transformation maintains color accuracy, resolution, and metadata for professional-grade output."
       },
       "item3": {
-        "title": "Cloud Storage Integration",
-        "description": "Easily import HEIC images from your cloud storage services like iCloud, Google Drive, or Dropbox, and save the converted PDFs back to your preferred location."
+        "title": "Seamless HEIC to PDF Cloud Integration",
+        "description": "Import HEIC files directly from cloud storage platforms and save converted PDF documents back to your preferred location. Our  service integrates with iCloud, Google Drive, and Dropbox for enhanced workflow efficiency."
       },
       "item4": {
-        "title": "Lightning-Fast Conversion",
-        "description": "Our optimized conversion engine processes your HEIC images in seconds, significantly faster than other converters. With its lightning-fast conversion capabilities, our tool ensures quick and efficient results, saving you valuable time."
+        "title": "Ultra-Fast HEIC to PDF Engine",
+        "description": "Experience lightning-speed HEIC to PDF conversion with our optimized processing technology. Our enhanced HEIC to PDF algorithms deliver converted files in seconds, outperforming standard conversion tools for maximum productivity."
       },
       "item5": {
-        "title": "Cross-Platform Compatibility",
-        "description": "Works seamlessly across all devices and operating systems. Whether you're using Windows, macOS, iOS, or Android, our HEIC to PDF converter ensures your images are accessible everywhere."
+        "title": "Universal HEIC to PDF Compatibility",
+        "description": "Access our HEIC to PDF converter across all platforms and devices. Whether using Windows, macOS, iOS, or Android, our cross-platform HEIC to PDF solution ensures consistent performance and accessibility."
       },
       "item6": {
-        "title": "User-Friendly Interface",
-        "description": "Simple and intuitive design makes converting HEIC to PDF effortless. Just upload your images, click convert, and download your PDF. No technical knowledge required - perfect for everyone from beginners to professionals."
+        "title": "Intuitive HEIC to PDF Interface",
+        "description": "Navigate our streamlined HEIC to PDF conversion process effortlessly. Upload HEIC files, initiate conversion, and download PDF results with our user-friendly HEIC to PDF platform designed for users of all technical backgrounds."
       }
     },
     "powered": {
@@ -199,81 +199,81 @@
     },
     "whatIs": {
       "title": "What is HEIC to PDF?",
-      "subtitle": "Understanding HEIC format and why you need to convert to PDF",
-      "description": "HEIC (High Efficiency Image Container) is Apple's default image format with high compression ratio and excellent quality. However, due to compatibility issues, many devices and software cannot directly open HEIC files.",
+      "subtitle": "Professional HEIC to PDF conversion service for seamless file transformation",
+      "description": "HEIC to PDF conversion transforms Apple's High Efficiency Image Container format into universally accessible PDF documents. Our HEIC to PDF converter solves compatibility issues by converting HEIC files to PDF format, ensuring your images can be viewed on any device or platform without specialized software.",
       "benefits": {
-        "title": "Benefits of Converting to PDF",
+        "title": "Why Choose HEIC to PDF Conversion?",
         "item1": {
-          "title": "Universal Compatibility",
-          "description": "PDF format displays perfectly on all devices and platforms"
+          "title": "Universal PDF Compatibility",
+          "description": "HEIC to PDF conversion ensures your files open seamlessly across all devices, browsers, and operating systems"
         },
         "item2": {
-          "title": "Easy Sharing",
-          "description": "PDF files can be easily shared via email, cloud storage, etc."
+          "title": "Effortless HEIC to PDF Sharing",
+          "description": "Convert HEIC to PDF format for easy sharing via email, messaging apps, and cloud storage platforms"
         },
         "item3": {
-          "title": "Quality Preservation",
-          "description": "Maintains original image quality during conversion"
+          "title": "High-Quality HEIC to PDF Output",
+          "description": "Our HEIC to PDF converter preserves original image quality while creating compact, professional PDF documents"
         },
         "item4": {
-          "title": "Document Integration",
-          "description": "Multiple images can be merged into a single PDF document"
+          "title": "Batch HEIC to PDF Processing",
+          "description": "Convert multiple HEIC files to PDF simultaneously, merging them into organized PDF documents for better workflow"
         }
       }
     },
     "howTo": {
       "title": "How to Use",
-      "subtitle": "Complete HEIC to PDF conversion in 3 simple steps",
+      "subtitle": "Transform your HEIC files to PDF format in three simple steps using our professional HEIC to PDF conversion service",
       "steps": {
         "step1": {
-          "title": "Upload Files",
-          "description": "Select your HEIC image files, drag & drop supported",
-          "detail": "Support single or batch upload, max file size 10MB"
+          "title": "Upload Your HEIC Files",
+          "description": "Select and upload your HEIC images for PDF conversion. Our HEIC to PDF tool supports drag-and-drop functionality for convenience",
+          "detail": "Support batch HEIC to PDF conversion with files up to 10MB each"
         },
         "step2": {
-          "title": "Auto Convert", 
-          "description": "Our servers automatically process your files",
-          "detail": "Using efficient algorithms, average conversion time under 30 seconds"
+          "title": "Automatic HEIC to PDF Processing",
+          "description": "Our advanced servers instantly begin converting your HEIC files to PDF format using optimized HEIC to PDF algorithms",
+          "detail": "Industry-leading HEIC to PDF conversion technology completes processing in under 30 seconds"
         },
         "step3": {
-          "title": "Download Results",
-          "description": "Instantly download your converted PDF files",
-          "detail": "Secure download links valid for 3 hours"
+          "title": "Download Your PDF Files",
+          "description": "Instantly download your converted PDF files. Each HEIC to PDF conversion maintains original image quality and formatting",
+          "detail": "Secure download links for your HEIC to PDF results remain active for 3 hours"
         }
       }
     },
     "why": {
-      "title": "Why Choose Us?",
-      "subtitle": "Professional, secure, and efficient HEIC to PDF service",
+      "title": "Why Choose Our HEIC to PDF Converter?",
+      "subtitle": "The most trusted HEIC to PDF conversion platform with advanced features",
       "features": {
         "security": {
-          "title": "Privacy Security",
-          "description": "All files encrypted during transmission, automatically deleted after conversion",
+          "title": "Secure HEIC to PDF Processing",
+          "description": "Our HEIC to PDF converter encrypts all files during transmission and automatically deletes converted files after processing",
           "icon": "shield"
         },
         "speed": {
-          "title": "Lightning Fast",
-          "description": "Latest technology, average conversion time only 30 seconds",
+          "title": "Fast HEIC to PDF Conversion",
+          "description": "Industry-leading HEIC to PDF technology delivers converted files in under 30 seconds with optimized processing",
           "icon": "zap"
         },
         "quality": {
-          "title": "Quality Preservation",
-          "description": "Advanced algorithms ensure converted PDFs maintain original image quality",
+          "title": "Premium HEIC to PDF Quality",
+          "description": "Our advanced HEIC to PDF algorithms preserve original image quality while creating professional PDF documents",
           "icon": "star"
         },
         "batch": {
-          "title": "Batch Processing",
-          "description": "Support simultaneous conversion of multiple files for efficiency",
+          "title": "Batch HEIC to PDF Processing",
+          "description": "Convert multiple HEIC files to PDF simultaneously, streamlining your HEIC to PDF workflow for maximum efficiency",
           "icon": "layers"
         },
         "free": {
-          "title": "Free to Use",
-          "description": "Daily free conversion quota, no registration required",
+          "title": "Free HEIC to PDF Service",
+          "description": "Enjoy daily free HEIC to PDF conversion quota without registration, making our converter accessible to everyone",
           "icon": "gift"
         },
         "support": {
-          "title": "24/7 Support",
-          "description": "Round-the-clock technical support to solve your problems",
+          "title": "Expert HEIC to PDF Support",
+          "description": "24/7 technical assistance for all your HEIC to PDF conversion needs and troubleshooting requirements",
           "icon": "headphones"
         }
       }
@@ -324,13 +324,74 @@
     }
   },
   "PricingPage": {
-    "title": "Choose a plan to buy credits",
-    "description": "No recurring",
-    "worth": "Credit",
+    "title": "Choose Your Plan",
+    "description": "Simple, transparent pricing for everyone",
+    "worth": "conversions",
     "label": "Pricing",
+    "billing": {
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "save": "Save 25%",
+      "freeMonths": "Get 2 months free"
+    },
+    "plans": {
+      "free": {
+        "title": "Free",
+        "price": "$0",
+        "period": "/month",
+        "description": "Perfect for daily basic conversion needs, completely free.",
+        "valueProposition": "Meets all your daily basic conversion needs, completely free.",
+        "features": [
+          "5 files per conversion",
+          "10 conversions per day",
+          "Basic conversion speed",
+          "Standard quality output",
+          "Email support"
+        ],
+        "limitations": [
+          "With ads",
+          "No batch processing",
+          "No priority support"
+        ],
+        "cta": "Get Started Free"
+      },
+      "pro": {
+        "title": "Pro",
+        "badge": "Most Popular",
+        "monthly": {
+          "price": "$7",
+          "period": "/month",
+          "originalPrice": null
+        },
+        "yearly": {
+          "price": "$69",
+          "period": "/year",
+          "originalPrice": "$84",
+          "savings": "Save 25%",
+          "monthlyEquivalent": "~$5.75/month"
+        },
+        "description": "Unleash your productivity. Unlimited conversions, faster speed, cleaner experience.",
+        "valueProposition": "Unleash your productivity. Unlimited conversions, faster speed, cleaner experience.",
+        "features": [
+          "Unlimited files per conversion",
+          "Unlimited daily conversions",
+          "Priority processing speed",
+          "High quality output",
+          "No ads",
+          "Batch processing up to 50 files",
+          "Priority email support",
+          "All future premium features"
+        ],
+        "popular": true,
+        "cta": "Upgrade to Pro"
+      }
+    },
     "action": {
       "signin": "Sign in",
-      "buy": "One Time Payment"
+      "buy": "Get Started",
+      "current": "Current Plan",
+      "upgrade": "Upgrade Now",
+      "contact": "Contact Sales"
     },
     "contact": {
       "title": "Contact us",
@@ -339,30 +400,30 @@
     "faq": {
       "label": "FAQ",
       "title": "Frequently asked questions",
-      "subtitle": "Explore our comprehensive FAQ to find quick answers about HEIC to PDF conversion. If you need further assistance, don't hesitate to contact us for personalized help.",
+      "subtitle": "Get answers to the most common questions about our pricing and service.",
       "item1": {
-        "question": "What is HEIC format and why convert to PDF?",
-        "answer": "HEIC (High Efficiency Image Container) is Apple's modern image format that saves storage space. Converting to PDF makes your images universally accessible across all devices and platforms, perfect for sharing, printing, and archiving."
+        "question": "Can I cancel my subscription anytime?",
+        "answer": "Yes, absolutely! You can cancel your subscription at any time from your account settings. There are no cancellation fees, and you'll continue to have Pro access until the end of your current billing period."
       },
       "item2": {
-        "question": "Can I convert multiple HEIC files at once?",
-        "answer": "Yes! Our batch conversion feature allows you to upload and convert multiple HEIC images simultaneously. You can create either a single PDF with all images or individual PDFs for each image."
+        "question": "What payment methods do you accept?",
+        "answer": "We accept all major credit cards (Visa, MasterCard, American Express) and PayPal accounts. All payments are processed securely through PayPal, ensuring your payment information is always protected."
       },
       "item3": {
-        "question": "Will the image quality be preserved during conversion?",
-        "answer": "Absolutely! Our advanced conversion engine maintains the original quality of your HEIC images. The converted PDFs will look identical to your original photos with no quality loss."
+        "question": "Is my payment information secure?",
+        "answer": "Absolutely. We use PayPal, a leading payment processor trusted by millions of businesses worldwide. We never store your payment information on our servers - all transactions are handled securely by PayPal with bank-level encryption."
       },
       "item4": {
-        "question": "How do I convert HEIC to PDF?",
-        "answer": "Simply upload your HEIC files using our drag-and-drop interface, choose your conversion settings (single PDF or multiple PDFs), click convert, and download your files. No software installation required!"
+        "question": "Do you offer refunds?",
+        "answer": "Yes, we offer a 7-day money-back guarantee. If you're not satisfied with our Pro service within the first 7 days of your subscription, contact us for a full refund, no questions asked."
       },
       "item5": {
-        "question": "Is there a file size limit for HEIC conversion?",
-        "answer": "Our free plan supports files up to 10MB each with up to 5 conversions per day. Premium plans offer larger file sizes and unlimited conversions for professional users."
+        "question": "What happens if I exceed the free plan limits?",
+        "answer": "If you reach your daily conversion limit on the free plan, you'll need to wait until the next day to convert more files, or upgrade to Pro for unlimited conversions. We'll always notify you when you're approaching your limits."
       },
       "item6": {
-        "question": "Is my data secure during the conversion process?",
-        "answer": "Yes, we take privacy seriously. All uploaded files are processed securely and automatically deleted from our servers after 24 hours. We never store or share your personal images."
+        "question": "Can I upgrade or downgrade my plan anytime?",
+        "answer": "Yes! You can upgrade to Pro anytime to get unlimited conversions immediately. If you want to downgrade, you can cancel your subscription and you'll continue to have Pro access until the end of your current billing period."
       }
     },
     "tip": {
@@ -371,7 +432,6 @@
       "contact": "contact us"
     }
   },
-
   "Playground": {
     "layout": {
       "title": "Free Flux.1 {model} Image Generator: Create Stunning Images in Seconds",
@@ -467,18 +527,18 @@
     }
   },
   "History": {
-    "title": "Generate Image History",
-    "description": "View your recent image generation history.",
+    "title": "Conversion History",
+    "description": "View your recent HEIC to PDF conversion history.",
     "empty": {
-      "title": "No history yet.",
-      "description": "Generate an image to see it here."
+      "title": "No conversions yet.",
+      "description": "Convert a HEIC file to see it here."
     },
     "action": {
-      "generate": "Generate",
-      "copy": "Copy prompt",
-      "copySuccess": "Prompt copied to clipboard.",
-      "download": "Download Image",
-      "downloadSuccess": "Image downloaded.",
+      "generate": "Convert Files",
+      "copy": "Copy filename",
+      "copySuccess": "Filename copied to clipboard.",
+      "download": "Download PDF",
+      "downloadSuccess": "PDF downloaded.",
       "downloadLoading": "Downloading..."
     }
   },
@@ -539,8 +599,8 @@
   },
   "LocaleLayout": {
     "title": "HEIC to PDF Converter Online - Free Fast Conversion",
-    "description": "Professional HEIC to PDF online conversion tool: batch conversion, high-quality preservation, cloud storage integration. Convert Apple HEIC format to universal PDF documents, simple, fast and secure.",
-    "keywords": "HEIC to PDF, HEIC converter, image conversion, Apple photo converter, PDF conversion tool, online converter, batch conversion, image format conversion, free conversion tool"
+    "description": "Convert HEIC to PDF online free. Fast HEIC to PDF converter with batch processing. Transform Apple HEIC images to PDF documents instantly and securely.",
+    "keywords": ""
   },
   "LocaleSwitcher": {
     "label": "Change language",
@@ -556,10 +616,15 @@
     "GiftCode": "Redeem Code",
     "ChargeOrder": "Order History"
   },
+  "Dashboard": {
+    "page": {
+      "title": "Dashboard",
+      "description": "Manage your HEIC to PDF conversions and subscription"
+    }
+  },
   "Navigation": {
     "pricing": "Pricing",
     "convert": "Start Converting",
-
     "title": "HEIC to PDF Converter",
     "blog": "Blog",
     "dashboard": "Dashboard",
@@ -594,5 +659,36 @@
   "BlogPage": {
     "title": "Blog",
     "description": "The latest news and updates from Our"
+  },
+  "HeicConverter": {
+    "title": "HEIC to PDF Online Converter",
+    "subtitle": "Convert your HEIC images to PDF documents quickly, easily and securely",
+    "upload": {
+      "dragActive": "Drop files to start conversion",
+      "dragInactive": "Drag and drop or click to upload HEIC files",
+      "clickToSelect": "Supports batch upload, up to 5 files at once",
+      "supportedFormats": "Supports .heic, .heif formats, max file size 10MB"
+    },
+    "usage": {
+      "dailyUsage": "Daily usage: {current}/{total} conversions",
+      "upgradeButton": "Upgrade to Pro"
+    },
+    "queue": {
+      "title": "Conversion Queue"
+    },
+    "status": {
+      "pending": "Pending",
+      "converting": "Converting",
+      "completed": "Completed",
+      "failed": "Failed",
+      "conversionComplete": "Conversion completed!",
+      "conversionFailed": "Conversion failed, please try again",
+      "networkError": "Network error, please check your connection"
+    },
+    "actions": {
+      "download": "Download PDF",
+      "retry": "Retry",
+      "remove": "Remove"
+    }
   }
 }

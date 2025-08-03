@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { convertApiClient, ConvertApiClient } from '@/lib/convertapi';
-import { UsageLimitManager } from '@/lib/usage-limits';
+import { canUserConvert, incrementUserConversionCount } from '@/lib/subscription';
 import { prisma } from '@/db/prisma';
 
 export async function POST(request: NextRequest) {
@@ -51,29 +51,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 5. 文件大小验证
-    if (!UsageLimitManager.isFileSizeValid(file.size)) {
-      const maxSizeMB = UsageLimitManager.getMaxFileSize() / (1024 * 1024);
+    // 5. 文件大小验证 (10MB limit for free users, 50MB for Pro)
+    const MAX_FILE_SIZE_FREE = 10 * 1024 * 1024; // 10MB
+    const MAX_FILE_SIZE_PRO = 50 * 1024 * 1024;  // 50MB
+    
+    // Check user conversion permissions first to determine file size limit
+    const conversionCheck = await canUserConvert(userId);
+    const maxFileSize = conversionCheck.isPro ? MAX_FILE_SIZE_PRO : MAX_FILE_SIZE_FREE;
+    
+    if (file.size > maxFileSize) {
+      const maxSizeMB = maxFileSize / (1024 * 1024);
       return NextResponse.json(
         { 
           error: `File size exceeds limit. Maximum allowed size is ${maxSizeMB}MB.`,
           maxSize: maxSizeMB,
-          currentSize: Math.round(file.size / (1024 * 1024) * 100) / 100
+          currentSize: Math.round(file.size / (1024 * 1024) * 100) / 100,
+          isPro: conversionCheck.isPro
         },
         { status: 400 }
       );
     }
 
     // 6. 检查用户转换限制
-    const usageCheck = await UsageLimitManager.canUserConvert(userId);
-    if (!usageCheck.canConvert) {
+    if (!conversionCheck.canConvert) {
       return NextResponse.json(
         {
-          error: 'Daily conversion limit exceeded.',
+          error: conversionCheck.reason || 'Conversion not allowed',
           limit: {
-            remainingConversions: usageCheck.remainingConversions,
-            isPremium: usageCheck.isPremium,
-            resetTime: usageCheck.resetTime
+            dailyCount: conversionCheck.dailyCount,
+            isPro: conversionCheck.isPro,
+            maxDaily: 10
           }
         },
         { status: 429 }
@@ -110,8 +117,10 @@ export async function POST(request: NextRequest) {
         }
       });
 
-      // 10. 记录用户使用次数
-      await UsageLimitManager.recordConversion(userId);
+      // 10. 记录用户使用次数 (only for free users)
+      if (!conversionCheck.isPro) {
+        await incrementUserConversionCount(userId);
+      }
 
       // 11. 返回成功结果
       return NextResponse.json({
@@ -125,8 +134,8 @@ export async function POST(request: NextRequest) {
           fileSize: convertResult.Files[0]?.FileSize
         },
         usage: {
-          remainingConversions: usageCheck.remainingConversions - 1,
-          isPremium: usageCheck.isPremium
+          dailyCount: conversionCheck.isPro ? 0 : conversionCheck.dailyCount + 1,
+          isPro: conversionCheck.isPro
         }
       });
 
@@ -204,7 +213,19 @@ export async function GET(request: NextRequest) {
     ]);
 
     // 获取用户使用情况
-    const usageInfo = await UsageLimitManager.canUserConvert(userId);
+    let usageInfo;
+    try {
+      usageInfo = await canUserConvert(userId);
+    } catch (usageError) {
+      console.error('Error getting user usage info:', usageError);
+      // 提供默认值，避免阻塞历史记录查询
+      usageInfo = {
+        canConvert: true,
+        dailyCount: 0,
+        isPro: false,
+        maxDaily: 10
+      };
+    }
 
     return NextResponse.json({
       conversions,
@@ -214,7 +235,12 @@ export async function GET(request: NextRequest) {
         total,
         totalPages: Math.ceil(total / limit)
       },
-      usage: usageInfo
+      usage: {
+        canConvert: usageInfo.canConvert,
+        dailyCount: usageInfo.dailyCount,
+        isPro: usageInfo.isPro,
+        maxDaily: 10
+      }
     });
 
   } catch (error) {
