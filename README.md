@@ -115,10 +115,6 @@ pnpm run dev
 
 - [Vercel Analytics](https://vercel.com/analytics) – Track unique visitors, pageviews, and more in a privacy-friendly way
 
-## Author
-
-Created by [@koyaguo](https://twitter.com/koyaguo) in 2023, released under the [MIT license](https://github.com/shadcn/taxonomy/blob/main/LICENSE.md).
-
 ## Credits
 
 This project was inspired by shadcn's [Taxonomy](https://github.com/shadcn-ui/taxonomy), Steven Tey’s [Precedent](https://github.com/steven-tey/precedent), and Antonio Erdeljac's [Next 13 AI SaaS](https://github.com/AntonioErdeljac/next13-ai-saas).
@@ -128,15 +124,8 @@ This project was inspired by shadcn's [Taxonomy](https://github.com/shadcn-ui/ta
 - Antonio Erdeljac ([@YTCodeAntonio](https://twitter.com/AntonioErdeljac))
 - Next SaaS Stripe Starter([@miickasmt](https://github.com/mickasmt/next-saas-stripe-starter))
 
-## Buy me coffee
 
-<img src="https://meme-static.douni.one/paycode.png" alt="Buy me coffee" width="400">
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=virgoone/next-money&type=Date)](https://star-history.com/#virgoone/next-money&Date)
-## F
-eatures
+## Features
 
 ### Core Functionality
 - **HEIC to PDF Conversion**: Convert Apple's HEIC format to universal PDF
