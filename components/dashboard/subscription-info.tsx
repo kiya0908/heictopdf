@@ -41,6 +41,7 @@ export default function SubscriptionInfo() {
       });
       if (!res.ok) {
         if (res.status === 404) return null; // No subscription
+        if (res.status === 503) return { disabled: true }; // Payment disabled
         throw new Error("Failed to fetch subscription");
       }
       return res.json();
@@ -102,6 +103,16 @@ export default function SubscriptionInfo() {
         <CardContent>
           {subscriptionQuery.isLoading ? (
             <Loading />
+          ) : subscription?.disabled ? (
+            <div className="text-center py-6">
+              <Badge variant="secondary" className="mb-2">Payment System Updating</Badge>
+              <p className="text-muted-foreground mb-4">
+                We are perfecting our payment system. Pro features will be available soon!
+              </p>
+              <Button disabled>
+                Coming Soon
+              </Button>
+            </div>
           ) : subscription ? (
             <div className="space-y-4">
               <div className="flex items-center justify-between">

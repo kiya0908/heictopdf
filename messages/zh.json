@@ -318,6 +318,12 @@
         "cta": "升级到专业版"
       }
     },
+    "paymentDisabled": {
+      "title": "支付功能即将开放",
+      "description": "我们正在完善支付系统，敬请期待",
+      "cta": "功能即将开放",
+      "notify": "获取开放通知"
+    },
     "action": {
       "signin": "登录",
       "buy": "开始使用",

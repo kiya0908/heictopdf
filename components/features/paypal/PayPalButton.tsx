@@ -30,6 +30,16 @@ export function PayPalButton({
 
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
+  // TODO: 临时禁用PayPal支付功能 - 需要商业账户
+  // 当获得PayPal商业账户后，删除下面的return语句即可恢复功能
+  return (
+    <Button disabled className={className}>
+      {btnText}
+    </Button>
+  );
+
+  /* 
+  // 原PayPal功能代码 - 保留以便后续恢复
   if (!clientId) {
     console.error("PayPal Client ID not configured");
     return (
@@ -38,6 +48,7 @@ export function PayPalButton({
       </Button>
     );
   }
+  */
 
   const handleSubscribeClick = () => {
     if (!showPayPal) {

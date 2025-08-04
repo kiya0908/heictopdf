@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { UserArrowLeftIcon } from "@/assets";
 import { Button } from "@/components/ui/button";
 import HeicUploader from "@/components/upload/heic-uploader";
-import ConversionProgress, { ConversionResult } from "@/components/conversion/conversion-progress";
+import BatchConversionProgress, { ConversionResult } from "@/components/conversion/conversion-progress";
 
 export default function HeroUploadSection() {
   const t = useTranslations("IndexPage");
@@ -27,14 +27,14 @@ export default function HeroUploadSection() {
     }
   };
 
-  const handleConversionComplete = (result: ConversionResult) => {
-    setCompletedConversions(prev => [...prev, result]);
-    setConvertingFiles(prev => prev.slice(1)); // 移除已完成的文件
+  const handleBatchConversionComplete = (results: ConversionResult[]) => {
+    setCompletedConversions(results);
+    setConvertingFiles([]); // 清空转换中的文件
   };
 
-  const handleConversionError = (error: string) => {
-    console.error('Conversion error:', error);
-    setConvertingFiles(prev => prev.slice(1)); // 移除失败的文件
+  const handleBatchConversionError = (error: string) => {
+    console.error('Batch conversion error:', error);
+    setConvertingFiles([]); // 清空转换中的文件
   };
 
   return (
@@ -84,50 +84,33 @@ export default function HeroUploadSection() {
           </div>
         )}
 
-        {/* 转换进度显示 */}
+        {/* 批量转换进度显示 */}
         {convertingFiles.length > 0 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center">转换进度</h3>
-            <div className="grid gap-4 md:grid-cols-2">
-              {convertingFiles.map((file, index) => (
-                <ConversionProgress
-                  key={`${file.name}-${index}`}
-                  file={file}
-                  onConversionComplete={handleConversionComplete}
-                  onConversionError={handleConversionError}
-                />
-              ))}
-            </div>
+            <h3 className="text-lg font-semibold text-center">批量转换进度</h3>
+            <BatchConversionProgress
+              files={convertingFiles}
+              onConversionComplete={handleBatchConversionComplete}
+              onConversionError={handleBatchConversionError}
+            />
           </div>
         )}
 
-        {/* 完成的转换结果 */}
-        {completedConversions.length > 0 && (
+        {/* 完成的转换结果展示 */}
+        {completedConversions.length > 0 && convertingFiles.length === 0 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center">转换完成</h3>
-            <div className="grid gap-4 md:grid-cols-2">
-              {completedConversions.map((result, index) => (
-                <div key={result.id} className="p-4 border rounded-lg bg-green-50">
-                  <p className="font-medium">{result.originalFileName}</p>
-                  <p className="text-sm text-gray-600">→ {result.convertedFileName}</p>
-                  {result.downloadUrl && (
-                    <Button
-                      size="sm"
-                      className="mt-2"
-                      onClick={() => {
-                        const link = document.createElement('a');
-                        link.href = result.downloadUrl!;
-                        link.download = result.convertedFileName || 'converted.pdf';
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                      }}
-                    >
-                      下载 PDF
-                    </Button>
-                  )}
-                </div>
-              ))}
+            <h3 className="text-lg font-semibold text-center">
+              转换完成 ({completedConversions.filter(r => r.status === 'completed').length}/{completedConversions.length})
+            </h3>
+            <div className="text-center">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setCompletedConversions([]);
+                }}
+              >
+                开始新的转换
+              </Button>
             </div>
           </div>
         )}

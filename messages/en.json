@@ -318,6 +318,12 @@
         "cta": "Upgrade to Pro"
       }
     },
+    "paymentDisabled": {
+      "title": "Payment Feature Coming Soon",
+      "description": "We are perfecting our payment system, stay tuned",
+      "cta": "Coming Soon",
+      "notify": "Get Notified"
+    },
     "action": {
       "signin": "Sign in",
       "buy": "Get Started",

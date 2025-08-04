@@ -1,76 +1,9 @@
-import { prisma } from "@/db/prisma";
+const { PrismaClient } = require('@prisma/client');
 
-/**
- * Check if a user has an active Pro subscription
- */
-export async function isUserPro(userId: string): Promise<boolean> {
-  if (!userId) return false;
+const prisma = new PrismaClient();
 
-  // TODO: 临时禁用Pro用户功能 - 所有用户都是免费用户
-  // 当恢复PayPal支付后，删除下面的return语句即可恢复Pro用户检查
-  return false;
-
-  /* 
-  // 原Pro用户检查代码 - 保留以便后续恢复
-  try {
-    const userPayment = await prisma.userPaymentInfo.findUnique({
-      where: { userId },
-      select: {
-        subscriptionStatus: true,
-        subscriptionExpiresAt: true,
-      },
-    });
-
-    if (!userPayment) return false;
-
-    // Check if subscription is active
-    if (userPayment.subscriptionStatus !== "active") return false;
-
-    // Check if subscription hasn't expired (if expiration date is set)
-    if (userPayment.subscriptionExpiresAt) {
-      const now = new Date();
-      if (userPayment.subscriptionExpiresAt < now) return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error("Error checking user Pro status:", error);
-    return false;
-  }
-  */
-}
-
-/**
- * Get user subscription details
- */
-export async function getUserSubscription(userId: string) {
-  if (!userId) return null;
-
-  try {
-    const userPayment = await prisma.userPaymentInfo.findUnique({
-      where: { userId },
-      select: {
-        subscriptionProvider: true,
-        paypalSubscriptionId: true,
-        subscriptionStatus: true,
-        subscriptionPlanId: true,
-        subscriptionExpiresAt: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
-
-    return userPayment;
-  } catch (error) {
-    console.error("Error fetching user subscription:", error);
-    return null;
-  }
-}
-
-/**
- * Check user's daily conversion usage
- */
-export async function getUserConversionUsage(userId: string) {
+// 最终修复版本的函数
+async function getUserConversionUsage(userId) {
   if (!userId) return { dailyCount: 0, isLimitReached: false };
 
   try {
@@ -136,10 +69,7 @@ export async function getUserConversionUsage(userId: string) {
   }
 }
 
-/**
- * Increment user's daily conversion count
- */
-export async function incrementUserConversionCount(userId: string) {
+async function incrementUserConversionCount(userId) {
   if (!userId) return;
 
   try {
@@ -164,15 +94,7 @@ export async function incrementUserConversionCount(userId: string) {
   }
 }
 
-/**
- * Check if user can perform conversion (considering Pro status and daily limits)
- */
-export async function canUserConvert(userId: string): Promise<{
-  canConvert: boolean;
-  reason?: string;
-  isPro: boolean;
-  dailyCount: number;
-}> {
+async function canUserConvert(userId) {
   if (!userId) {
     return {
       canConvert: false,
@@ -182,13 +104,22 @@ export async function canUserConvert(userId: string): Promise<{
     };
   }
 
-  const isPro = await isUserPro(userId);
+  // 检查Pro用户状态
+  const userPayment = await prisma.userPaymentInfo.findUnique({
+    where: { userId },
+    select: {
+      subscriptionStatus: true,
+      subscriptionExpiresAt: true,
+    },
+  });
+
+  const isPro = userPayment && userPayment.subscriptionStatus === "active";
   
   if (isPro) {
     return {
       canConvert: true,
       isPro: true,
-      dailyCount: 0, // Pro users don't have daily limits
+      dailyCount: 0,
     };
   }
 
@@ -202,3 +133,79 @@ export async function canUserConvert(userId: string): Promise<{
     dailyCount,
   };
 }
+
+async function testFinalConversionLimits() {
+  console.log('🎯 最终转换限制功能测试...\n');
+
+  const testUserId = 'final_test_' + Date.now();
+  console.log(`📝 测试用户: ${testUserId}`);
+  
+  // 显示当前UTC时间用于调试
+  const now = new Date();
+  const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  console.log(`🕐 当前UTC日期: ${todayUTC.toISOString()}`);
+
+  try {
+    // 测试转换限制（应该在第11次被限制）
+    for (let i = 1; i <= 12; i++) {
+      console.log(`\n=== 第${i}次转换测试 ===`);
+      
+      // 检查是否可以转换
+      const canConvert = await canUserConvert(testUserId);
+      console.log(`🔍 转换检查: 允许=${canConvert.canConvert}, 当前计数=${canConvert.dailyCount}, Pro=${canConvert.isPro}`);
+      
+      if (canConvert.reason) {
+        console.log(`⛔ 限制原因: ${canConvert.reason}`);
+      }
+      
+      if (!canConvert.canConvert) {
+        console.log(`❌ 第${i}次转换被成功限制！`);
+        break;
+      }
+      
+      // 执行转换并增加计数
+      console.log(`✅ 执行转换并增加计数...`);
+      await incrementUserConversionCount(testUserId);
+      
+      // 验证计数更新
+      const afterUsage = await getUserConversionUsage(testUserId);
+      console.log(`📊 转换后: 当前计数=${afterUsage.dailyCount}, 达到限制=${afterUsage.isLimitReached}`);
+      
+      if (i === 10) {
+        console.log(`🚨 第10次转换完成，下次应该被限制！`);
+      }
+    }
+
+    // 测试Pro用户绕过限制
+    console.log('\n=== Pro用户测试 ===');
+    await prisma.userPaymentInfo.create({
+      data: {
+        userId: testUserId,
+        subscriptionStatus: 'active',
+        subscriptionProvider: 'paypal',
+        paypalSubscriptionId: 'final_test_pro',
+        subscriptionExpiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+      }
+    });
+    
+    const proCheck = await canUserConvert(testUserId);
+    console.log(`👑 Pro用户检查: 允许=${proCheck.canConvert}, Pro=${proCheck.isPro}, 计数=${proCheck.dailyCount}`);
+
+    console.log('\n🎉 所有测试完成！');
+
+  } catch (error) {
+    console.error('❌ 测试失败:', error);
+  } finally {
+    // 清理测试数据
+    await prisma.userConversionUsage.deleteMany({
+      where: { userId: testUserId }
+    });
+    await prisma.userPaymentInfo.deleteMany({
+      where: { userId: testUserId }
+    });
+    await prisma.$disconnect();
+    console.log('\n🧹 测试数据已清理');
+  }
+}
+
+testFinalConversionLimits();

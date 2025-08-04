@@ -78,7 +78,8 @@ const PricingCard = ({
 
   const getCTA = () => {
     if (isFree) return t("plans.free.cta");
-    return t("plans.pro.cta");
+    // TODO: 临时使用支付暂停的翻译键，恢复PayPal后改回 t("plans.pro.cta")
+    return t("paymentDisabled.cta");
   };
 
   return (
@@ -155,6 +156,9 @@ const PricingCard = ({
         
         <SignedIn>
           {isProTier && (
+            // TODO: 临时禁用PayPal按钮，显示支付暂停提示
+            // 恢复PayPal后取消注释下面的PayPalButton组件
+            /*
             <PayPalButton 
               planId={isYearly ? 
                 process.env.NEXT_PUBLIC_PAYPAL_PRO_YEARLY_USD_PLAN_ID || "" : 
@@ -163,6 +167,15 @@ const PricingCard = ({
               customId={userId || ""}
               btnText={getCTA()}
             />
+            */
+            <div className="text-center space-y-2">
+              <Button disabled className="w-full">
+                {getCTA()}
+              </Button>
+              <p className="text-xs text-muted-foreground">
+                {t("paymentDisabled.description")}
+              </p>
+            </div>
           )}
           {isFree && (
             <Button variant="outline" className="w-full">

@@ -65,9 +65,23 @@ function verifyPayPalSignature(
 }
 
 export async function POST(req: NextRequest) {
+  // TODO: 临时禁用PayPal webhook - 需要商业账户
+  // 当获得PayPal商业账户后，删除下面的return语句即可恢复功能
+  return NextResponse.json(
+    { 
+      error: "Payment feature is temporarily disabled", 
+      message: "PayPal webhook is temporarily disabled",
+      code: "PAYMENT_DISABLED"
+    }, 
+    { status: 503 }
+  );
+
+  /* 
+  // 原webhook处理代码 - 保留以便后续恢复
   try {
     const body = await req.text();
     const headersList = headers();
+  */
     
     // Get PayPal webhook ID from environment
     const webhookId = process.env.PAYPAL_WEBHOOK_ID;

@@ -129,6 +129,19 @@ async function cancelPayPalSubscription(subscriptionId: string, reason: string =
 
 // POST: Create new subscription
 export async function POST(req: NextRequest) {
+  // TODO: 临时禁用PayPal订阅功能 - 需要商业账户
+  // 当获得PayPal商业账户后，删除下面的return语句即可恢复功能
+  return NextResponse.json(
+    { 
+      error: "Payment feature is temporarily disabled", 
+      message: "We are perfecting our payment system. Please stay tuned for updates.",
+      code: "PAYMENT_DISABLED"
+    }, 
+    { status: 503 }
+  );
+
+  /* 
+  // 原订阅创建代码 - 保留以便后续恢复
   try {
     const { userId } = auth();
     const user = await currentUser();
@@ -136,6 +149,7 @@ export async function POST(req: NextRequest) {
     if (!userId || !user) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
+  */
 
     const body = await req.json();
     const { planId, customId } = CreateSubscriptionSchema.parse(body);
@@ -188,12 +202,26 @@ export async function POST(req: NextRequest) {
 
 // GET: Get subscription details
 export async function GET(req: NextRequest) {
+  // TODO: 临时禁用PayPal订阅功能 - 需要商业账户
+  // 当获得PayPal商业账户后，删除下面的return语句即可恢复功能
+  return NextResponse.json(
+    { 
+      error: "Payment feature is temporarily disabled", 
+      message: "We are perfecting our payment system. Please stay tuned for updates.",
+      code: "PAYMENT_DISABLED"
+    }, 
+    { status: 503 }
+  );
+
+  /* 
+  // 原订阅查询代码 - 保留以便后续恢复
   try {
     const { userId } = auth();
 
     if (!userId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
+  */
 
     const { searchParams } = new URL(req.url);
     const subscriptionId = searchParams.get("subscriptionId");
@@ -227,12 +255,26 @@ export async function GET(req: NextRequest) {
 
 // DELETE: Cancel subscription
 export async function DELETE(req: NextRequest) {
+  // TODO: 临时禁用PayPal订阅功能 - 需要商业账户
+  // 当获得PayPal商业账户后，删除下面的return语句即可恢复功能
+  return NextResponse.json(
+    { 
+      error: "Payment feature is temporarily disabled", 
+      message: "We are perfecting our payment system. Please stay tuned for updates.",
+      code: "PAYMENT_DISABLED"
+    }, 
+    { status: 503 }
+  );
+
+  /* 
+  // 原订阅取消代码 - 保留以便后续恢复
   try {
     const { userId } = auth();
 
     if (!userId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
+  */
 
     const { searchParams } = new URL(req.url);
     const subscriptionId = searchParams.get("subscriptionId");
