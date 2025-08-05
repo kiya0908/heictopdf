@@ -1,0 +1,5 @@
+name = "heictopdf"
+compatibility_date = "2024-08-05"
+
+[env.production.vars]
+NODE_VERSION = "20.18.0"
