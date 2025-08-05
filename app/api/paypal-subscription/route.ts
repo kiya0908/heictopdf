@@ -149,7 +149,6 @@ export async function POST(req: NextRequest) {
     if (!userId || !user) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
-  */
 
     const body = await req.json();
     const { planId, customId } = CreateSubscriptionSchema.parse(body);
@@ -198,6 +197,7 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+  */
 }
 
 // GET: Get subscription details
@@ -221,7 +221,6 @@ export async function GET(req: NextRequest) {
     if (!userId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
-  */
 
     const { searchParams } = new URL(req.url);
     const subscriptionId = searchParams.get("subscriptionId");
@@ -251,6 +250,7 @@ export async function GET(req: NextRequest) {
       { status: 500 }
     );
   }
+  */
 }
 
 // DELETE: Cancel subscription
@@ -274,7 +274,6 @@ export async function DELETE(req: NextRequest) {
     if (!userId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
-  */
 
     const { searchParams } = new URL(req.url);
     const subscriptionId = searchParams.get("subscriptionId");
@@ -319,4 +318,5 @@ export async function DELETE(req: NextRequest) {
       { status: 500 }
     );
   }
+  */
 }

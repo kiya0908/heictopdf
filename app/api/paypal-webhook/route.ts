@@ -81,7 +81,6 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.text();
     const headersList = headers();
-  */
     
     // Get PayPal webhook ID from environment
     const webhookId = process.env.PAYPAL_WEBHOOK_ID;
@@ -121,6 +120,7 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+  */
 }
 
 async function handleWebhookEvent(event: PayPalWebhookEvent) {
