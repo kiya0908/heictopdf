@@ -1,0 +1,11 @@
+name = "heictopdf"
+compatibility_date = "2024-08-05"
+
+[build]
+command = "npm run build"
+
+[build.environment_variables]
+NODE_VERSION = "20.18.0"
+
+[[pages_build_output_dir]]
+value = ".next"
