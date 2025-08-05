@@ -2,3 +2,17 @@ name = "heictopdf"
 compatibility_date = "2025-08-05"
 
 pages_build_output_dir = ".next"
+
+
+
+# [新增] 将所有环境变量定义在这里
+[vars]
+NEXT_PUBLIC_APP_URL = "https://heic-to-pdf.pro" # 换成你的域名
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = pk_test_YW1hemluZy1hbnRlYXRlci04Mi5jbGVyay5hY2NvdW50cy5kZXYk # 这个是公开的，可以放在这里
+
+# 对于敏感信息，只写变量名，值会自动从UI中读取
+[secrets]
+DATABASE_URL
+HASHID_SALT
+CLERK_SECRET_KEY
+CONVERTAPI_SECRET
