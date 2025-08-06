@@ -3,8 +3,8 @@
  * This is especially useful for Docker builds.
  */
 import { setupDevPlatform } from "@cloudflare/next-on-pages/next-dev";
-// import { withSentryConfig } from "@sentry/nextjs";  // 临时禁用
-// import { withContentlayer } from "next-contentlayer2";  // 临时禁用
+import { withSentryConfig } from "@sentry/nextjs";
+import { withContentlayer } from "next-contentlayer2";
 import withNextIntl from "next-intl/plugin";
 
 import("./env.mjs");
@@ -34,7 +34,7 @@ const nextConfig = {
   experimental: {
     taint: true,
   },
-  
+
   // Cloudflare 使用 redirects，其他环境使用 rewrites
   ...(isCloudflareEnv ? {
     async redirects() {
@@ -74,7 +74,7 @@ const nextConfig = {
       ];
     },
   }),
-  
+
   webpack: (config) => {
     // Handle file types for HEIC processing
     config.module.rules.push({
@@ -96,4 +96,26 @@ if (process.env.NODE_ENV === "development") {
   await setupDevPlatform();
 }
 
-export default withNextIntl()(nextConfig);
+// 应用所有配置包装器
+let config = withContentlayer(nextConfig);
+config = withNextIntl()(config);
+
+// 只在非 Cloudflare 环境中启用 Sentry
+if (!isCloudflareEnv) {
+  config = withSentryConfig(config, {
+    // Sentry 配置选项
+    silent: true,
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+  }, {
+    // Sentry webpack 插件选项
+    widenClientFileUpload: true,
+    transpileClientSDK: true,
+    tunnelRoute: "/monitoring",
+    hideSourceMaps: true,
+    disableLogger: true,
+    automaticVercelMonitors: true,
+  });
+}
+
+export default config;

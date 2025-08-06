@@ -24,15 +24,24 @@ try {
   console.log('\n2️⃣ 生成 Prisma 客户端...');
   execSync('pnpm run db:generate', { stdio: 'inherit' });
   
-  // 3. Next.js 构建
-  console.log('\n3️⃣ 构建 Next.js 应用...');
+  // 3. 生成 Contentlayer
+  console.log('\n3️⃣ 生成 Contentlayer...');
+  try {
+    execSync('pnpm exec contentlayer2 build', { stdio: 'inherit' });
+  } catch (error) {
+    console.log('⚠️ Contentlayer 构建失败，尝试使用 npx...');
+    execSync('npx contentlayer2 build', { stdio: 'inherit' });
+  }
+  
+  // 4. Next.js 构建
+  console.log('\n4️⃣ 构建 Next.js 应用...');
   execSync('pnpm run build', { stdio: 'inherit' });
   
-  // 4. Cloudflare Pages 适配
-  console.log('\n4️⃣ 适配 Cloudflare Pages...');
+  // 5. Cloudflare Pages 适配
+  console.log('\n5️⃣ 适配 Cloudflare Pages...');
   execSync('pnpm run build:cloudflare', { stdio: 'inherit' });
   
-  // 5. 检查构建输出
+  // 6. 检查构建输出
   const outputDir = '.vercel/output/static';
   if (!fs.existsSync(outputDir)) {
     throw new Error(`构建输出目录不存在: ${outputDir}`);
