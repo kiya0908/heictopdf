@@ -107,14 +107,14 @@ function validateMiddleware() {
   // Check 5: Environment variables
   let clerkKeysFound = false;
   
-  // Check if we're in Cloudflare Pages build environment
-  const isCloudflarePages = process.env.CF_PAGES === '1' || process.env.CLOUDFLARE_ENV;
+  // Check if we're in Vercel build environment
+  const isVercelBuild = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
   
-  if (isCloudflarePages) {
-    log(COLORS.blue, '🔧 Cloudflare Pages environment detected');
+  if (isVercelBuild) {
+    log(COLORS.blue, '🔧 Vercel/Production environment detected');
     log(COLORS.yellow, '⚠️  Skipping environment variable validation (will be available at runtime)');
-    log(COLORS.yellow, '   Make sure CLERK_SECRET_KEY is configured in Cloudflare Pages dashboard');
-    clerkKeysFound = true; // Skip validation in CF Pages build
+    log(COLORS.yellow, '   Make sure CLERK_SECRET_KEY is configured in environment variables');
+    clerkKeysFound = true; // Skip validation in production build
   } else {
     // First check process.env (for local development and other environments)
     if (process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY) {

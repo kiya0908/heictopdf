@@ -2,8 +2,8 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 export const env = createEnv({
-  // Skip validation during Cloudflare Pages build
-  skipValidation: process.env.CF_PAGES === '1' || process.env.CLOUDFLARE_ENV,
+  // Skip validation during Vercel build or production
+  skipValidation: process.env.VERCEL === '1' || process.env.NODE_ENV === 'production',
 
   server: {
     // This is optional because it's only used in development.

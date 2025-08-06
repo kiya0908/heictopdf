@@ -9,15 +9,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:cf": "prisma generate && next build",
-    "build:cloudflare": "@cloudflare/next-on-pages",
+
     "turbo": "next dev --turbo",
     "start": "next start",
-    "preview": "wrangler pages dev .vercel/output/static",
-    "deploy": "wrangler pages deploy .vercel/output/static",
-    "cf:build": "node scripts/cloudflare-build.js",
-    "cf:preview": "npm run cf:build && npm run preview",
-    "cf:deploy": "npm run cf:build && npm run deploy",
+
     "lint": "next lint",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",

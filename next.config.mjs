@@ -2,21 +2,15 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
  */
-import { setupDevPlatform } from "@cloudflare/next-on-pages/next-dev";
 import { withSentryConfig } from "@sentry/nextjs";
 import { withContentlayer } from "next-contentlayer2";
 import withNextIntl from "next-intl/plugin";
 
 import("./env.mjs");
 
-// 检查是否是 Cloudflare 构建环境
-const isCloudflareEnv = process.env.CF_PAGES || process.env.CLOUDFLARE_ENV;
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // Cloudflare 环境下使用 unoptimized
-    ...(isCloudflareEnv ? { unoptimized: true } : {}),
     remotePatterns: [
       {
         protocol: "https",
@@ -35,45 +29,22 @@ const nextConfig = {
     taint: true,
   },
 
-  // Cloudflare 使用 redirects，其他环境使用 rewrites
-  ...(isCloudflareEnv ? {
-    async redirects() {
-      return [
-        {
-          source: "/feed",
-          destination: "/feed.xml",
-          permanent: true,
-        },
-        {
-          source: "/rss",
-          destination: "/feed.xml",
-          permanent: true,
-        },
-        {
-          source: "/rss.xml",
-          destination: "/feed.xml",
-          permanent: true,
-        },
-      ];
-    },
-  } : {
-    rewrites() {
-      return [
-        {
-          source: "/feed",
-          destination: "/feed.xml",
-        },
-        {
-          source: "/rss",
-          destination: "/feed.xml",
-        },
-        {
-          source: "/rss.xml",
-          destination: "/feed.xml",
-        },
-      ];
-    },
-  }),
+  async rewrites() {
+    return [
+      {
+        source: "/feed",
+        destination: "/feed.xml",
+      },
+      {
+        source: "/rss",
+        destination: "/feed.xml",
+      },
+      {
+        source: "/rss.xml",
+        destination: "/feed.xml",
+      },
+    ];
+  },
 
   webpack: (config) => {
     // Handle file types for HEIC processing
@@ -92,16 +63,12 @@ const nextConfig = {
   },
 };
 
-if (process.env.NODE_ENV === "development") {
-  await setupDevPlatform();
-}
-
 // 应用所有配置包装器
 let config = withContentlayer(nextConfig);
 config = withNextIntl()(config);
 
-// 只在非 Cloudflare 环境中启用 Sentry
-if (!isCloudflareEnv) {
+// 启用 Sentry（在生产环境中）
+if (process.env.NODE_ENV === 'production') {
   config = withSentryConfig(config, {
     // Sentry 配置选项
     silent: true,
