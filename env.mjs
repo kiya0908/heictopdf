@@ -2,6 +2,9 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 export const env = createEnv({
+  // Skip validation during Cloudflare Pages build
+  skipValidation: process.env.CF_PAGES === '1' || process.env.CLOUDFLARE_ENV,
+
   server: {
     // This is optional because it's only used in development.
     // See https://next-auth.js.org/deployment.
@@ -73,7 +76,7 @@ export const env = createEnv({
     //SITE_NOTIFICATION_EMAIL_TO: process.env.SITE_NOTIFICATION_EMAIL_TO,
     //WEBHOOK_SECRET: process.env.WEBHOOK_SECRET,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     CONVERTAPI_SECRET: process.env.CONVERTAPI_SECRET,
     //S3_ENDPOINT: process.env.S3_ENDPOINT,
