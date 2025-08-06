@@ -36,14 +36,13 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         >
           {t("footer.privacy")}
         </Link>
-        <Link
+        <a
           href="mailto:support@heictopdf.com"
           className="underline-offset-4 hover:underline"
-          prefetch={false}
           title={t("footer.contact")}
         >
           {t("footer.contact")}
-        </Link>
+        </a>
         <ModeToggle />
       </div>
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-between gap-4 text-sm md:flex-row">
@@ -52,15 +51,15 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           <span className="font-medium">HEIC to PDF Converter</span>
         </div>
         <div className="flex flex-col items-center gap-4 md:flex-row">
-          <Link
+          <a
             href="https://github.com"
             title="GitHub"
             className="underline-offset-4 hover:underline"
-            prefetch={false}
             target="_blank"
+            rel="noopener noreferrer"
           >
             GitHub
-          </Link>
+          </a>
         </div>
       </div>
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-center gap-4 text-sm md:flex-row">

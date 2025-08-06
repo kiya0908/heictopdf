@@ -141,7 +141,7 @@ const PricingCard = ({
           {/* Show limitations for free tier */}
           {isFree && (
             <>
-              {Array.isArray(t("plans.free.limitations")) && (t("plans.free.limitations") as string[]).map((limitation: string) => (
+              {Array.isArray(t("plans.free.limitations")) && (t("plans.free.limitations") as unknown as string[]).map((limitation: string) => (
                 <li
                   className="flex items-start text-muted-foreground"
                   key={limitation}
@@ -232,14 +232,14 @@ export function FreeCard() {
 
       <div className="flex h-full flex-col justify-between gap-16 p-6">
         <ul className="space-y-2 text-left text-sm font-medium leading-normal">
-          {Array.isArray(t("plans.free.features")) && (t("plans.free.features") as string[]).map((feature: string) => (
+          {Array.isArray(t("plans.free.features")) && (t("plans.free.features") as unknown as string[]).map((feature: string) => (
             <li className="flex items-start gap-x-3" key={feature}>
               <Icons.check className="size-5 shrink-0 text-purple-500" />
               <p>{feature}</p>
             </li>
           ))}
 
-          {Array.isArray(t("plans.free.limitations")) && (t("plans.free.limitations") as string[]).map((limitation: string) => (
+          {Array.isArray(t("plans.free.limitations")) && (t("plans.free.limitations") as unknown as string[]).map((limitation: string) => (
             <li
               className="flex items-start text-muted-foreground"
               key={limitation}

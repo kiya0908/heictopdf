@@ -53,10 +53,8 @@ export function UpdateDialog(props: { detail: ChargeProductSelectDto }) {
     formField.form.setFieldsValue({
       ...detail,
       currency: detail?.currency as Currency,
-      tag: (detail?.tag || []) as string[],
-      message: detail?.message || "",
+      // 移除不存在的字段：tag, message, state
       locale: detail?.locale as Locale,
-      state: (detail?.state || "enable") as "enable" | "disabled",
     });
   }, [detail, open]);
 

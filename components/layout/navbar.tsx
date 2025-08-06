@@ -73,21 +73,32 @@ export function NavBar({ scroll = false }: NavBarProps) {
           {links && links.length > 0 ? (
             <nav className="hidden gap-6 md:flex">
               {links.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.disabled ? "#" : item.href}
-                  prefetch={true}
-                  className={cn(
-                    "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                    item.href.startsWith(`/${selectedLayout}`) ||
-                      (item.href === "/blog" && blog)
-                      ? "text-foreground"
-                      : "text-foreground/60",
-                    item.disabled && "cursor-not-allowed opacity-80",
-                  )}
-                >
-                  {t(item.title)}
-                </Link>
+                item.disabled ? (
+                  <span
+                    key={index}
+                    className={cn(
+                      "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                      "cursor-not-allowed opacity-80 text-foreground/60"
+                    )}
+                  >
+                    {t(item.title)}
+                  </span>
+                ) : (
+                  <Link
+                    key={index}
+                    href={item.href as any}
+                    prefetch={true}
+                    className={cn(
+                      "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                      item.href.startsWith(`/${selectedLayout}`) ||
+                        (item.href === "/blog" && blog)
+                        ? "text-foreground"
+                        : "text-foreground/60"
+                    )}
+                  >
+                    {t(item.title)}
+                  </Link>
+                )
               ))}
             </nav>
           ) : null}

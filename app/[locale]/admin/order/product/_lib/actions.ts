@@ -2,41 +2,33 @@
 
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 
-import { omitBy } from "lodash-es";
-
 import { ChargeProductHashids } from "@/db/dto/charge-product.dto";
 import { prisma } from "@/db/prisma";
 import { getErrorMessage } from "@/lib/handle-error";
 
 import type { CreateSchema, UpdateSchema } from "./validations";
 
+// 根据实际的 Prisma schema 修复字段映射
 export async function createAction(input: CreateSchema) {
   noStore();
   try {
     const {
       title,
       locale,
-      credit,
       amount,
       currency,
-      tag = [],
-      originalAmount,
-      message = "",
-      state,
+      // 忽略不存在的字段：credit, originalAmount, tag, message, state
     } = input;
 
     await Promise.all([
       await prisma.chargeProduct.create({
         data: {
-          title,
+          name: title, // 映射 title -> name
           locale,
-          credit,
           amount,
           currency,
-          originalAmount,
-          tag,
-          message,
-          state,
+          // 只保留数据库中存在的字段
+          description: `Product created`, // 可选字段
         },
       }),
     ]);
@@ -62,28 +54,20 @@ export async function updateAction(input: UpdateSchema & { id: string }) {
     const {
       title,
       locale,
-      credit,
       amount,
       currency,
-      originalAmount,
-      tag,
-      message,
-      state,
     } = input;
+    
     await prisma.chargeProduct.update({
       where: {
         id: id as number,
       },
       data: {
-        title,
+        name: title, // 映射 title -> name
         locale,
-        credit,
         amount,
         currency,
-        originalAmount,
-        tag,
-        message,
-        state,
+        description: `Product updated`, // 可选字段
       },
     });
 
@@ -119,3 +103,9 @@ export async function deleteAction(input: { id: string }) {
     };
   }
 }
+
+/*
+// 原代码中使用了数据库不存在的字段：
+// credit, originalAmount, tag, message, state
+// 这些字段不在 ChargeProduct 模型中，已从代码中移除
+*/

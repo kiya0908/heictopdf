@@ -144,7 +144,7 @@ export function PayPalButton({
     <div className="w-full">
       <PayPalScriptProvider
         options={{
-          clientId,
+          clientId: clientId || "",
           vault: true,
           intent: "subscription",
           currency: "USD",

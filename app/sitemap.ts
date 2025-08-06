@@ -1,7 +1,4 @@
 import { MetadataRoute } from "next";
-import { prisma } from "@/db/prisma";
-import { FluxTaskStatus } from "@/db/type";
-import { FluxHashids } from "@/db/dto/flux.dto";
 
 // import { allPosts } from "contentlayer/generated";  // 临时禁用
 
@@ -11,28 +8,13 @@ import { getPathname } from "@/lib/navigation";
 
 /**
  * Generate URLs for successful conversion results
- * These are public conversion results that can be indexed by search engines
+ * DEPRECATED: This function is temporarily disabled due to database schema changes
+ * The fluxData table has been removed from the database schema
  */
 
 const getConversionUrls = async () => {
-  try {
-    const conversions = await prisma.fluxData.findMany({
-      where: {
-        isPrivate: false,
-        taskStatus: {
-          in: [FluxTaskStatus.Succeeded],
-        },
-      },
-      select: {
-        id: true
-      }
-    });
-    return conversions.map((conversion) => `/d/${FluxHashids.encode(conversion.id)}`)
-  } catch (error) {
-    // 如果数据库连接失败，返回空数组
-    console.warn('Failed to fetch conversion URLs for sitemap:', error);
-    return [];
-  }
+  // Return empty array since the flux system is deprecated
+  return [];
 }
 
 /**

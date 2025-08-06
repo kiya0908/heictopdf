@@ -1,16 +1,38 @@
 "use server";
 
 import { unstable_noStore as noStore } from "next/cache";
-import { redirect } from "next/navigation";
 
+import { getErrorMessage } from "@/lib/handle-error";
+
+import { CreateNewsletterSchema, CreateSchema } from "./validations";
+
+// TODO: newsletters 和 subscribers 功能已被废弃，相关数据表已删除
+// 这些 actions 暂时禁用，后续可以完全删除
+
+export async function createAction(input: CreateSchema) {
+  noStore();
+  try {
+    // newsletters 和 subscribers 表已被删除，返回错误信息
+    return {
+      data: null,
+      error: "Newsletter functionality has been disabled.",
+    };
+  } catch (err) {
+    return {
+      data: null,
+      error: getErrorMessage(err),
+    };
+  }
+}
+
+/*
+// 原实现 - 保留以备参考
+import { redirect } from "next/navigation";
 import { emailConfig } from "@/config/email";
 import { prisma } from "@/db/prisma";
 import NewslettersTemplate from "@/emails/NewslettersTemplate";
 import { env } from "@/env.mjs";
 import { resend } from "@/lib/email";
-import { getErrorMessage } from "@/lib/handle-error";
-
-import { CreateNewsletterSchema, CreateSchema } from "./validations";
 
 export async function createAction(input: CreateSchema) {
   noStore();
@@ -57,3 +79,4 @@ export async function createAction(input: CreateSchema) {
     };
   }
 }
+*/

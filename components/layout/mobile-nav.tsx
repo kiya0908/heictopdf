@@ -64,7 +64,7 @@ export function NavMobile() {
           {links.map(({ title, href }) => (
             <li key={href} className="py-3">
               <Link
-                href={href}
+                href={href as any}
                 onClick={() => setOpen(false)}
                 className="flex w-full font-medium capitalize"
               >
@@ -77,10 +77,10 @@ export function NavMobile() {
         </ul>
 
         <div className="mt-5 flex items-center justify-end space-x-4">
-          <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
+          <a href={siteConfig.links.github} target="_blank" rel="noreferrer">
             <Icons.gitHub className="size-6" />
             <span className="sr-only">GitHub</span>
-          </Link>
+          </a>
           <ModeToggle />
         </div>
       </nav>

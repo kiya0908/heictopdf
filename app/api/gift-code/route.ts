@@ -23,6 +23,17 @@ const ratelimit = new Ratelimit({
 });
 
 export async function POST(req: NextRequest) {
+  // TODO: GiftCode 功能已被废弃，相关数据表已删除
+  // 临时返回功能禁用信息
+  return NextResponse.json(
+    { 
+      error: "Gift code functionality has been disabled",
+      message: "This feature is temporarily unavailable" 
+    }, 
+    { status: 400 }
+  );
+
+  /* 原代码保留以备后续恢复
   const { userId } = auth();
 
   const user = await currentUser();
@@ -124,4 +135,5 @@ export async function POST(req: NextRequest) {
       { status: 400 },
     );
   }
+  */
 }

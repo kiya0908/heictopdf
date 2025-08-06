@@ -27,6 +27,14 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // TODO: subscribers 功能已被废弃，相关数据表已删除
+    // 临时返回成功状态以避免构建错误
+    return NextResponse.json({ 
+      status: "success",
+      message: "Newsletter subscription is temporarily disabled" 
+    });
+
+    /* 原代码保留以备后续恢复
     const { data } = await req.json();
     const parsed = newsletterFormSchema.parse(data);
 
@@ -63,6 +71,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ status: "success" });
+    */
   } catch (error) {
     return NextResponse.error();
   }

@@ -252,7 +252,7 @@ export default function SubscriptionInfo() {
             </Table>
           ) : (
             <EmptyPlaceholder>
-              <EmptyPlaceholder.Icon name="file" />
+              <EmptyPlaceholder.Icon name="post" />
               <EmptyPlaceholder.Title>
                 No conversions yet
               </EmptyPlaceholder.Title>

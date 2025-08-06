@@ -15,7 +15,7 @@ import BlurImage from "@/components/shared/blur-image";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { DashboardTableOfContents } from "@/components/shared/toc";
 // BLOG_CATEGORIES import removed - no longer using categories
-import { Link } from "@/lib/navigation";
+import Link from "next/link";
 import { getTableOfContents } from "@/lib/toc";
 import {
   constructMetadata,
@@ -157,7 +157,7 @@ export default async function PostPage({ params }: PageProps) {
               {relatedArticles.map((post) => (
                 <Link
                   key={post.slug}
-                  href={post.slug}
+                  href={`/blog/${post.slug}`}
                   className="flex flex-col space-y-2 rounded-xl border p-5 transition-colors duration-300 hover:bg-muted/80"
                 >
                   <h3 className="font-heading text-xl text-foreground">

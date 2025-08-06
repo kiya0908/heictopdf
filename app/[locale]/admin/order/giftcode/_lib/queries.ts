@@ -2,11 +2,40 @@ import "server-only";
 
 import { unstable_noStore as noStore } from "next/cache";
 
+import { type GetSchema } from "./validations";
+
+// TODO: giftCode 功能已被废弃，相关数据表已删除
+// 这些查询 暂时禁用，后续可以完全删除
+
+export async function getBySearch(input: GetSchema) {
+  noStore();
+  
+  try {
+    // giftCode 表已被删除，返回空结果
+    return {
+      data: [],
+      pageCount: 0,
+      total: 0,
+      pageSize: input.pageSize,
+      page: input.page,
+    };
+  } catch (err) {
+    console.error("Error in getBySearch:", err);
+    return { 
+      data: [], 
+      pageCount: 0, 
+      total: 0, 
+      pageSize: input.pageSize, 
+      page: input.page 
+    };
+  }
+}
+
+/*
+// 原实现 - 保留以备参考
 import { GiftCodeHashids } from "@/db/dto/giftcode.dto";
 import { prisma } from "@/db/prisma";
 import { type GiftCodeDto } from "@/db/type";
-
-import { type GetSchema } from "./validations";
 
 export async function getBySearch(input: GetSchema) {
   noStore();
@@ -62,3 +91,4 @@ export async function getBySearch(input: GetSchema) {
     return { data: [], pageCount: 0, total: 0, pageSize, page };
   }
 }
+*/

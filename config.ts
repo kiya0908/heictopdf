@@ -17,11 +17,31 @@ export const locales = [
 
 export type Locale = (typeof locales)[number];
 
-// Simplified pathnames for current locale setup
+// Pathnames configuration for all possible routes
 export const pathnames = {
   "/": "/",
   "/privacy-policy": "/privacy-policy",
   "/terms-of-use": "/terms-of-use",
+  "/pricing": "/pricing",
+  "/blog": "/blog",
+  "/support": "/support",
+  "/docs": "/docs",
+  "/guides": "/guides",
+  "/projects": "/projects",
+  "/tool": "/tool",
+  "/app": "/app",
+  "/app/generate": "/app/generate",
+  "/app/history": "/app/history",
+  "/app/giftcode": "/app/giftcode",
+  "/app/order": "/app/order",
+  "/docs/installation": "/docs/installation",
+  "/docs/configuration/database": "/docs/configuration/database",
+  "/docs/configuration/subscriptions": "/docs/configuration/subscriptions",
+  "/docs/configuration/config-files": "/docs/configuration/config-files",
+  "/docs/configuration/markdown-files": "/docs/configuration/markdown-files",
+  "/docs/configuration/authentification": "/docs/configuration/authentification",
+  "/docs/configuration/email": "/docs/configuration/email",
+  "/docs/configuration/components": "/docs/configuration/components",
 } satisfies Pathnames<typeof locales>;
 
 export const localePrefix: LocalePrefix<typeof locales> = "as-needed";

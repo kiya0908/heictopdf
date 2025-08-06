@@ -2,14 +2,29 @@ import { redirect } from "next/navigation";
 
 import { unstable_setRequestLocale } from "next-intl/server";
 
-import { Container } from "@/components/layout/container";
-import { prisma } from "@/db/prisma";
-
-import { SubbedCelebration } from "./SubbedCelebration";
+// TODO: subscribers 功能已被废弃，相关数据表已删除
+// 这个页面暂时重定向到首页，后续可以完全删除
 
 export const metadata = {
   title: "感谢你的订阅",
 };
+
+export default async function ConfirmPage({
+  params,
+}: {
+  params: { token: string; locale: string };
+}) {
+  unstable_setRequestLocale(params.locale);
+  
+  // subscribers 表已被删除，直接重定向到首页
+  redirect("/");
+}
+
+/*
+// 原实现 - 保留以备参考
+import { Container } from "@/components/layout/container";
+import { prisma } from "@/db/prisma";
+import { SubbedCelebration } from "./SubbedCelebration";
 
 export default async function ConfirmPage({
   params,
@@ -53,3 +68,4 @@ export default async function ConfirmPage({
     </Container>
   );
 }
+*/

@@ -77,7 +77,7 @@ export function BlogCard({
         </div>
       </div>
       <Link
-        href={data.slug?.replace(`/${data.language}`, "")}
+        href={(data.slug?.replace(`/${data.language}`, "") || "/") as any}
         className="absolute inset-0"
       >
         <span className="sr-only">View Article</span>

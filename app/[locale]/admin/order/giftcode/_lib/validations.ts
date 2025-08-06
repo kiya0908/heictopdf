@@ -21,6 +21,7 @@ export const createSchema = z.object({
 export type CreateSchema = z.infer<typeof createSchema>;
 
 export const updateSchema = z.object({
+  id: z.string(),
   code: z.string().min(8).optional(),
   creditAmount: z.number().min(1).optional(),
 });
