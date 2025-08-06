@@ -105,26 +105,44 @@ function validateMiddleware() {
   }
 
   // Check 5: Environment variables
-  const envFiles = ['.env', '.env.local'];
   let clerkKeysFound = false;
-
-  for (const envFile of envFiles) {
-    const envPath = path.join(process.cwd(), envFile);
-    if (fs.existsSync(envPath)) {
-      const envContent = fs.readFileSync(envPath, 'utf8');
-      if (envContent.includes('NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY') && 
-          envContent.includes('CLERK_SECRET_KEY')) {
-        clerkKeysFound = true;
-        log(COLORS.green, `✅ Clerk environment variables found in ${envFile}`);
-        break;
+  
+  // Check if we're in Cloudflare Pages build environment
+  const isCloudflarePages = process.env.CF_PAGES === '1' || process.env.CLOUDFLARE_ENV;
+  
+  if (isCloudflarePages) {
+    log(COLORS.blue, '🔧 Cloudflare Pages environment detected');
+    log(COLORS.yellow, '⚠️  Skipping environment variable validation (will be available at runtime)');
+    log(COLORS.yellow, '   Make sure CLERK_SECRET_KEY is configured in Cloudflare Pages dashboard');
+    clerkKeysFound = true; // Skip validation in CF Pages build
+  } else {
+    // First check process.env (for local development and other environments)
+    if (process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY) {
+      clerkKeysFound = true;
+      log(COLORS.green, '✅ Clerk environment variables found in process.env');
+    } else {
+      // Fallback to checking local env files
+      const envFiles = ['.env', '.env.local'];
+      
+      for (const envFile of envFiles) {
+        const envPath = path.join(process.cwd(), envFile);
+        if (fs.existsSync(envPath)) {
+          const envContent = fs.readFileSync(envPath, 'utf8');
+          if (envContent.includes('NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY') && 
+              envContent.includes('CLERK_SECRET_KEY')) {
+            clerkKeysFound = true;
+            log(COLORS.green, `✅ Clerk environment variables found in ${envFile}`);
+            break;
+          }
+        }
       }
     }
-  }
 
-  if (!clerkKeysFound) {
-    log(COLORS.red, '❌ ERROR: Clerk environment variables not found!');
-    log(COLORS.red, '   Required: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY');
-    hasErrors = true;
+    if (!clerkKeysFound) {
+      log(COLORS.red, '❌ ERROR: Clerk environment variables not found!');
+      log(COLORS.red, '   Required: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY');
+      hasErrors = true;
+    }
   }
 
   // Final result
