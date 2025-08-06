@@ -26,12 +26,6 @@ export enum BillingType {
   Withdraw = "Withdraw",
 }
 
-export enum FluxTaskStatus {
-  Processing = "processing",
-  Succeeded = "succeeded",
-  Failed = "failed",
-  Canceled = "canceled",
-}
 
 export type UserCreditDto = Prisma.UserCreditGetPayload<any>;
 
@@ -55,8 +49,3 @@ export type GiftCodeSchema = Prisma.GiftCodeCreateInput;
 
 export type GiftCodeSelectDto = Omit<GiftCodeDto, "id"> & { id: string };
 
-export type FluxDto = Prisma.FluxDataGetPayload<any>;
-
-export type FluxSchema = Prisma.FluxDataCreateInput;
-
-export type FluxSelectDto = Omit<FluxDto, "id"> & { id: string };

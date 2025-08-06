@@ -1,3 +1,7 @@
-import { Hashids } from '@/lib/hashid'
+import { createHashids } from "@/lib/hashid";
 
-export const FluxHashids = Hashids('flux_data')
+/**
+ * Flux (HEIC conversion) data transfer objects and utilities
+ */
+
+export const FluxHashids = createHashids("flux", 8);

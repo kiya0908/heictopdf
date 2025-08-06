@@ -410,7 +410,7 @@
       "description": "There is no record yet."
     },
     "table": {
-      "fluxId": "Task ID",
+      "taskId": "Task ID",
       "status": "Status",
       "amount": "Credit",
       "type": "Type",

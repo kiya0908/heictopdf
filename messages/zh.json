@@ -411,7 +411,7 @@
       "description": "还没有账单记录哦～"
     },
     "table": {
-      "fluxId": "任务ID",
+      "taskId": "任务ID",
       "status": "状态",
       "amount": "消耗积分",
       "type": "类型",

@@ -4,20 +4,13 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { Ratelimit } from "@upstash/ratelimit";
 import { z } from "zod";
 
-import { FluxHashids } from "@/db/dto/flux.dto";
 import { prisma } from "@/db/prisma";
-import { FluxTaskStatus } from "@/db/type";
 import { getErrorMessage } from "@/lib/handle-error";
 import { redis } from "@/lib/redis";
 
 const searchParamsSchema = z.object({
-  fluxId: z.string(),
+  conversionId: z.string(),
 });
-
-const getMime = (filename: string) =>
-  filename
-    .substring(filename.lastIndexOf(".") + 1, filename.length)
-    .toLowerCase();
 
 export async function GET(req: NextRequest) {
   const ratelimit = new Ratelimit({
@@ -26,7 +19,7 @@ export async function GET(req: NextRequest) {
     analytics: true,
   });
   const { success } = await ratelimit.limit(
-    "download:image" + `_${req.ip ?? ""}`,
+    "download:pdf" + `_${req.ip ?? ""}`,
   );
   if (!success) {
     return new Response("Too Many Requests", {
@@ -48,59 +41,44 @@ export async function GET(req: NextRequest) {
     const values = searchParamsSchema.parse(
       Object.fromEntries(url.searchParams),
     );
-    const { fluxId } = values;
-    const [id] = FluxHashids.decode(fluxId);
-    if (!id) {
-      return new Response("not found", {
-        status: 404,
-      });
-    }
-    const fluxData = await prisma.fluxData.findUnique({
+    const { conversionId } = values;
+    
+    const conversionData = await prisma.conversionHistory.findUnique({
       where: {
-        id: id as number,
+        id: parseInt(conversionId),
+        userId: userId, // 确保只能下载自己的文件
       },
     });
 
-    if (!fluxData || !fluxData?.id) {
-      return new Response("not found", {
+    if (!conversionData || !conversionData.downloadUrl) {
+      return new Response("Conversion record not found or download URL not available", {
         status: 404,
       });
     }
-    if (fluxData.taskStatus !== FluxTaskStatus.Succeeded) {
-      return new Response("flux status error", {
+
+    if (conversionData.status !== "completed") {
+      return new Response("Conversion not completed yet", {
         status: 400,
       });
     }
-    await prisma.$transaction(async (tx) => {
-      await tx.fluxData.update({
-        where: {
-          id: fluxData.id,
-        },
-        data: {
-          downloadNum: {
-            increment: 1,
-          },
-        },
-      });
-      await tx.fluxDownloads.create({
-        data: {
-          fluxId: fluxData.id,
-          userId: user.id,
-        },
-      });
-    });
 
-    // headers.set('Content-Type', 'image/*');// 默认动作是下载
-    // headers.set("content-Type", "text/plain"); // 默认动作是浏览器展示
-    const blob = await fetch(fluxData.imageUrl!).then((response) =>
+    // 检查下载链接是否过期
+    if (conversionData.urlExpiresAt && conversionData.urlExpiresAt < new Date()) {
+      return new Response("Download link has expired", {
+        status: 410,
+      });
+    }
+
+    // 获取文件内容
+    const blob = await fetch(conversionData.downloadUrl).then((response) =>
       response.blob(),
     );
-    console.log("blob.type-->", blob.type);
+    
     const headers = new Headers();
-    headers.set("Content-Type", blob.type); // 设置为文件的MIME类型
+    headers.set("Content-Type", "application/pdf"); // HEIC转PDF的结果都是PDF
     headers.set(
       "Content-Disposition",
-      `attachment; filename="${encodeURIComponent(fluxId + `.${getMime(fluxData.imageUrl!)}`)}"`,
+      `attachment; filename="${encodeURIComponent(conversionData.convertedFileName || `converted_${conversionId}.pdf`)}"`,
     );
     return new NextResponse(blob, { status: 200, statusText: "OK", headers });
   } catch (error) {

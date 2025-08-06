@@ -32,7 +32,7 @@ export function DownloadAction({
       toast.promise(
         async () => {
           setIsPending(true);
-          const blob = await fetch(`/api/download?fluxId=${id}`, {
+          const blob = await fetch(`/api/download?conversionId=${id}`, {
             headers: {
               Authorization: `Bearer ${await getToken()}`,
             },
@@ -41,7 +41,7 @@ export function DownloadAction({
           const url = window.URL.createObjectURL(blob);
           const link = document.createElement("a");
           link.href = url;
-          link.download = `${id}_fluxaipro.art.${blob.type.split("/")?.[1]}`;
+          link.download = `${id}_heictopdf.${blob.type.split("/")?.[1]}`;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

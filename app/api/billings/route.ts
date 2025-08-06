@@ -3,8 +3,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { z } from "zod";
 
-import { UserBillingHashids } from "@/db/dto/billing.dto";
-import { FluxHashids } from "@/db/dto/flux.dto";
 import { prisma } from "@/db/prisma";
 import { getErrorMessage } from "@/lib/handle-error";
 
@@ -38,25 +36,39 @@ export async function GET(req: NextRequest) {
       whereConditions.type = type;
     }
 
-    const [data, total] = await Promise.all([
-      prisma.userBilling.findMany({
-        where: whereConditions,
+    // 获取用户转换使用统计
+    const usageData = await prisma.userConversionUsage.findUnique({
+      where: { userId },
+    });
+
+    // 获取转换历史记录用于统计
+    const [conversionHistory, totalConversions] = await Promise.all([
+      prisma.conversionHistory.findMany({
+        where: { userId },
         take: pageSize,
         skip: offset,
         orderBy: { createdAt: "desc" },
       }),
-      prisma.userBilling.count({ where: whereConditions }),
+      prisma.conversionHistory.count({ where: { userId } }),
     ]);
 
     return NextResponse.json({
       data: {
-        total,
+        total: totalConversions,
         page,
         pageSize,
-        data: data.map(({ id, fluxId, ...rest }) => ({
-          ...rest,
-          fluxId: fluxId ? FluxHashids.encode(fluxId!) : null,
-          id: UserBillingHashids.encode(id),
+        usageStats: {
+          dailyConversionCount: usageData?.dailyConversionCount || 0,
+          lastConversionDate: usageData?.lastConversionDate,
+          totalConversions,
+        },
+        data: conversionHistory.map((record) => ({
+          id: record.id.toString(),
+          originalFileName: record.originalFileName,
+          convertedFileName: record.convertedFileName,
+          status: record.status,
+          conversionCost: record.conversionCost,
+          createdAt: record.createdAt,
         })),
       },
     });
