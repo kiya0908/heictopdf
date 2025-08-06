@@ -26,6 +26,14 @@ export enum BillingType {
   Withdraw = "Withdraw",
 }
 
+export enum FluxTaskStatus {
+  Pending = "pending",
+  Processing = "processing", 
+  Succeeded = "succeeded",
+  Failed = "failed",
+  Canceled = "canceled",
+}
+
 
 export type UserCreditDto = Prisma.UserCreditGetPayload<any>;
 

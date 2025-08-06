@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 
 import { stripe } from "@/lib/stripe";
-import { getUserSubscriptionPlan } from "@/lib/subscription";
+import { getUserSubscription } from "@/lib/subscription";
 import { absoluteUrl } from "@/lib/utils";
 
 export type responseAction = {
@@ -28,7 +28,12 @@ export async function generateUserStripe(
       throw new Error("Unauthorized");
     }
 
-    const subscriptionPlan = await getUserSubscriptionPlan(user.id);
+    // 临时兼容性修复 - Stripe 功能已迁移到 PayPal
+    const subscription = await getUserSubscription(user.id);
+    const subscriptionPlan = {
+      isPaid: false, // 临时禁用 Stripe 支付
+      stripeCustomerId: null,
+    };
 
     if (subscriptionPlan.isPaid && subscriptionPlan.stripeCustomerId) {
       // User on Paid Plan - Create a portal session to manage subscription.
