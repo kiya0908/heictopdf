@@ -44,7 +44,7 @@ export const env = createEnv({
     //OPEN_AI_MODEL: z.string().min(1),
   },
   client: {
-    //NEXT_PUBLIC_SITE_URL: z.string().min(1),
+    NEXT_PUBLIC_SITE_URL: z.string().min(1),
     //NEXT_PUBLIC_SITE_EMAIL_FROM: z.string().min(1),
     //NEXT_PUBLIC_SITE_LINK_PREVIEW_ENABLED: z
     //.boolean()
@@ -68,7 +68,7 @@ export const env = createEnv({
     //VERCEL_ENV: process.env.VERCEL_ENV,
     //UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
     //UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
-    //NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     //NEXT_PUBLIC_SITE_EMAIL_FROM: process.env.NEXT_PUBLIC_SITE_EMAIL_FROM,
     //NEXT_PUBLIC_SITE_LINK_PREVIEW_ENABLED:
     //process.env.NEXT_PUBLIC_SITE_LINK_PREVIEW_ENABLED == "true",

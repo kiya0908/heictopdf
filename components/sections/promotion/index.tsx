@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 
-import { getChargeProduct, getClaimed } from "@/db/queries/charge-product";
+import { getChargeProduct } from "@/db/queries/charge-product";
 
 import PromotionBanner from "./promotion-banner";
 

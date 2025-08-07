@@ -17,60 +17,7 @@
       "close": "Schließen"
     }
   },
-  "PromptGenerator": {
-    "layout": {
-      "title": "Kostenloser Flux AI Prompt Generator: Steigern Sie Ihre Kreativität mit AI-gesteuerten Prompts",
-      "description": "Entdecken Sie die Leistungsfähigkeit des Flux AI Prompt Generators, Ihrem ultimativen Tool zur mühelosen Erstellung maßgeschneiderter AI-Prompts. Egal ob Sie Schriftsteller, Entwickler oder kreativer Denker sind, unsere intuitive Plattform verwandelt Ihre Ideen in fesselnde Prompts, steigert die Produktivität und inspiriert Innovation. Beginnen Sie noch heute mit der Generierung überzeugender Inhalte und heben Sie Ihre Projekte mit Flux AI an!",
-      "keywords": "flux ai prompt generator, ai prompt generator, flux prompt ersteller, ai inhalt generierung, ai schreibtools, kreative schreibprompts, flux ai tools, prompts mit ai generieren, ai gesteuerte prompt generierung, kreativität mit ai steigern, prompt generierungssoftware"
-    },
-    "title": "Kostenloser Flux AI Prompt Generator",
-    "subtitle": "Verwandeln Sie Ihre Ideen in mächtige AI-Bildgenerierungsprompts mit unserem umfassenden Leitfaden",
-    "form": {
-      "input": {
-        "title": "Geben Sie Ihre Prompt-Idee ein",
-        "placeholder": "Geben Sie Ihre Prompt-Idee hier ein..."
-      },
-      "output": {
-        "title": "Generierter Prompt"
-      },
-      "action": {
-        "generate": "AI-Prompt generieren",
-        "generating": "Generierung läuft...",
-        "copy": "Prompt kopieren",
-        "copySuccess": "Prompt in die Zwischenablage kopiert.",
-        "to_generate": "Zum Generieren"
-      }
-    },
-    "faq": {
-      "label": "Fragen",
-      "title": "Häufig gestellte Fragen zum Flux AI Prompt Generator",
-      "subtitle": "Entdecken Sie unsere umfassende FAQ, um schnelle Antworten auf häufig gestellte Fragen zu finden. Wenn Sie weitere Hilfe benötigen, zögern Sie nicht, uns für personalisierte Unterstützung zu kontaktieren.",
-      "item1": {
-        "question": "Was ist der Flux AI Prompt Generator?",
-        "answer": "Der Flux AI Prompt Generator ist ein innovatives Tool, das Benutzern dabei hilft, ansprechende und effektive Prompts für verschiedene Anwendungen, einschließlich Schreiben, Marketing und Content-Erstellung, zu erstellen. Durch den Einsatz fortschrittlicher AI-Algorithmen generiert er Vorschläge, die Kreativität fördern und die Produktivität steigern."
-      },
-      "item2": {
-        "question": "Wie funktioniert Flux AI?",
-        "answer": "Flux AI nutzt Techniken der künstlichen Intelligenz und des maschinellen Lernens, um Benutzereingaben zu analysieren und relevante Prompts zu generieren. Benutzer können Parameter anpassen, um die Ausgabe zu individualisieren, und sicherstellen, dass die generierten Prompts ihren spezifischen Bedürfnissen entsprechen, sei es für private Projekte oder professionelle Aufgaben."
-      },
-      "item3": {
-        "question": "Wer kann von der Nutzung von Flux AI profitieren?",
-        "answer": "Flux AI ist ideal für Schriftsteller, Marketer, Pädagogen und Content-Ersteller, die nach Inspiration und Anleitung suchen. Es kann Benutzern helfen, den Schreibblockade zu überwinden, Marketingstrategien zu entwickeln oder Lernpläne zu erstellen, wodurch es zu einem wertvollen Tool für jeden wird, der frische Ideen benötigt."
-      },
-      "item4": {
-        "question": "Ist Flux AI benutzerfreundlich?",
-        "answer": "Ja, Flux AI ist mit dem Benutzerkomfort im Hinterkopf entwickelt. Sein intuitives Interface ermöglicht es Benutzern aller Erfahrungsstufen, das Tool leicht zu bedienen. Mit einfachen Eingabeoptionen und klaren Anweisungen können sogar diejenigen mit minimaler technischer Erfahrung sofort mit der Generierung von Prompts beginnen."
-      },
-      "item5": {
-        "question": "Kann ich Flux AI für mehrere Projekte verwenden?",
-        "answer": "Absolut! Der Flux AI Prompt Generator ist vielseitig und unterstützt eine breite Palette von Projekten. Egal, ob Sie Blog-Beiträge, Social-Media-Inhalte oder Ideen für kreatives Schreiben erstellen, Sie können das Tool mehrmals verwenden, um einzigartige Prompts für verschiedene Bedürfnisse zu generieren."
-      },
-      "item6": {
-        "question": "Gibt es Kosten für die Nutzung des Flux AI Prompt Generators?",
-        "answer": "Der Flux AI Prompt Generator ist derzeit kostenlos. Benutzer können jederzeit auf die Plattform zugreifen, Prompts eingeben und relevante Vorschläge ohne Kosten generieren."
-      }
-    }
-  },
+
   "IndexPage": {
     "intro": "Einführung des Flux AI Image Generators",
     "description": "Revolutionäres Next-Generation-Advanced-Text-to-Image-Open-Modell, unterstützt flux.1 pro/dev und flux.1 schnell Modelle.",

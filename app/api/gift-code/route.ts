@@ -6,7 +6,6 @@ import { z } from "zod";
 
 import { ChargeOrderHashids } from "@/db/dto/charge-order.dto";
 import { prisma } from "@/db/prisma";
-import { getUserCredit } from "@/db/queries/account";
 
 import { Currency, OrderPhase } from "@/db/type";
 import { getErrorMessage } from "@/lib/handle-error";

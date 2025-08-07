@@ -70,7 +70,9 @@ export class UsageLimitManager {
       }
 
       // 检查是否是新的一天，如果是则重置计数
-      const lastConversionDate = new Date(usage.lastConversionDate);
+      const lastConversionDate = usage.lastConversionDate 
+        ? new Date(usage.lastConversionDate) 
+        : new Date(0); // 如果为 null，使用 epoch 时间
       lastConversionDate.setHours(0, 0, 0, 0);
 
       if (lastConversionDate.getTime() < today.getTime()) {

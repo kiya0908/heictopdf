@@ -4,7 +4,6 @@ import { currentUser } from "@clerk/nextjs/server";
 import { Ratelimit } from "@upstash/ratelimit";
 
 import { AccountHashids } from "@/db/dto/account.dto";
-import { getUserCredit } from "@/db/queries/account";
 import { redis } from "@/lib/redis";
 
 export async function GET(req: NextRequest) {
@@ -31,11 +30,15 @@ export async function GET(req: NextRequest) {
   //   });
   // }
 
-  const accountInfo = await getUserCredit(user.id);
   console.timeEnd("stat");
 
   return NextResponse.json({
-    ...accountInfo,
-    id: AccountHashids.encode(accountInfo.id),
+    code: 0,
+    message: "success",
+    data: {
+      user: {
+        id: AccountHashids.encode(user.id),
+      },
+    },
   });
 }

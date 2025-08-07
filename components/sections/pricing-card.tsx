@@ -1,4 +1,4 @@
-import { PricingPlans } from "@/components/pricing-plans";
+import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 export default async function PricingCard(props: Props) {
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
-      <PricingPlans locale={props.locale} />
+      <PricingCards locale={props.locale} />
       <hr className="container" />
       <PricingFaq />
     </div>

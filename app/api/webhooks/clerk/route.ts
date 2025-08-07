@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { Webhook } from "svix";
 
-import { getUserCredit } from "@/db/queries/account";
 import { env } from "@/env.mjs";
 
 export async function POST(req: Request) {
@@ -61,7 +60,7 @@ export async function POST(req: Request) {
 
   if (evt.type === "user.created") {
     const userId = evt.data.id;
-    await getUserCredit(userId);
+    console.log(`User created: ${userId}`);
   }
 
   return new Response("", { status: 200 });

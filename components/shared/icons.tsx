@@ -88,7 +88,7 @@ export const Icons = {
   ),
   help: HelpCircle,
   laptop: Laptop,
-  logo: ({ ...props }: LucideProps) => (
+  logo: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <img
       src="/favicon-16x16.png"
       alt="HEIC to PDF Converter"

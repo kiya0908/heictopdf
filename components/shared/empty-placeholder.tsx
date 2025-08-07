@@ -25,19 +25,14 @@ export function EmptyPlaceholder({
   );
 }
 
-interface EmptyPlaceholderIconProps
-  extends Partial<React.SVGProps<SVGSVGElement>> {
+interface EmptyPlaceholderIconProps {
   name: keyof typeof Icons;
-  ref?:
-    | ((instance: SVGSVGElement | null) => void)
-    | React.RefObject<SVGSVGElement>
-    | null;
+  className?: string;
 }
 
 EmptyPlaceholder.Icon = function EmptyPlaceholderIcon({
   name,
   className,
-  ...props
 }: EmptyPlaceholderIconProps) {
   const Icon = Icons[name];
 
@@ -47,7 +42,7 @@ EmptyPlaceholder.Icon = function EmptyPlaceholderIcon({
 
   return (
     <div className="flex size-20 items-center justify-center rounded-full bg-muted">
-      <Icon className={cn("size-10", className)} {...props} />
+      <Icon className={cn("size-10", className)} />
     </div>
   );
 };
