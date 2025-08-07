@@ -4,21 +4,8 @@ import { ogImageSchema } from "@/lib/validations/og"
 
 export const runtime = "edge"
 
-// 使用 Google Fonts 的在线字体，减少包大小
-const interRegular = fetch(
-  "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2"
-).then((res) => res.arrayBuffer())
-
-const interBold = fetch(
-  "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fAZ9hiJ-Ek-_EeA.woff2"
-).then((res) => res.arrayBuffer())
-
-
 export async function GET(req: Request) {
   try {
-    const fontRegular = await interRegular
-    const fontBold = await interBold
-
     const url = new URL(req.url)
     const values = ogImageSchema.parse(Object.fromEntries(url.searchParams))
     const heading =
@@ -28,10 +15,7 @@ export async function GET(req: Request) {
 
     const { mode } = values
     const paint = mode === "dark" ? "#fff" : "#000"
-
     const fontSize = heading.length > 80 ? "60px" : "80px"
-
-
 
     return new ImageResponse(
       (
@@ -46,11 +30,8 @@ export async function GET(req: Request) {
           }}
         >
           <div
-            tw="text-5xl"
+            tw="text-5xl font-bold"
             style={{
-              fontFamily: "Inter",
-              fontWeight: "bold",
-              position: "relative",
               background: "linear-gradient(90deg, #6366f1, #a855f7 80%)",
               backgroundClip: 'text',
               color: 'transparent'
@@ -60,19 +41,12 @@ export async function GET(req: Request) {
           </div>
 
           <div tw="flex flex-col flex-1 py-16">
-            {/* Type : Blog or Doc */}
-            <div
-              tw="flex text-xl uppercase font-bold tracking-tight"
-              style={{ fontFamily: "Inter", fontWeight: "normal" }}
-            >
+            <div tw="flex text-xl uppercase font-bold tracking-tight">
               {values.type}
             </div>
-            {/* Title */}
             <div
-              tw="flex leading-[1.15] text-[80px] font-bold"
+              tw="flex leading-[1.15] font-bold"
               style={{
-                fontFamily: "Inter",
-                fontWeight: "bold",
                 marginLeft: "-3px",
                 fontSize,
               }}
@@ -82,10 +56,7 @@ export async function GET(req: Request) {
           </div>
 
           <div tw="flex items-center w-full justify-center">
-            <div
-              tw="flex items-center text-xl"
-              style={{ fontFamily: "Inter", fontWeight: "normal" }}
-            >
+            <div tw="flex items-center text-xl">
               <div tw="flex">heictopdf.com</div>
             </div>
           </div>
@@ -94,20 +65,6 @@ export async function GET(req: Request) {
       {
         width: 1200,
         height: 630,
-        fonts: [
-          {
-            name: "Inter",
-            data: fontRegular,
-            weight: 400,
-            style: "normal",
-          },
-          {
-            name: "Inter",
-            data: fontBold,
-            weight: 700,
-            style: "normal",
-          },
-        ],
       }
     )
   } catch (error) {
