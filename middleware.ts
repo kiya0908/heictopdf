@@ -25,7 +25,7 @@ import { kvKeys } from "@/config/kv";
 import { env } from "@/env.mjs";
 import countries from "@/lib/countries.json";
 import { getIP } from "@/lib/ip";
-import { redis } from "@/lib/redis";
+// Redis functionality removed for simplicity
 
 import { defaultLocale, localePrefix, locales } from "./config";
 
@@ -146,7 +146,9 @@ export default clerkMiddleware(async (auth, req) => {
     const countryInfo = countries.find((x) => x.cca2 === country);
     if (countryInfo) {
       const flag = countryInfo.flag;
-      await redis.set(kvKeys.currentVisitor, { country, city, flag });
+      // Redis tracking is temporarily disabled
+      // await redis.set(kvKeys.currentVisitor, { country, city, flag });
+      console.log("Visitor info:", { country, city, flag });
     }
   }
 

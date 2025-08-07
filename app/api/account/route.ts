@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { Ratelimit } from "@upstash/ratelimit";
 
 import { AccountHashids } from "@/db/dto/account.dto";
-import { redis } from "@/lib/redis";
+// import { redis } from "@/lib/redis";
 
 export async function GET(req: NextRequest) {
   console.time("stat");

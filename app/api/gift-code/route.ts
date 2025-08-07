@@ -9,17 +9,13 @@ import { prisma } from "@/db/prisma";
 
 import { Currency, OrderPhase } from "@/db/type";
 import { getErrorMessage } from "@/lib/handle-error";
-import { redis } from "@/lib/redis";
+// import { redis } from "@/lib/redis";
 
 const CreateGiftCodeOrderSchema = z.object({
   code: z.string().min(8),
 });
 
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(2, "5 s"),
-  analytics: true,
-});
+// Rate limiting removed for simplicity
 
 export async function POST(req: NextRequest) {
   // TODO: GiftCode 功能已被废弃，相关数据表已删除
@@ -40,14 +36,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  const { success } = await ratelimit.limit(
-    "gift-code:redeemed" + `_${req.ip ?? ""}`,
-  );
-  if (!success) {
-    return new Response("Too Many Requests", {
-      status: 429,
-    });
-  }
+  // Rate limiting removed for simplicity
 
   try {
     const data = await req.json();

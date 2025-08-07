@@ -9,7 +9,7 @@ import { ChargeProductHashids } from "@/db/dto/charge-product.dto";
 import { prisma } from "@/db/prisma";
 import { OrderPhase } from "@/db/type";
 import { getErrorMessage } from "@/lib/handle-error";
-import { redis } from "@/lib/redis";
+// import { redis } from "@/lib/redis";
 // import { stripe } from "@/lib/stripe"; // Removed for PayPal migration
 import { absoluteUrl } from "@/lib/utils";
 
@@ -21,11 +21,7 @@ const CreateChargeOrderSchema = z.object({
   url: z.string().optional(),
 });
 
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(2, "5 s"),
-  analytics: true,
-});
+// Rate limiting removed for simplicity
 
 export async function POST(req: NextRequest) {
   const { userId } = auth();
@@ -35,14 +31,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  const { success } = await ratelimit.limit(
-    "charge-order:created" + `_${req.ip ?? ""}`,
-  );
-  if (!success) {
-    return new Response("Too Many Requests", {
-      status: 429,
-    });
-  }
+  // Rate limiting removed for simplicity
 
   try {
     const data = await req.json();

@@ -5,14 +5,10 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { z } from "zod";
 
 import { env } from "@/env.mjs";
-import { redis } from "@/lib/redis";
+// import { redis } from "@/lib/redis";
 import { S3Service } from "@/lib/s3";
 
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(10, "10 s"),
-  analytics: true,
-});
+// Rate limiting removed for simplicity
 
 function getKey(id: string) {
   return `s3:${id}`;
@@ -33,14 +29,7 @@ export async function POST(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  const { success } = await ratelimit.limit(
-    getKey("s3-key" + userId) + `_${req.ip ?? ""}`,
-  );
-  if (!success) {
-    return new Response("Too Many Requests", {
-      status: 429,
-    });
-  }
+  // Rate limiting removed for simplicity
 
   try {
     const data = await req.json();

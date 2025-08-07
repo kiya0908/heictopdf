@@ -6,26 +6,14 @@ import { z } from "zod";
 
 import { prisma } from "@/db/prisma";
 import { getErrorMessage } from "@/lib/handle-error";
-import { redis } from "@/lib/redis";
+// import { redis } from "@/lib/redis";
 
 const searchParamsSchema = z.object({
   conversionId: z.string(),
 });
 
 export async function GET(req: NextRequest) {
-  const ratelimit = new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(5, "5 s"),
-    analytics: true,
-  });
-  const { success } = await ratelimit.limit(
-    "download:pdf" + `_${req.ip ?? ""}`,
-  );
-  if (!success) {
-    return new Response("Too Many Requests", {
-      status: 429,
-    });
-  }
+  // Rate limiting removed for simplicity - rely on Vercel's built-in limits
 
   const { userId } = auth();
   if (!userId) {
