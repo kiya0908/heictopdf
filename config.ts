@@ -44,7 +44,7 @@ export const pathnames = {
   "/docs/configuration/components": "/docs/configuration/components",
 } satisfies Pathnames<typeof locales>;
 
-export const localePrefix = "always" satisfies LocalePrefix<typeof locales>;
+export const localePrefix = "as-needed" satisfies LocalePrefix<typeof locales>;
 
 export const port = process.env.PORT || 3000;
 export const host = process.env.VERCEL_URL
