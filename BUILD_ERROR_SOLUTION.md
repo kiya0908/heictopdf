@@ -42,7 +42,7 @@ CLERK_SECRET_KEY="sk_test_your-clerk-secret-key"
 CONVERTAPI_SECRET="your-convertapi-secret"
 
 # 网站URL配置
-NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 # Upstash Redis配置（可选）
 UPSTASH_REDIS_REST_URL="https://your-redis-url.upstash.io"

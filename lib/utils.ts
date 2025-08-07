@@ -70,7 +70,7 @@ export function constructMetadata({
       creator: "@koyaguo",
     },
     icons,
-    metadataBase: new URL(siteConfig.url),
+    metadataBase: siteConfig.url ? new URL(siteConfig.url) : undefined,
     manifest: `${siteConfig.url}/site.webmanifest`,
     ...(noIndex && {
       robots: {
@@ -91,7 +91,7 @@ export function formatDate(input: Date | string): string {
 }
 
 export function absoluteUrl(path: string) {
-  return `${env.NEXT_PUBLIC_SITE_URL}${path}`;
+  return `${env.NEXT_PUBLIC_APP_URL}${path}`;
 }
 
 // Utils from precedent.dev

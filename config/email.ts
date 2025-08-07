@@ -4,6 +4,6 @@ export const emailConfig = {
   from: env.NEXT_PUBLIC_SITE_EMAIL_FROM,
   baseUrl:
     env.VERCEL_ENV !== "development"
-      ? env.NEXT_PUBLIC_SITE_URL
+      ? env.NEXT_PUBLIC_APP_URL
       : "http://localhost:3000",
 };
