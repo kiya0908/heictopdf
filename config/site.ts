@@ -13,5 +13,5 @@ export const siteConfig: SiteConfig = {
     twitter: "https://x.com/yourname",
     github: "https://github.com/yourname",
   },
-  mailSupport: "support@heictopdf.com",
+  mailSupport: "support@heic-to-pdf.pro",
 };

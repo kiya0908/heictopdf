@@ -26,7 +26,7 @@ export default function IndexPage({ params: { locale } }: Props) {
       <Features />
       <FaqSection />
       <GetStartedSection />
-      {process.env.NODE_ENV === "production" && <TwitterList />}
+{/* {process.env.NODE_ENV === "production" && <TwitterList />} */}
     </>
   );
 }

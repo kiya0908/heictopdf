@@ -52,13 +52,13 @@ const PricingCard = ({
   // Calculate pricing based on billing period with localized display
   const getPrice = () => {
     if (isFree) return formatPrice(0, offer.currency === 'CNY' ? '¥' : '$');
-    
+
     if (isYearly) {
       // Display localized prices but payment will be in USD
       const yearlyPrice = offer.currency === 'CNY' ? 4900 * 10 : 6900; // ¥490 or $69 yearly
       return formatPrice(yearlyPrice, offer.currency === 'CNY' ? '¥' : '$');
     }
-    
+
     // Display localized prices: ¥49 for CN, $7 for others
     const monthlyPrice = offer.currency === 'CNY' ? 4900 : 700; // ¥49 or $7 monthly
     return formatPrice(monthlyPrice, offer.currency === 'CNY' ? '¥' : '$');
@@ -137,7 +137,7 @@ const PricingCard = ({
               <p>{feature}</p>
             </li>
           ))}
-          
+
           {/* Show limitations for free tier */}
           {isFree && (
             <>
@@ -153,7 +153,7 @@ const PricingCard = ({
             </>
           )}
         </ul>
-        
+
         <SignedIn>
           {isProTier && (
             // TODO: 临时禁用PayPal按钮，显示支付暂停提示
@@ -342,9 +342,9 @@ export function PricingCards({
 
         <div className="grid gap-5 bg-inherit py-5 md:grid-cols-2">
           {chargeProduct?.map((offer) => (
-            <PricingCard 
-              offer={offer} 
-              key={offer.id} 
+            <PricingCard
+              offer={offer}
+              key={offer.id}
               isYearly={isYearly}
               userId={user?.id}
             />
@@ -356,9 +356,9 @@ export function PricingCards({
           <br />
           <a
             className="font-medium text-primary hover:underline"
-            href="mailto:support@heictopdf.com"
+            href="mailto:support@heic-to-pdf.pro"
           >
-            support@heictopdf.com
+            support@heic-to-pdf.pro
           </a>{" "}
           {t("contact.description")}
           <br />
@@ -385,7 +385,7 @@ export function PricingCardDialog({
   const { isSm, isMobile } = useMediaQuery();
   const [isYearly, setIsYearly] = useState(false);
   const { user } = useUser();
-  
+
   const product = useMemo(() => {
     if (isSm || isMobile) {
       return ([chargeProduct?.[1]] ?? []) as ChargeProductSelectDto[];
@@ -428,9 +428,9 @@ export function PricingCardDialog({
           </div>
           <div className="grid grid-cols-1 gap-5 bg-inherit py-5 lg:grid-cols-2">
             {product?.map((offer) => (
-              <PricingCard 
-                offer={offer} 
-                key={offer.id} 
+              <PricingCard
+                offer={offer}
+                key={offer.id}
                 isYearly={isYearly}
                 userId={user?.id}
               />

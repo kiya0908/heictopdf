@@ -599,9 +599,9 @@ export default function IndexPage({ params: { locale } }: Props) {
             By email:{" "}
             <a
               className="font-medium underline underline-offset-4"
-              href="mailto:support@heictopdf.com"
+              href="mailto:support@heic-to-pdf.pro"
             >
-              support@heictopdf.com
+              support@heic-to-pdf.pro
             </a>
           </li>
         </ul>

@@ -37,7 +37,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           {t("footer.privacy")}
         </Link>
         <a
-          href="mailto:support@heictopdf.com"
+          href="mailto:support@heic-to-pdf.pro"
           className="underline-offset-4 hover:underline"
           title={t("footer.contact")}
         >
