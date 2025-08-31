@@ -218,3 +218,25 @@ A: Free users can convert files up to 10MB each. Premium users get higher limits
 - Basic HEIC to PDF conversion
 - Web interface
 - File upload/download
+
+## SEO 配置
+
+### 搜索引擎优化
+本项目已正确配置SEO元数据，包括：
+- 自动生成sitemap.xml
+- 配置robots.txt
+- 设置正确的meta标签
+- 支持多语言SEO
+
+### 环境变量配置
+确保在`.env.local`文件中设置以下变量：
+```bash
+NEXT_PUBLIC_APP_URL=https://heic-to-pdf.pro
+```
+
+### 故障排除
+如果遇到"noindex"标记问题：
+1. 检查环境变量`NEXT_PUBLIC_APP_URL`是否正确设置
+2. 确保网站已正确部署到生产环境
+3. 在Google Search Console中重新提交sitemap
+4. 等待Google重新抓取页面

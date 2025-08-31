@@ -71,6 +71,17 @@ export async function generateMetadata({
     },
     description: t("description"),
     keywords: t("keywords"),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 
