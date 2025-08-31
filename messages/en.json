@@ -256,7 +256,8 @@
     }
   },
   "PricingPage": {
-    "title": "Choose Your Plan",
+    "title": "HEIC to PDF Pricing",
+    "subtitle": "Choose Your Plan",
     "description": "Simple, transparent pricing for everyone",
     "worth": "conversions",
     "label": "Pricing",

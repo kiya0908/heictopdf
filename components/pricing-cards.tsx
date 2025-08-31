@@ -288,7 +288,7 @@ export function PricingCards({
   return (
     <MaxWidthWrapper>
       <section className="flex flex-col items-center text-center">
-        <HeaderSection label={t("label")} title={t("title")} />
+        <HeaderSection label={t("label")} title={t("subtitle")} />
         <div className="mb-4 mt-10 flex items-center gap-5">
           <ToggleGroup
             type="single"
@@ -402,7 +402,7 @@ export function PricingCardDialog({
     >
       <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px]">
         <DialogHeader>
-          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogTitle>{t("subtitile")}</DialogTitle>
           <div className="mb-4 flex justify-center">
             <ToggleGroup
               type="single"

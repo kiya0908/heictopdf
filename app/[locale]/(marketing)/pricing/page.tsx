@@ -33,9 +33,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
         <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gradient_indigo-purple mb-4">
           {t("PricingPage.title")}
         </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          {t("PricingPage.subtitle") || "Choose the perfect plan for your HEIC to PDF conversion needs"}
-        </p>
+
       </div>
       
       <PricingCards chargeProduct={chargeProduct} />

@@ -256,7 +256,8 @@
     }
   },
   "PricingPage": {
-    "title": "选择您的套餐",
+    "title": "HEIC 转换为 PDF 套餐",
+    "subtitle": "选择您需要的套餐",
     "description": "简单透明的定价，适合每个人",
     "worth": "次转换",
     "label": "定价",
