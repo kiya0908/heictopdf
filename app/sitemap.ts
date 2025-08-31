@@ -23,27 +23,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Generate sitemap entries for all pages across all locales
-  const sitemapEntries = [...keys].flatMap((key) =>
+  // By adding ": MetadataRoute.Sitemap", we explicitly tell TypeScript the type.
+  const sitemapEntries: MetadataRoute.Sitemap = [...keys].flatMap((key) =>
     locales.map((locale) => ({
       url: getUrl(key, locale),
       priority: key === "/" ? 1.0 : key.includes("/pricing") ? 0.9 : 0.7,
-      changeFrequency: key.includes("/blog") ? "weekly" : "daily" as const,
+      changeFrequency: key.includes("/blog") ? "weekly" : "daily",
       lastModified: new Date(),
     }))
   );
 
-  // Add root domain URLs
-  const rootUrls = [
+  // Also explicitly type rootUrls for consistency and safety.
+  const rootUrls: MetadataRoute.Sitemap = [
     {
       url: "https://heic-to-pdf.pro",
       priority: 1.0,
-      changeFrequency: "daily" as const,
+      changeFrequency: "daily",
       lastModified: new Date(),
     },
     {
       url: "http://heic-to-pdf.pro",
       priority: 0.8,
-      changeFrequency: "daily" as const,
+      changeFrequency: "daily",
       lastModified: new Date(),
     }
   ];
