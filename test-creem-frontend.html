@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creem API 前端测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .result { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 3px; white-space: pre-wrap; }
+        .success { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔬 Creem API 前端测试</h1>
+    
+    <div class="test-section">
+        <h3>配置信息</h3>
+        <div id="config" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>API连接测试</h3>
+        <button onclick="testConnection()">测试连接</button>
+        <button onclick="testProducts()">测试Products端点</button>
+        <button onclick="testBundle()">测试Bundle端点</button>
+        <div id="connectionResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>支付测试</h3>
+        <button onclick="testCheckout()">测试Checkout创建</button>
+        <div id="checkoutResult" class="result"></div>
+    </div>
+
+    <script>
+        // 配置
+        const CONFIG = {
+            API_KEY: 'creem_test_4g41oSxGmAZ0SvE0EGTFaV',
+            BASE_URL: 'https://test-api.creem.io',
+            BUNDLE_ID: 'bund_3rus8VatGglCRdoMDKih3O'
+        };
+        
+        // 显示配置
+        document.getElementById('config').textContent = JSON.stringify(CONFIG, null, 2);
+        
+        async function logResult(elementId, message, isSuccess = false) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result ${isSuccess ? 'success' : 'error'}`;
+        }
+        
+        async function makeRequest(url, options = {}) {
+            const headers = {
+                'Authorization': `Bearer ${CONFIG.API_KEY}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+            
+            const response = await fetch(url, {
+                method: options.method || 'GET',
+                headers,
+                body: options.body ? JSON.stringify(options.body) : undefined
+            });
+            
+            const data = await response.json().catch(() => response.text()).catch(() => 'No content');
+            
+            return {
+                status: response.status,
+                statusText: response.statusText,
+                data,
+                success: response.ok
+            };
+        }
+        
+        async function testConnection() {
+            try {
+                logResult('connectionResult', '🔄 测试根路径连接...');
+                
+                const result = await makeRequest(`${CONFIG.BASE_URL}/`);
+                
+                const message = `根路径测试结果:
+状态: ${result.status} ${result.statusText}
+响应: ${typeof result.data === 'string' ? result.data : JSON.stringify(result.data, null, 2)}`;
+                
+                logResult('connectionResult', message, result.success);
+            } catch (error) {
+                logResult('connectionResult', `❌ 连接失败: ${error.message}`);
+            }
+        }
+        
+        async function testProducts() {
+            try {
+                logResult('connectionResult', '🔄 测试Products端点...');
+                
+                const result = await makeRequest(`${CONFIG.BASE_URL}/products`);
+                
+                const message = `Products端点测试结果:
+状态: ${result.status} ${result.statusText}
+响应: ${typeof result.data === 'string' ? result.data : JSON.stringify(result.data, null, 2)}`;
+                
+                logResult('connectionResult', message, result.success);
+            } catch (error) {
+                logResult('connectionResult', `❌ Products测试失败: ${error.message}`);
+            }
+        }
+        
+        async function testBundle() {
+            try {
+                logResult('connectionResult', '🔄 测试Bundle端点...');
+                
+                const bundleUrl = `${CONFIG.BASE_URL}/bundles/${CONFIG.BUNDLE_ID}`;
+                const result = await makeRequest(bundleUrl);
+                
+                const message = `Bundle端点测试结果:
+URL: ${bundleUrl}
+状态: ${result.status} ${result.statusText}
+响应: ${typeof result.data === 'string' ? result.data : JSON.stringify(result.data, null, 2)}`;
+                
+                logResult('connectionResult', message, result.success);
+            } catch (error) {
+                logResult('connectionResult', `❌ Bundle测试失败: ${error.message}`);
+            }
+        }
+        
+        async function testCheckout() {
+            try {
+                logResult('checkoutResult', '🔄 测试Checkout会话创建...');
+                
+                const checkoutData = {
+                    bundle_id: CONFIG.BUNDLE_ID,
+                    customer_email: 'test@example.com',
+                    success_url: 'http://localhost:3000/success',
+                    cancel_url: 'http://localhost:3000/cancel'
+                };
+                
+                const result = await makeRequest(`${CONFIG.BASE_URL}/checkout`, {
+                    method: 'POST',
+                    body: checkoutData
+                });
+                
+                const message = `Checkout创建测试结果:
+请求数据: ${JSON.stringify(checkoutData, null, 2)}
+状态: ${result.status} ${result.statusText}
+响应: ${typeof result.data === 'string' ? result.data : JSON.stringify(result.data, null, 2)}`;
+                
+                logResult('checkoutResult', message, result.success);
+                
+                if (result.success && (result.data.url || result.data.checkout_url)) {
+                    logResult('checkoutResult', message + '\n\n🎉 获得了支付URL! 可以尝试重定向到支付页面。', true);
+                }
+            } catch (error) {
+                logResult('checkoutResult', `❌ Checkout测试失败: ${error.message}`);
+            }
+        }
+        
+        // 自动运行基本测试
+        window.onload = () => {
+            testConnection();
+        };
+    </script>
+</body>
+</html>

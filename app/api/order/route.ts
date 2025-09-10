@@ -13,7 +13,7 @@ const searchParamsSchema = z.object({
   pageSize: z.coerce.number().default(10),
   sort: z.string().optional(),
   phase: z
-    .enum([OrderPhase.Paid, OrderPhase.Canceled, OrderPhase.Failed])
+    .enum([OrderPhase.Paid, OrderPhase.Canceled, OrderPhase.Failed, "cancelled-subscription"])
     .optional(),
 });
 
@@ -36,7 +36,14 @@ export async function GET(req: NextRequest) {
     const whereConditions: any = {
       userId,
     };
-    if (phase) {
+    
+    // 特殊处理"已取消"tab的查询逻辑
+    if (phase === "cancelled-subscription") {
+      // 查询所有订单，稍后在代码中过滤被取消的订阅
+      whereConditions.phase = {
+        not: OrderPhase.Pending,
+      };
+    } else if (phase) {
       whereConditions.phase = phase;
     } else {
       whereConditions.phase = {
@@ -54,12 +61,72 @@ export async function GET(req: NextRequest) {
       prisma.chargeOrder.count({ where: whereConditions }),
     ]);
 
+    // 获取用户的订阅信息
+    const userPaymentInfo = await prisma.userPaymentInfo.findUnique({
+      where: { userId },
+      select: {
+        subscriptionStatus: true,
+        subscriptionProvider: true,
+        creemSubscriptionId: true,
+        paypalSubscriptionId: true,
+        stripeSubscriptionId: true,
+      }
+    });
+
+    // 处理数据，添加动态订阅状态信息
+    const processedData = data.map((order) => {
+      let subscriptionStatus: {
+        currentStatus: any;
+        provider: any;
+        subscriptionId: any;
+      } | null = null;
+      
+      // 如果是订阅相关的订单且有用户支付信息，检查当前订阅状态
+      if (userPaymentInfo && order.channel === "Creem") {
+        // 检查是否是当前订单对应的订阅
+        if (userPaymentInfo.subscriptionProvider === "creem" && 
+            userPaymentInfo.creemSubscriptionId &&
+            order.result?.creemSubscriptionId === userPaymentInfo.creemSubscriptionId) {
+          subscriptionStatus = {
+            currentStatus: userPaymentInfo.subscriptionStatus,
+            provider: userPaymentInfo.subscriptionProvider,
+            subscriptionId: userPaymentInfo.creemSubscriptionId
+          };
+        }
+      } else if (userPaymentInfo && order.channel === "PayPal" && userPaymentInfo.paypalSubscriptionId) {
+        subscriptionStatus = {
+          currentStatus: userPaymentInfo.subscriptionStatus,
+          provider: userPaymentInfo.subscriptionProvider,
+          subscriptionId: userPaymentInfo.paypalSubscriptionId
+        };
+      }
+      
+      return {
+        ...order,
+        subscriptionStatus // 添加订阅状态信息
+      };
+    });
+
+    // 如果是"已取消"tab，过滤出被取消的订阅
+    let filteredData = processedData;
+    if (phase === "cancelled-subscription") {
+      filteredData = processedData.filter(order => 
+        order.subscriptionStatus && 
+        order.subscriptionStatus.currentStatus === 'cancelled' &&
+        order.phase === OrderPhase.Paid
+      );
+    }
+
+    // 重新计算分页
+    const filteredTotal = filteredData.length;
+    const paginatedData = filteredData.slice(offset, offset + pageSize);
+
     return NextResponse.json({
       data: {
-        total,
+        total: phase === "cancelled-subscription" ? filteredTotal : total,
         page,
         pageSize,
-        data: data.map(({ id, ...rest }) => ({
+        data: (phase === "cancelled-subscription" ? paginatedData : processedData).map(({ id, ...rest }) => ({
           ...rest,
           id: ChargeOrderHashids.encode(id),
         })),

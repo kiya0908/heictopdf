@@ -1,4 +1,4 @@
-<a href="https://heictopdf.com">
+<a href="https://heic-to-pdf.pro">
   <img alt="HEIC to PDF Converter" src="/favicon-32x32.png">
   <h1 align="center">HEIC to PDF Converter</h1>
 </a>
@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yourusername/heictopdf">
-    <img src="https://img.shields.io/github/stars/yourusername/heictopdf?style=social" alt="GitHub stars" />
+  <a href="https://github.com/kiya0908/heictopdf">
+    <img src="https://img.shields.io/github/stars/kiya0908/heictopdf?style=social" alt="GitHub stars" />
   </a>
 </p>
 
@@ -40,7 +40,7 @@ HEIC to PDF Converter is a modern web application built with Next.js 14 that all
 Clone this repository locally:
 
 ```bash
-git clone https://github.com/yourusername/heictopdf.git
+git clone https://github.com/kiya0908/heictopdf.git
 cd heictopdf
 ```
 

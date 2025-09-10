@@ -14,7 +14,7 @@ export interface UsageLimit {
 
 export class UsageLimitManager {
   // 免费用户每日限制
-  private static readonly FREE_DAILY_LIMIT = 5;
+  private static readonly FREE_DAILY_LIMIT = 10;
   
   // 文件大小限制 (10MB)
   private static readonly MAX_FILE_SIZE = 10 * 1024 * 1024;

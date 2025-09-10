@@ -4,7 +4,7 @@
   "private": true,
   "author": {
     "name": "HEIC to PDF Converter",
-    "url": "https://github.com/yourname"
+    "url": "https://github.com/kiya0908"
   },
   "scripts": {
     "dev": "next dev",

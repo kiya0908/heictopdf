@@ -1,3 +1,21 @@
+/**
+ * 订阅状态显示组件 - /app页面的核心订阅信息展示
+ * 
+ * 最近更新: 2025-09-07 - 重大更新，完全重构订阅状态显示逻辑
+ * 
+ * 更新内容:
+ * 1. API调用: 从 /api/paypal-subscription 改为 /api/user-subscription (支持多支付方式)
+ * 2. 未订阅用户显示: 从空白"No active subscription"改为详细的免费计划信息
+ * 3. 多支付方式支持: 统一的图标+名称显示系统 (Creem💳, PayPal🅿️, Stripe💰, 等)
+ * 4. 智能取消逻辑: Creem用户隐藏取消按钮，其他支付方式显示
+ * 5. 可扩展架构: 轻松添加新支付方式（Alipay💙, WeChat Pay💚）
+ * 
+ * 解决问题:
+ * - 修复了硬编码"Payment System Updating"消息显示问题
+ * - Creem支付用户现在可以正确看到Pro状态
+ * - 免费用户看到有价值的功能对比信息，而不是空白
+ */
+
 "use client";
 
 import React, { useState } from "react";
@@ -32,16 +50,15 @@ export default function SubscriptionInfo() {
   const { user } = useUser();
   const t = useTranslations("Dashboard");
 
-  // Fetch subscription info
+  // Fetch subscription info (supports Creem, PayPal, Stripe)
   const subscriptionQuery = useQuery({
     queryKey: ["userSubscription"],
     queryFn: async () => {
-      const res = await fetch("/api/paypal-subscription", {
+      const res = await fetch("/api/user-subscription", {
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
       if (!res.ok) {
         if (res.status === 404) return null; // No subscription
-        if (res.status === 503) return { disabled: true }; // Payment disabled
         throw new Error("Failed to fetch subscription");
       }
       return res.json();
@@ -61,19 +78,40 @@ export default function SubscriptionInfo() {
   });
 
   const handleCancelSubscription = async () => {
-    if (!subscriptionQuery.data?.id) return;
+    if (!subscriptionQuery.data?.subscriptionId && !subscription?.provider) return;
     
     try {
-      const res = await fetch(`/api/paypal-subscription?subscriptionId=${subscriptionQuery.data.id}`, {
-        method: "DELETE",
+      let cancelUrl = "";
+      let method = "DELETE";
+      
+      if (subscriptionQuery.data?.provider === "paypal") {
+        cancelUrl = `/api/paypal-subscription?subscriptionId=${subscriptionQuery.data.subscriptionId}`;
+      } else if (subscriptionQuery.data?.provider === "stripe") {
+        cancelUrl = `/api/stripe-subscription?subscriptionId=${subscriptionQuery.data.subscriptionId}`;
+      } else if (subscriptionQuery.data?.provider === "creem") {
+        cancelUrl = `/api/creem-cancel-subscription`;
+        method = "POST"; // Creem API 使用 POST 方法
+      } else {
+        alert("Unsupported payment provider for cancellation.");
+        return;
+      }
+      
+      const res = await fetch(cancelUrl, {
+        method,
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
       
+      const result = await res.json();
+      
       if (res.ok) {
+        alert("Subscription cancelled successfully!");
         subscriptionQuery.refetch();
+      } else {
+        alert(`Failed to cancel subscription: ${result.message || result.error}`);
       }
     } catch (error) {
       console.error("Failed to cancel subscription:", error);
+      alert("An error occurred while cancelling the subscription.");
     }
   };
 
@@ -86,9 +124,22 @@ export default function SubscriptionInfo() {
     document.body.removeChild(link);
   };
 
+  // 支付方式图标和显示名称映射
+  const getProviderDisplay = (provider: string) => {
+    const providerMap: Record<string, { icon: string; name: string }> = {
+      creem: { icon: "💳", name: "Creem" },
+      paypal: { icon: "🅿️", name: "PayPal" },
+      stripe: { icon: "💰", name: "Stripe" },
+      alipay: { icon: "💙", name: "Alipay" },
+      wechat: { icon: "💚", name: "WeChat Pay" },
+      default: { icon: "💳", name: provider }
+    };
+    return providerMap[provider] || providerMap.default;
+  };
+
   const subscription = subscriptionQuery.data;
   const conversions = conversionsQuery.data;
-  const isPro = subscription?.status === "ACTIVE";
+  const isPro = subscription?.isPro || subscription?.status === "ACTIVE";
 
   return (
     <div className="space-y-6">
@@ -103,17 +154,7 @@ export default function SubscriptionInfo() {
         <CardContent>
           {subscriptionQuery.isLoading ? (
             <Loading />
-          ) : subscription?.disabled ? (
-            <div className="text-center py-6">
-              <Badge variant="secondary" className="mb-2">Payment System Updating</Badge>
-              <p className="text-muted-foreground mb-4">
-                We are perfecting our payment system. Pro features will be available soon!
-              </p>
-              <Button disabled>
-                Coming Soon
-              </Button>
-            </div>
-          ) : subscription ? (
+          ) : subscription?.isActive ? (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -121,7 +162,12 @@ export default function SubscriptionInfo() {
                     {isPro ? "Pro Member" : subscription.status}
                   </Badge>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Plan: {subscription.plan_id?.includes("YEARLY") ? "Yearly" : "Monthly"}
+                    Plan: {subscription.planType === "yearly" ? "Yearly" : "Monthly"}
+                    {subscription.provider && (
+                      <span className="ml-2 px-2 py-1 bg-muted rounded text-xs capitalize">
+                        {getProviderDisplay(subscription.provider).icon} {getProviderDisplay(subscription.provider).name}
+                      </span>
+                    )}
                   </p>
                 </div>
                 {isPro && (
@@ -131,18 +177,49 @@ export default function SubscriptionInfo() {
                 )}
               </div>
               
-              {subscription.billing_info?.next_billing_time && (
+              {subscription.expiresAt && (
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4" />
-                  Next billing: {formatDate(subscription.billing_info.next_billing_time)}
+                  {subscription.provider === "creem" 
+                    ? "Active subscription (Creem)" 
+                    : `Next billing: ${formatDate(subscription.expiresAt)}`
+                  }
+                </div>
+              )}
+              
+              {!subscription.expiresAt && subscription.provider === "creem" && (
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  Active subscription - No expiration date
                 </div>
               )}
             </div>
           ) : (
             <div className="text-center py-6">
-              <p className="text-muted-foreground mb-4">No active subscription</p>
+              <div className="mb-4">
+                <Badge variant="outline" className="mb-2">Free Plan</Badge>
+                <p className="text-muted-foreground">
+                  Currently using our free tier with daily limits
+                </p>
+                <div className="mt-3 p-3 bg-muted/50 rounded-lg">
+                  <div className="text-sm text-muted-foreground">
+                    <div className="flex justify-between items-center mb-1">
+                      <span>Daily conversions:</span>
+                      <span className="font-medium">10 free/day</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-1">
+                      <span>Files per conversion:</span>
+                      <span className="font-medium">10 files max</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span>File size limit:</span>
+                      <span className="font-medium">10MB each</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <Button asChild>
-                <a href="/pricing">Upgrade to Pro</a>
+                <a href="/pricing">Upgrade to Pro - Unlimited Conversions</a>
               </Button>
             </div>
           )}

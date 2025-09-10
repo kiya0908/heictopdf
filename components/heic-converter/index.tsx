@@ -155,7 +155,7 @@ export default function HeicConverter({
       'image/heic': ['.heic', '.HEIC'],
       'image/heif': ['.heif', '.HEIF'],
     },
-    maxFiles: 5,
+    maxFiles: 10,
     maxSize: 10 * 1024 * 1024, // 10MB
   });
 

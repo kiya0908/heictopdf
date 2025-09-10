@@ -6,18 +6,13 @@ import { prisma } from "@/db/prisma";
 export async function isUserPro(userId: string): Promise<boolean> {
   if (!userId) return false;
 
-  // TODO: 临时禁用Pro用户功能 - 所有用户都是免费用户
-  // 当恢复PayPal支付后，删除下面的return语句即可恢复Pro用户检查
-  return false;
-
-  /* 
-  // 原Pro用户检查代码 - 保留以便后续恢复
   try {
     const userPayment = await prisma.userPaymentInfo.findUnique({
       where: { userId },
       select: {
         subscriptionStatus: true,
         subscriptionExpiresAt: true,
+        subscriptionProvider: true,
       },
     });
 
@@ -32,12 +27,17 @@ export async function isUserPro(userId: string): Promise<boolean> {
       if (userPayment.subscriptionExpiresAt < now) return false;
     }
 
+    // Support both Creem and legacy PayPal subscriptions
+    const supportedProviders = ["creem", "paypal"];
+    if (!supportedProviders.includes(userPayment.subscriptionProvider || "")) {
+      return false;
+    }
+
     return true;
   } catch (error) {
     console.error("Error checking user Pro status:", error);
     return false;
   }
-  */
 }
 
 /**
@@ -52,6 +52,8 @@ export async function getUserSubscription(userId: string) {
       select: {
         subscriptionProvider: true,
         paypalSubscriptionId: true,
+        creemCustomerId: true,
+        creemSubscriptionId: true,
         subscriptionStatus: true,
         subscriptionPlanId: true,
         subscriptionExpiresAt: true,

@@ -443,6 +443,10 @@
       "pending": "Pending",
       "failed": "Failed",
       "canceled": "Canceled"
+    },
+    "subscription": {
+      "monthly": "Monthly",
+      "yearly": "Yearly"
     }
   },
   "NewsLetter": {

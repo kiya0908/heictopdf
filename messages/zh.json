@@ -232,7 +232,7 @@
         },
         "q4": {
           "question": "文件大小有限制吗？",
-          "answer": "免费用户单个文件最大支持 10MB，批量上传最多支持 5 个文件。如需处理更大的文件或更多数量，可以升级到付费计划。"
+          "answer": "免费用户单个文件最大支持 10MB，批量上传最多支持 10 个文件。如需处理更大的文件或更多数量，可以升级到付费计划。"
         },
         "q5": {
           "question": "我的文件安全吗？",
@@ -292,16 +292,16 @@
         "title": "专业版",
         "badge": "最受欢迎",
         "monthly": {
-          "price": "¥49",
+          "price": "$7",
           "period": "/月",
           "originalPrice": null
         },
         "yearly": {
-          "price": "¥490",
+          "price": "$69",
           "period": "/年",
-          "originalPrice": "¥588",
-          "savings": "节省25%",
-          "monthlyEquivalent": "约¥40.8/月"
+          "originalPrice": "$84",
+          "savings": "节省17%",
+          "monthlyEquivalent": "约$5.75/月"
         },
         "description": "解放您的生产力。无限转换，速度更快，体验更纯净。",
         "valueProposition": "解放您的生产力。无限转换，速度更快，体验更纯净。",
@@ -444,6 +444,10 @@
       "pending": "待处理",
       "failed": "失败",
       "canceled": "已取消"
+    },
+    "subscription": {
+      "monthly": "月度订阅",
+      "yearly": "年度订阅"
     }
   },
   "NewsLetter": {

@@ -46,8 +46,32 @@ interface BillingInfoProps extends React.HTMLAttributes<HTMLFormElement> {
 
 const OrderBadge = {
   [OrderPhase.Paid]: "default",
-  [OrderPhase.Canceled]: "Secondary",
+  [OrderPhase.Pending]: "secondary", // 添加待处理状态
+  [OrderPhase.Canceled]: "secondary",
   [OrderPhase.Failed]: "destructive",
+  // 新增：动态状态
+  "cancelled-subscription": "outline", // 已取消的订阅
+} as const;
+
+// 获取动态显示状态
+const getDisplayStatus = (item: any) => {
+  // 如果是订阅相关的订单且有订阅状态信息
+  if (item.subscriptionStatus && 
+      item.subscriptionStatus.currentStatus === 'cancelled' && 
+      item.phase === OrderPhase.Paid) {
+    return {
+      phase: 'cancelled-subscription',
+      label: '已取消订阅',
+      showSubscriptionInfo: true
+    };
+  }
+  
+  // 默认显示原始状态
+  return {
+    phase: item.phase,
+    label: item.phase,
+    showSubscriptionInfo: false
+  };
 };
 export function OrderInfo() {
   const { getToken } = useAuth();
@@ -56,7 +80,7 @@ export function OrderInfo() {
     page: 1,
     pageSize: 12,
   });
-  const [phase, setPhase] = useState<OrderPhase | "all">("all");
+  const [phase, setPhase] = useState<OrderPhase | "all" | "cancelled-subscription">("all");
   const queryData = useQuery({
     queryKey: ["queryUserOrder", pageParams, phase],
     queryFn: async () => {
@@ -83,7 +107,7 @@ export function OrderInfo() {
     <main className="grid flex-1 items-start gap-4 py-4 sm:py-0 md:gap-8">
       <Tabs
         value={phase}
-        onValueChange={(value) => setPhase(value as OrderPhase | "all")}
+        onValueChange={(value) => setPhase(value as OrderPhase | "all" | "cancelled-subscription")}
       >
         <div className="flex items-center">
           <TabsList>
@@ -92,8 +116,8 @@ export function OrderInfo() {
             <TabsTrigger value={OrderPhase.Failed}>
               {t("order.failed")}
             </TabsTrigger>
-            <TabsTrigger value={OrderPhase.Canceled} className="hidden sm:flex">
-              {t("order.canceled")}
+            <TabsTrigger value="cancelled-subscription" className="hidden sm:flex">
+              已取消订阅
             </TabsTrigger>
           </TabsList>
         </div>
@@ -142,33 +166,69 @@ export function OrderInfo() {
                   </TableHeader>
 
                   <TableBody>
-                    {queryData.data?.data?.map((item) => (
-                      <TableRow key={item.id}>
-                        <TableCell className="font-medium">
-                          <div className="font-medium">
-                            {item.userInfo?.fullName}
-                          </div>
-                          <div className="hidden text-sm text-muted-foreground md:inline">
-                            {item.userInfo?.email}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={OrderBadge[item.phase]}>
-                            {item.phase}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{formatPrice(item.amount)}</TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          +{item.credit}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {item.channel}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {formatDate(item.createdAt)}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {queryData.data?.data?.map((item) => {
+                      const displayStatus = getDisplayStatus(item);
+                      
+                      return (
+                        <TableRow key={item.id}>
+                          <TableCell className="font-medium">
+                            <div className="font-medium">
+                              {item.userInfo?.fullName}
+                            </div>
+                            <div className="hidden text-sm text-muted-foreground md:inline">
+                              {item.userInfo?.email}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={OrderBadge[displayStatus.phase as keyof typeof OrderBadge]}>
+                              {displayStatus.label}
+                            </Badge>
+                            {/* 显示订阅状态详情 */}
+                            {displayStatus.showSubscriptionInfo && (
+                              <div className="text-xs text-muted-foreground mt-1">
+                                <div>✅ Payment: Paid</div>
+                                <div>❌ Subscription: Cancelled</div>
+                              </div>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <div className="font-medium">
+                              {formatPrice(item.amount)}
+                            </div>
+                            {/* 显示Creem订阅类型信息 */}
+                            {item.channel === "Creem" && item.result?.planType && (
+                              <div className="text-sm text-muted-foreground">
+                                {item.result.planType === 'monthly' ? t("subscription.monthly") : t("subscription.yearly")}
+                              </div>
+                            )}
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            {item.credit ? `+${item.credit}` : '-'}
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            <div className="flex items-center gap-1">
+                              {item.channel === "Creem" && "💳"}
+                              {item.channel}
+                            </div>
+                            {/* 显示Creem订阅ID */}
+                            {item.channel === "Creem" && item.result?.creemSubscriptionId && (
+                              <div className="text-xs text-muted-foreground mt-1">
+                                ID: {item.result.creemSubscriptionId.substring(0, 12)}...
+                              </div>
+                            )}
+                            {/* 显示订阅状态 */}
+                            {item.subscriptionStatus && (
+                              <div className="text-xs text-muted-foreground mt-1">
+                                Status: {item.subscriptionStatus.currentStatus}
+                              </div>
+                            )}
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            {formatDate(item.createdAt)}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               )}

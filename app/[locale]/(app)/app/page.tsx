@@ -3,9 +3,11 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import SubscriptionInfo from "@/components/dashboard/subscription-info";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";
+import { PaymentStatusNotification } from "@/components/dashboard/payment-status-notification";
 
 interface PageProps {
   params: { locale: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({
@@ -19,11 +21,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function DashboardPage({ params: { locale } }: PageProps) {
+export default async function DashboardPage({ 
+  params: { locale },
+  searchParams 
+}: PageProps) {
   unstable_setRequestLocale(locale);
 
   return (
     <DashboardShell>
+      <PaymentStatusNotification searchParams={searchParams} />
       <DashboardHeader 
         heading="Dashboard" 
         text="Manage your conversions and subscription"

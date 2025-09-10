@@ -86,8 +86,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 检查文件数量限制（每次转换最多5个文件）
-    const MAX_FILES_PER_CONVERSION = 5;
+    // 检查文件数量限制（每次转换最多10个文件）
+    const MAX_FILES_PER_CONVERSION = 10;
     if (files.length > MAX_FILES_PER_CONVERSION) {
       return NextResponse.json(
         {

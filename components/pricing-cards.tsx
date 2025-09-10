@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
 
 import PayPalButton from "@/components/features/paypal/PayPalButton";
+import CreemButton from "@/components/features/creem/CreemButton";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
@@ -49,19 +50,19 @@ const PricingCard = ({
   const isProTier = offer.amount > 0;
   const isFree = offer.amount === 0;
 
-  // Calculate pricing based on billing period with localized display
+  // Calculate pricing based on billing period - unified USD pricing
   const getPrice = () => {
-    if (isFree) return formatPrice(0, offer.currency === 'CNY' ? '¥' : '$');
+    if (isFree) return formatPrice(0, '$');
 
     if (isYearly) {
-      // Display localized prices but payment will be in USD
-      const yearlyPrice = offer.currency === 'CNY' ? 4900 * 10 : 6900; // ¥490 or $69 yearly
-      return formatPrice(yearlyPrice, offer.currency === 'CNY' ? '¥' : '$');
+      // Unified yearly price: $69
+      const yearlyPrice = 6900; // $69 yearly
+      return formatPrice(yearlyPrice, '$');
     }
 
-    // Display localized prices: ¥49 for CN, $7 for others
-    const monthlyPrice = offer.currency === 'CNY' ? 4900 : 700; // ¥49 or $7 monthly
-    return formatPrice(monthlyPrice, offer.currency === 'CNY' ? '¥' : '$');
+    // Unified monthly price: $7
+    const monthlyPrice = 700; // $7 monthly
+    return formatPrice(monthlyPrice, '$');
   };
 
   const getPeriod = () => {
@@ -71,15 +72,15 @@ const PricingCard = ({
 
   const getOriginalPrice = () => {
     if (!isYearly || isFree) return null;
-    // Show original price for yearly discount calculation
-    const originalPrice = offer.currency === 'CNY' ? 4900 * 12 : 700 * 12; // ¥588 or $84
-    return formatPrice(originalPrice, offer.currency === 'CNY' ? '¥' : '$');
+    // Show unified original price for yearly discount calculation: $7 * 12 = $84
+    const originalPrice = 700 * 12; // $84 original yearly price
+    return formatPrice(originalPrice, '$');
   };
 
   const getCTA = () => {
     if (isFree) return t("plans.free.cta");
-    // TODO: 临时使用支付暂停的翻译键，恢复PayPal后改回 t("plans.pro.cta")
-    return t("paymentDisabled.cta");
+    // 使用Creem支付，恢复正常的CTA文案
+    return t("plans.pro.cta") || `订阅 Pro ${isYearly ? '年付' : '月付'}`;
   };
 
   return (
@@ -118,7 +119,7 @@ const PricingCard = ({
               <div>{getPeriod()}</div>
               {isYearly && isProTier && (
                 <div className="text-xs text-green-600">
-                  {offer.currency === 'CNY' ? '约¥40.8/月' : '~$5.75/month'}
+                  ~$5.75/month
                 </div>
               )}
             </div>
@@ -156,26 +157,12 @@ const PricingCard = ({
 
         <SignedIn>
           {isProTier && (
-            // TODO: 临时禁用PayPal按钮，显示支付暂停提示
-            // 恢复PayPal后取消注释下面的PayPalButton组件
-            /*
-            <PayPalButton 
-              planId={isYearly ? 
-                process.env.NEXT_PUBLIC_PAYPAL_PRO_YEARLY_USD_PLAN_ID || "" : 
-                process.env.NEXT_PUBLIC_PAYPAL_PRO_MONTHLY_USD_PLAN_ID || ""
-              }
+            <CreemButton 
+              planType={isYearly ? 'yearly' : 'monthly'}
               customId={userId || ""}
               btnText={getCTA()}
+              className="w-full"
             />
-            */
-            <div className="text-center space-y-2">
-              <Button disabled className="w-full">
-                {getCTA()}
-              </Button>
-              <p className="text-xs text-muted-foreground">
-                {t("paymentDisabled.description")}
-              </p>
-            </div>
           )}
           {isFree && (
             <Button variant="outline" className="w-full">

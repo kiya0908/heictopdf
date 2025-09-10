@@ -52,8 +52,10 @@ model UserPaymentInfo {
   paypalSubscriptionId   String?   @map("paypal_subscription_id") @db.VarChar
   subscriptionExpiresAt  DateTime? @map("subscription_expires_at") @db.Timestamp(6)
   subscriptionPlanId     String?   @map("subscription_plan_id") @db.VarChar
-  subscriptionProvider   String?   @default("paypal") @map("subscription_provider") @db.VarChar
+  subscriptionProvider   String?   @default("creem") @map("subscription_provider") @db.VarChar
   subscriptionStatus     String?   @map("subscription_status") @db.VarChar
+  creemCustomerId        String?   @map("creem_customer_id") @db.VarChar
+  creemSubscriptionId    String?   @map("creem_subscription_id") @db.VarChar
 
   @@map("user_payment_info")
 }

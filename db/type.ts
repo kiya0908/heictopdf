@@ -16,6 +16,7 @@ export enum PaymentChannelType {
   Alipay = "Alipay",
   WeChat = "WeChat",
   Stripe = "Stripe",
+  Creem = "Creem", // 新增Creem支付渠道
   GiftCode = "GiftCode",
   InviteCode = "InviteCode",
   ActivityCredit = "Event Gift",
