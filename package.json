@@ -22,7 +22,7 @@
     "validate-middleware": "node scripts/validate-middleware.js",
     "validate-all": "node scripts/validate-middleware.js --test-api",
     "predev": "node scripts/validate-middleware.js",
-    "prebuild": "node scripts/validate-middleware.js"
+    "prebuild": "prisma generate && node scripts/validate-middleware.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

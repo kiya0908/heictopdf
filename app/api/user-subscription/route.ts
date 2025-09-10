@@ -23,6 +23,9 @@ import { NextResponse, type NextRequest } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
 import { prisma } from "@/db/prisma";
 
+// 强制动态渲染
+export const dynamic = 'force-dynamic';
+
 /**
  * 获取用户订阅状态的统一API接口
  * 支持Creem、PayPal、Stripe等多种支付方式的订阅状态查询

@@ -346,11 +346,11 @@
       },
       "item2": {
         "question": "What payment methods do you accept?",
-        "answer": "We accept all major credit cards (Visa, MasterCard, American Express) and PayPal accounts. All payments are processed securely through PayPal, ensuring your payment information is always protected."
+        "answer": "We accept all major credit cards (Visa, MasterCard, American Express). All payments are processed securely through Creem, a modern payment platform that ensures your payment information is always protected."
       },
       "item3": {
         "question": "Is my payment information secure?",
-        "answer": "Absolutely. We use PayPal, a leading payment processor trusted by millions of businesses worldwide. We never store your payment information on our servers - all transactions are handled securely by PayPal with bank-level encryption."
+        "answer": "Absolutely. We use Creem, a modern payment processing platform that employs the latest security technologies. We never store your payment information on our servers - all transactions are handled securely by Creem with bank-level encryption and PCI DSS compliance standards."
       },
       "item4": {
         "question": "Do you offer refunds?",

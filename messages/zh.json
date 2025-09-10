@@ -346,11 +346,11 @@
       },
       "item2": {
         "question": "你们接受哪些支付方式？",
-        "answer": "我们接受所有主要信用卡（Visa、MasterCard、American Express）和PayPal账户支付。所有支付都通过PayPal安全处理，确保您的支付信息始终受到保护。"
+        "answer": "我们接受所有主要信用卡（Visa、MasterCard、American Express）。所有支付都通过Creem安全处理，Creem是一个现代化的支付平台，确保您的支付信息始终受到保护。"
       },
       "item3": {
         "question": "我的支付信息安全吗？",
-        "answer": "绝对安全。我们使用PayPal，这是全球数百万企业信赖的领先支付处理商。我们从不在服务器上存储您的支付信息 - 所有交易都由PayPal通过银行级加密安全处理。"
+        "answer": "绝对安全。我们使用Creem，这是一个采用最新安全技术的现代化支付处理平台。我们从不在服务器上存储您的支付信息 - 所有交易都由Creem通过银行级加密和PCI DSS合规标准安全处理。"
       },
       "item4": {
         "question": "如果我不满意，可以退款吗？",
