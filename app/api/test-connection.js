@@ -1,9 +1,15 @@
 const postgres = require('postgres');
 
-// ！！！ 在这里粘贴你从 Supabase 连接池页面复制的完整 URL ！！！
-const DATABASE_URL = "postgresql://postgres.atsvyuqjntoufzmnxqtp:supabasecode01@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres";
+// 从环境变量获取数据库连接字符串
+const DATABASE_URL = process.env.DATABASE_URL;
 
 async function testConnection() {
+  if (!DATABASE_URL) {
+    console.error("❌ DATABASE_URL 环境变量未设置！");
+    console.log("请在 .env.local 文件中设置 DATABASE_URL");
+    return;
+  }
+
   console.log("Attempting to connect to the database...");
 
   try {

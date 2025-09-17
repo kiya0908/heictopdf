@@ -4,8 +4,8 @@ const path = require('path');
 
 // ⚠️ 请设置环境变量或在.env文件中配置：
 const PAYPAL_CONFIG = {
-  CLIENT_ID: process.env.PAYPAL_CLIENT_ID || 'your_paypal_client_id_here',
-  CLIENT_SECRET: process.env.PAYPAL_CLIENT_SECRET || 'your_paypal_client_secret_here',
+  CLIENT_ID: process.env.PAYPAL_CLIENT_ID || '',
+  CLIENT_SECRET: process.env.PAYPAL_CLIENT_SECRET || '',
   ENVIRONMENT: 'sandbox',
   API_BASE: 'https://api-m.sandbox.paypal.com'
 };
@@ -161,10 +161,9 @@ async function main() {
     console.log('🚀 开始创建PayPal产品和订阅计划...\n');
     
     // 验证配置
-    if (PAYPAL_CONFIG.CLIENT_ID === 'your_paypal_client_id_here' || 
-        PAYPAL_CONFIG.CLIENT_SECRET === 'your_paypal_client_secret_here') {
-      console.error('❌ 请先在脚本中填入你的PayPal Client ID和Client Secret');
-      console.log('   在第6-7行替换配置信息');
+    if (!PAYPAL_CONFIG.CLIENT_ID || !PAYPAL_CONFIG.CLIENT_SECRET) {
+      console.error('❌ 请先设置 PAYPAL_CLIENT_ID 和 PAYPAL_CLIENT_SECRET 环境变量');
+      console.log('   或在 .env.local 文件中配置这些值');
       return;
     }
     
