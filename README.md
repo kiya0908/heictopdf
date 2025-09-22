@@ -234,9 +234,4 @@ A: Free users can convert files up to 10MB each. Premium users get higher limits
 NEXT_PUBLIC_APP_URL=https://heic-to-pdf.pro
 ```
 
-### 故障排除
-如果遇到"noindex"标记问题：
-1. 检查环境变量`NEXT_PUBLIC_APP_URL`是否正确设置
-2. 确保网站已正确部署到生产环境
-3. 在Google Search Console中重新提交sitemap
-4. 等待Google重新抓取页面
+

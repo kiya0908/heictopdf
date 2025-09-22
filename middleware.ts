@@ -47,8 +47,36 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 const isPublicRoute = createRouteMatcher([
+  // API endpoints
   "/api/webhooks(.*)",    // Public webhook endpoints
   "/api/health(.*)",      // Health check endpoints (if any)
+
+  // Root paths (default locale - English)
+  "/",                    // Home page (default locale)
+  "/pricing",             // Pricing page (default locale)
+  "/blog(.*)",            // Blog pages (default locale)
+  "/privacy-policy",      // Privacy policy (default locale)
+  "/terms-of-use",        // Terms of use (default locale)
+  "/newsletters(.*)",     // Newsletter pages (default locale)
+  "/confirm(.*)",         // Email confirmation (default locale)
+
+  // Localized paths (with locale prefix)
+  "/:locale",             // Home page (with locale)
+  "/:locale/",            // Home page with trailing slash
+  "/:locale/pricing",     // Pricing page
+  "/:locale/blog(.*)",    // Blog pages
+  "/:locale/privacy-policy",  // Privacy policy
+  "/:locale/terms-of-use",    // Terms of use
+  "/:locale/newsletters(.*)", // Newsletter pages
+  "/:locale/confirm(.*)", // Email confirmation pages
+
+  // Authentication pages (both default and localized)
+  "/sign-in(.*)",         // Sign in (default locale)
+  "/sign-up(.*)",         // Sign up (default locale)
+  "/:locale/sign-in(.*)", // Sign in pages (localized)
+  "/:locale/sign-up(.*)", // Sign up pages (localized)
+
+
 ]);
 
 // Next-intl middleware configuration
