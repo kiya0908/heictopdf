@@ -119,29 +119,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId, redirectToSignIn } = auth();
   const { geo, nextUrl } = req;
   const isApi = nextUrl.pathname.startsWith("/api/");
 
-  // Debug logging in development
-  if (process.env.NODE_ENV === 'development' && isApi) {
-    console.log(`🔐 Clerk middleware processing API route: ${nextUrl.pathname}`);
-  }
-
-  // Handle public routes (no authentication required)
-  if (isPublicRoute(req)) {
-    return;
-  }
-  
-  // Handle protected routes (authentication required)
-  if (isProtectedRoute(req)) {
-    if (!userId) {
-      return redirectToSignIn();
-    }
-    auth().protect();
-  }
-
-  // IP blocking logic (if Edge Config is available)
+  // ===================================================================
+  // 1. IP 拦截逻辑 (作为安全检查，我们首先运行它)
+  // ===================================================================
   if (process.env.EDGE_CONFIG && env.VERCEL_ENV !== "development") {
     const blockedIPs = await get<string[]>("blocked_ips");
     const ip = getIP(req);
@@ -154,18 +137,27 @@ export default clerkMiddleware(async (auth, req) => {
           { status: 403 },
         );
       }
-
       nextUrl.pathname = "/blocked";
       return NextResponse.rewrite(nextUrl);
     }
-
     if (nextUrl.pathname === "/blocked") {
       nextUrl.pathname = "/";
       return NextResponse.redirect(nextUrl);
     }
   }
 
-  // Geolocation tracking (if available and not API request)
+  // ===================================================================
+  // 2. 受保护路由的认证检查
+  // ===================================================================
+  if (isProtectedRoute(req)) {
+    // auth().protect() 是 Clerk 推荐的方式，它会自动处理重定向。
+    // 这比手动检查 userId 更简洁、更安全。
+    auth().protect();
+  }
+
+  // ===================================================================
+  // 3. 地理位置追踪逻辑
+  // ===================================================================
   if (geo && !isApi && env.VERCEL_ENV !== "development") {
     console.log("geo-->", geo);
     const country = geo.country;
@@ -180,11 +172,15 @@ export default clerkMiddleware(async (auth, req) => {
     }
   }
 
-  // For API routes, let Clerk handle authentication
-  // For page routes, use next-intl middleware
+  // ===================================================================
+  // 4. 最终路由处理 (这是修复 404 的关键)
+  // ===================================================================
+  // 对于 API 路由，我们让 Clerk 的默认行为处理，然后终止。
   if (isApi) {
     return;
   }
 
+  // 对于所有页面路由 (无论是公共的还是受保护的)，
+  // 都必须交由 next-intl 中间件来处理国际化。
   return nextIntlMiddleware(req);
 });
