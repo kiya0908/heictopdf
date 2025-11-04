@@ -235,3 +235,111 @@ NEXT_PUBLIC_APP_URL=https://heic-to-pdf.pro
 ```
 
 
+## 运行环境
+
+- Node.js ≥ 20.10.0（与项目 `engines` 一致）
+- pnpm 9（项目使用 `pnpm@9.7.1`）
+
+> 若使用 Docker 或 CI 构建并希望跳过本地环境校验，可在构建命令前加入环境变量：`SKIP_ENV_VALIDATION=1`
+
+## 常用脚本（Scripts）
+
+在项目根目录执行：
+
+```bash
+pnpm run dev           # 本地开发（Next.js）
+pnpm run turbo         # 使用 Turbo 模式的 dev（更快的 HMR）
+pnpm run build         # 生产构建（含预构建校验）
+pnpm start             # 启动生产服务
+pnpm lint              # 代码规范检查
+
+# 数据库/Prisma
+pnpm db:generate       # 生成 Prisma Client
+pnpm db:push           # 同步 schema 至数据库（开发环境推荐）
+pnpm db:pull           # 从数据库拉取 schema
+
+# 邮件预览（本地）
+pnpm email             # 启动 react-email 预览（需先更新 .react-email）
+
+# 其他
+pnpm prettier          # 执行 Prettier 代码格式化
+pnpm validate-middleware  # 校验中间件配置
+pnpm validate-all         # 校验中间件并测试 API 路由匹配
+```
+
+## 环境变量清单
+
+以下变量由 `env.mjs` 校验与注入（生产或 Vercel 构建时可跳过校验）：
+
+- 服务器侧（必填）
+  - `DATABASE_URL`：数据库连接串（PostgreSQL/Supabase 等）
+  - `HASHID_SALT`：短链/ID 混淆的盐值
+  - `CLERK_SECRET_KEY`：Clerk 服务端密钥
+  - `CONVERTAPI_SECRET`：ConvertAPI 用于 HEIC 转换的秘钥
+
+- 客户端侧（必填）
+  - `NEXT_PUBLIC_APP_URL`：站点访问地址，默认 `http://localhost:3000`
+  - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`：Clerk 前端可公开的密钥
+
+- 客户端侧（可选）
+  - `NEXT_PUBLIC_UMAMI_DATA_ID`：Umami 统计 ID（可选）
+  - `NEXT_PUBLIC_GA_ID`：Google Analytics ID（可选）
+
+> 建议在本地复制 `.env.example` 为 `.env.local` 并逐项填写。生产环境中，请在 Vercel/Cloud 提供商的环境变量面板进行配置。
+
+## 数据库与 Prisma 初始化
+
+1. 配置数据库环境变量 `DATABASE_URL`
+2. 生成 Prisma Client：
+   ```bash
+   pnpm db:generate
+   ```
+3. 将 schema 同步到数据库（开发环境推荐）：
+   ```bash
+   pnpm db:push
+   ```
+4. 如需种子数据，项目已在 `package.json` 中配置：
+   ```bash
+   npx prisma db seed
+   # 或根据你的包管理器：pnpm prisma db seed
+   ```
+
+## 国际化（next-intl）与认证（Clerk）及中间件
+
+- 使用 `next-intl` 提供多语言能力，默认与受支持语言在 `app/[locale]` 下组织路由。
+- 使用 `@clerk/nextjs` 进行用户认证与会话管理。
+- 中间件 `middleware.ts`：
+  - 通过 `matcher` 同时匹配页面与 `api` 路由。
+  - 通过 `createRouteMatcher` 定义公共路由（无需登录）。
+  - 对非公共路由使用 `auth().protect()` 强制登录。
+  - 所有请求均交由 `next-intl` 中间件处理语言解析。
+
+> 若遇到中间件相关问题，可运行 `pnpm validate-middleware` 快速自检。
+
+## 部署与配置
+
+### Vercel
+
+- 项目内置 `vercel.json`，`app/api/**/*.ts` 的函数 `maxDuration` 为 30 秒。
+- Rewrites 已在 `next.config.mjs` 与 `vercel.json` 同步配置 `/feed`、`/rss`、`/rss.xml` 到 `feed.xml`。
+- 构建命令：`npm run build`（Vercel 会自动识别）。
+
+### Cloudflare Pages（可选）
+
+- 项目包含 `@cloudflare/next-on-pages` 与 `wrangler` 依赖，可按需迁移。
+- 如使用 Cloudflare，请遵循官方指引配置构建命令与环境变量。
+
+## 性能与文件处理
+
+- HEIC/HEIF 文件在 `next.config.mjs` 中通过 webpack 自定义 `file-loader` 规则进行处理（输出到 `static/files/`）。
+- 使用 `sharp` 进行图像处理与转换，确保在服务器环境（如 Vercel）具备相应二进制支持。
+
+## 故障排查与安全
+
+- 构建/部署常见错误与解决方案：见 `BUILD_ERROR_SOLUTION.md` 与 `doc/TROUBLESHOOTING.md`
+- 安全策略与中间件保护：见 `doc/SECURITY.md` 与 `doc/MIDDLEWARE-PROTECTION.md`
+- 若支付/第三方集成出现异常，可参考 `doc/paypal-*`、`doc/creem-*` 文档
+
+---
+
+以上章节补充了运行环境、脚本、环境变量、数据库初始化、国际化与中间件、部署与故障排查等要点，便于零基础开发者快速完成本地运行与上线。
