@@ -115,7 +115,16 @@ export default async function RootLayout({
   return (
     <ClerkProvider localization={localeMap[locale] ?? enUS}>
       <html lang={locale} suppressHydrationWarning>
-        <head />
+        <head>
+          {env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && (
+            <Script
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
+              crossOrigin="anonymous"
+              strategy="afterInteractive"
+            />
+          )}
+        </head>
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",

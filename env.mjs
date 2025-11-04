@@ -60,6 +60,7 @@ export const env = createEnv({
 
     NEXT_PUBLIC_UMAMI_DATA_ID: z.string().optional(),
     NEXT_PUBLIC_GA_ID: z.string().optional(),
+    NEXT_PUBLIC_ADSENSE_CLIENT_ID: z.string().optional(),
   },
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
@@ -105,6 +106,7 @@ export const env = createEnv({
 
     NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
     NEXT_PUBLIC_UMAMI_DATA_ID: process.env.NEXT_PUBLIC_UMAMI_DATA_ID,
+    NEXT_PUBLIC_ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
 
     //OPEN_AI_API_ENDPOINT: process.env.OPEN_AI_API_ENDPOINT,
     //OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
